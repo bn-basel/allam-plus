@@ -1,0 +1,15 @@
+================================================================
+C:\WIP\projects\allam-plus\results\ifeval\base_q8_yarn4\checker\eval_results_language_check.jsonl Language Check Scores:
+Language-check accuracy: 0.898515 (363/404)
+================================================================
+C:\WIP\projects\allam-plus\results\ifeval\base_q8_yarn4\checker\eval_results_strict_no_lang.jsonl Strict (no language check) Scores:
+prompt-level: 0.467822
+instruction-level: 0.585443
+================================================================
+C:\WIP\projects\allam-plus\results\ifeval\base_q8_yarn4\checker\eval_results_strict_with_lang.jsonl Strict with Language Check Scores:
+strict_with_lang prompt-level: 0.420792
+strict_with_lang instruction-level: 0.526899
+
+I1007 21:25:08.401451 39144 evaluation.py:414] Generating eval_results_language_check...
+I1007 21:25:10.237799 39144 evaluation.py:426] Generating strict instruction following results...
+I1007 21:25:10.403274 39144 evaluation.py:438] Generating eval_results_strict_with_lang...

@@ -1,0 +1,122 @@
+[
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 2048,
+  "kv": "f16",
+  "gpu_mib": 5309,
+  "prefill_tok_s": 8206.8,
+  "gen_tok_s": 143.9
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 4096,
+  "kv": "f16",
+  "gpu_mib": 6335,
+  "prefill_tok_s": 7542.3,
+  "gen_tok_s": 122.9
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 8192,
+  "kv": "f16",
+  "gpu_mib": 8387,
+  "prefill_tok_s": 6282.5,
+  "gen_tok_s": 94.4
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 16384,
+  "kv": "f16",
+  "gpu_mib": 12492,
+  "prefill_tok_s": 4785.0,
+  "gen_tok_s": 65.1
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 32768,
+  "kv": "f16",
+  "gpu_mib": 15003,
+  "prefill_tok_s": 426.2,
+  "gen_tok_s": 6.5
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 2048,
+  "kv": "q8_0",
+  "gpu_mib": 4829,
+  "prefill_tok_s": 7932.6,
+  "gen_tok_s": 150.9
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 4096,
+  "kv": "q8_0",
+  "gpu_mib": 5383,
+  "prefill_tok_s": 7158.9,
+  "gen_tok_s": 137.2
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 8192,
+  "kv": "q8_0",
+  "gpu_mib": 6539,
+  "prefill_tok_s": 5833.7,
+  "gen_tok_s": 115.4
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 16384,
+  "kv": "q8_0",
+  "gpu_mib": 8859,
+  "prefill_tok_s": 4350.7,
+  "gen_tok_s": 89.6
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 32768,
+  "kv": "q8_0",
+  "gpu_mib": 13475,
+  "prefill_tok_s": 2847.4,
+  "gen_tok_s": 61.3
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 2048,
+  "kv": "q4_0",
+  "gpu_mib": 4573,
+  "prefill_tok_s": 8002.3,
+  "gen_tok_s": 157.8
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 4096,
+  "kv": "q4_0",
+  "gpu_mib": 4871,
+  "prefill_tok_s": 7274.8,
+  "gen_tok_s": 149.2
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 8192,
+  "kv": "q4_0",
+  "gpu_mib": 5515,
+  "prefill_tok_s": 5942.6,
+  "gen_tok_s": 132.8
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 16384,
+  "kv": "q4_0",
+  "gpu_mib": 6803,
+  "prefill_tok_s": 4441.5,
+  "gen_tok_s": 110.6
+ },
+ {
+  "gguf": "allam-7b-instruct-base-Q4_K_M.gguf",
+  "ctx": 32768,
+  "kv": "q4_0",
+  "gpu_mib": 9379,
+  "prefill_tok_s": 2903.8,
+  "gen_tok_s": 81.4
+ }
+]

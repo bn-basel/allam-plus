@@ -1,0 +1,43 @@
+{
+ "name": "receptionist",
+ "rope": "shipped",
+ "adapter": "C:/WIP/projects/saudi-dialect/runs/allam_v1/checkpoint-414",
+ "n": 14455,
+ "correct": 9992,
+ "acc": 0.6912,
+ "ci95": [
+  0.6837,
+  0.6987
+ ],
+ "macro_subject_acc": 0.6919,
+ "by_group": {
+  "Humanities": 0.7373,
+  "Language": 0.7309,
+  "Other": 0.7343,
+  "STEM": 0.6242,
+  "Social Science": 0.6555
+ },
+ "by_subject": {
+  "Accounting": 0.6892,
+  "Arabic Language": 0.6323,
+  "Arabic Language (General)": 0.817,
+  "Arabic Language (Grammar)": 0.7671,
+  "Biology": 0.4975,
+  "Civics": 0.6099,
+  "Computer Science": 0.7048,
+  "Driving Test": 0.725,
+  "Economics": 0.6592,
+  "General Knowledge": 0.7446,
+  "Geography": 0.6196,
+  "History": 0.6028,
+  "Islamic Studies": 0.8005,
+  "Law": 0.742,
+  "Management": 0.72,
+  "Math": 0.6846,
+  "Natural Science": 0.8599,
+  "Philosophy": 0.7949,
+  "Physics": 0.5216,
+  "Political Science": 0.6095,
+  "Social Science": 0.7283
+ }
+}

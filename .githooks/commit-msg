@@ -1,0 +1,8 @@
+#!/bin/sh
+# Refuse any commit message with a co-author trailer or a "Generated with" line.
+# Every commit in this repo has a single author.
+# Enabled per clone with: git config core.hooksPath .githooks
+if grep -qiE '^co-authored-by:|^generated with' "$1"; then
+  echo "commit-msg hook: co-author or 'Generated with' line found. Remove it and commit again." >&2
+  exit 1
+fi

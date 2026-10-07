@@ -1,0 +1,92 @@
+{
+ "bench": "aisa_dev",
+ "protocol": "text",
+ "rope": "shipped",
+ "adapter": "C:/WIP/projects/saudi-dialect/runs/allam_v1/checkpoint-414",
+ "all": {
+  "n": 545,
+  "fn_acc": 0.8514,
+  "fn_acc_ci95": [
+   0.8191,
+   0.8788
+  ],
+  "arg_em": 0.312,
+  "no_call_acc": 0.3111,
+  "aef1": 0.6767,
+  "lcr": 0.7706,
+  "call_rate": 0.9761,
+  "wellformed": "503/532"
+ },
+ "by_group": {
+  "egyptian": {
+   "n": 66,
+   "fn_acc": 0.8939,
+   "fn_acc_ci95": [
+    0.7969,
+    0.9477
+   ],
+   "arg_em": 0.2727,
+   "no_call_acc": null,
+   "aef1": 0.5905,
+   "lcr": 0.6681,
+   "call_rate": 1.0,
+   "wellformed": "62/66"
+  },
+  "gulf": {
+   "n": 75,
+   "fn_acc": 0.8,
+   "fn_acc_ci95": [
+    0.6959,
+    0.8749
+   ],
+   "arg_em": 0.2361,
+   "no_call_acc": 0.3333,
+   "aef1": 0.6582,
+   "lcr": 0.7613,
+   "call_rate": 0.9867,
+   "wellformed": "66/74"
+  },
+  "levantine": {
+   "n": 75,
+   "fn_acc": 0.84,
+   "fn_acc_ci95": [
+    0.7408,
+    0.906
+   ],
+   "arg_em": 0.2537,
+   "no_call_acc": 0.375,
+   "aef1": 0.5778,
+   "lcr": 0.7194,
+   "call_rate": 0.96,
+   "wellformed": "69/72"
+  },
+  "maghrebi": {
+   "n": 6,
+   "fn_acc": 0.8333,
+   "fn_acc_ci95": [
+    0.4365,
+    0.9699
+   ],
+   "arg_em": 0.1667,
+   "no_call_acc": null,
+   "aef1": 0.6,
+   "lcr": 0.6667,
+   "call_rate": 1.0,
+   "wellformed": "6/6"
+  },
+  "msa": {
+   "n": 323,
+   "fn_acc": 0.8576,
+   "fn_acc_ci95": [
+    0.8153,
+    0.8915
+   ],
+   "arg_em": 0.3564,
+   "no_call_acc": 0.2941,
+   "aef1": 0.7232,
+   "lcr": 0.8084,
+   "call_rate": 0.9721,
+   "wellformed": "300/314"
+  }
+ }
+}

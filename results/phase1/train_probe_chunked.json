@@ -1,0 +1,34 @@
+{
+ "rank": 16,
+ "rope": "yarn4",
+ "chunked_loss": true,
+ "results": [
+  {
+   "length": 8192,
+   "peak_allocated_gb": 10.31,
+   "peak_reserved_gb": 11.33,
+   "s_per_step": 8.3,
+   "tokens_per_s": 987.0,
+   "loss": 2.321,
+   "error": null
+  },
+  {
+   "length": 12288,
+   "peak_allocated_gb": 13.13,
+   "peak_reserved_gb": 14.73,
+   "s_per_step": 14.0,
+   "tokens_per_s": 879.0,
+   "loss": 2.595,
+   "error": null
+  },
+  {
+   "length": 16384,
+   "peak_allocated_gb": 15.95,
+   "peak_reserved_gb": 17.99,
+   "s_per_step": 659.3,
+   "tokens_per_s": 25.0,
+   "loss": 2.645,
+   "error": null
+  }
+ ]
+}

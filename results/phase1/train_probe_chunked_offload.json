@@ -1,0 +1,26 @@
+{
+ "rank": 16,
+ "rope": "yarn4",
+ "chunked_loss": true,
+ "offload": true,
+ "results": [
+  {
+   "length": 12288,
+   "peak_allocated_gb": 10.27,
+   "peak_reserved_gb": 11.54,
+   "s_per_step": 14.2,
+   "tokens_per_s": 865.0,
+   "loss": 2.624,
+   "error": null
+  },
+  {
+   "length": 16384,
+   "peak_allocated_gb": 12.08,
+   "peak_reserved_gb": 13.97,
+   "s_per_step": 21.4,
+   "tokens_per_s": 764.0,
+   "loss": 2.671,
+   "error": null
+  }
+ ]
+}

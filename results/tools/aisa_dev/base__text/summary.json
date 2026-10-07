@@ -1,0 +1,92 @@
+{
+ "bench": "aisa_dev",
+ "protocol": "text",
+ "rope": "shipped",
+ "adapter": null,
+ "all": {
+  "n": 545,
+  "fn_acc": 0.6459,
+  "fn_acc_ci95": [
+   0.6048,
+   0.6849
+  ],
+  "arg_em": 0.088,
+  "no_call_acc": 0.8667,
+  "aef1": 0.305,
+  "lcr": 0.3243,
+  "call_rate": 0.6697,
+  "wellformed": "338/365"
+ },
+ "by_group": {
+  "egyptian": {
+   "n": 66,
+   "fn_acc": 0.5758,
+   "fn_acc_ci95": [
+    0.4556,
+    0.6876
+   ],
+   "arg_em": 0.0455,
+   "no_call_acc": null,
+   "aef1": 0.2342,
+   "lcr": 0.2838,
+   "call_rate": 0.6515,
+   "wellformed": "41/43"
+  },
+  "gulf": {
+   "n": 75,
+   "fn_acc": 0.6533,
+   "fn_acc_ci95": [
+    0.5405,
+    0.7512
+   ],
+   "arg_em": 0.1111,
+   "no_call_acc": 1.0,
+   "aef1": 0.337,
+   "lcr": 0.3152,
+   "call_rate": 0.76,
+   "wellformed": "51/57"
+  },
+  "levantine": {
+   "n": 75,
+   "fn_acc": 0.6933,
+   "fn_acc_ci95": [
+    0.5817,
+    0.7861
+   ],
+   "arg_em": 0.0597,
+   "no_call_acc": 0.875,
+   "aef1": 0.1926,
+   "lcr": 0.1889,
+   "call_rate": 0.6933,
+   "wellformed": "49/52"
+  },
+  "maghrebi": {
+   "n": 6,
+   "fn_acc": 0.6667,
+   "fn_acc_ci95": [
+    0.3,
+    0.9032
+   ],
+   "arg_em": 0.1667,
+   "no_call_acc": null,
+   "aef1": 0.3333,
+   "lcr": 0.1667,
+   "call_rate": 0.6667,
+   "wellformed": "4/4"
+  },
+  "msa": {
+   "n": 323,
+   "fn_acc": 0.6471,
+   "fn_acc_ci95": [
+    0.5935,
+    0.6972
+   ],
+   "arg_em": 0.0969,
+   "no_call_acc": 0.8529,
+   "aef1": 0.3389,
+   "lcr": 0.3722,
+   "call_rate": 0.6471,
+   "wellformed": "193/209"
+  }
+ }
+}

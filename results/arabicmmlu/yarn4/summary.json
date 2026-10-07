@@ -1,0 +1,43 @@
+{
+ "name": "yarn4",
+ "rope": "yarn4",
+ "adapter": null,
+ "n": 14455,
+ "correct": 9719,
+ "acc": 0.6724,
+ "ci95": [
+  0.6647,
+  0.68
+ ],
+ "macro_subject_acc": 0.6681,
+ "by_group": {
+  "Humanities": 0.7131,
+  "Language": 0.6993,
+  "Other": 0.713,
+  "STEM": 0.6207,
+  "Social Science": 0.6358
+ },
+ "by_subject": {
+  "Accounting": 0.6216,
+  "Arabic Language": 0.6158,
+  "Arabic Language (General)": 0.7729,
+  "Arabic Language (Grammar)": 0.7288,
+  "Biology": 0.4954,
+  "Civics": 0.5697,
+  "Computer Science": 0.6956,
+  "Driving Test": 0.6953,
+  "Economics": 0.6695,
+  "General Knowledge": 0.7304,
+  "Geography": 0.594,
+  "History": 0.5822,
+  "Islamic Studies": 0.7846,
+  "Law": 0.6529,
+  "Management": 0.72,
+  "Math": 0.6968,
+  "Natural Science": 0.8374,
+  "Philosophy": 0.7179,
+  "Physics": 0.5412,
+  "Political Science": 0.6,
+  "Social Science": 0.7072
+ }
+}

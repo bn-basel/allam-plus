@@ -1,0 +1,13 @@
+{
+ "name": "base_q8",
+ "rope": null,
+ "adapter": null,
+ "backend": "llama-server http://127.0.0.1:8095",
+ "n": 404,
+ "language_check": 0.8738,
+ "prompt_strict_no_lang": 0.453,
+ "instruction_strict_no_lang": 0.557,
+ "prompt_strict": 0.4084,
+ "instruction_strict": 0.4921,
+ "hit_max_new_tokens": 66
+}

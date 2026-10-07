@@ -1,0 +1,43 @@
+{
+ "rank": 16,
+ "rope": "yarn4",
+ "chunked_loss": false,
+ "results": [
+  {
+   "length": 4096,
+   "peak_allocated_gb": 8.96,
+   "peak_reserved_gb": 10.57,
+   "s_per_step": 3.4,
+   "tokens_per_s": 1211.0,
+   "loss": 2.983,
+   "error": null
+  },
+  {
+   "length": 8192,
+   "peak_allocated_gb": 13.25,
+   "peak_reserved_gb": 16.76,
+   "s_per_step": 10.2,
+   "tokens_per_s": 802.0,
+   "loss": 2.308,
+   "error": null
+  },
+  {
+   "length": 12288,
+   "peak_allocated_gb": 17.54,
+   "peak_reserved_gb": 22.67,
+   "s_per_step": 15.1,
+   "tokens_per_s": 813.0,
+   "loss": 2.579,
+   "error": null
+  },
+  {
+   "length": 16384,
+   "peak_allocated_gb": 21.83,
+   "peak_reserved_gb": 27.84,
+   "s_per_step": 32.9,
+   "tokens_per_s": 498.0,
+   "loss": 2.635,
+   "error": null
+  }
+ ]
+}

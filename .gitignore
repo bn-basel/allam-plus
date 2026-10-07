@@ -1,0 +1,37 @@
+# Secrets: API keys live only in a local .env, never in git
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Large artifacts: models, checkpoints, training outputs
+models/
+checkpoints/
+outputs/
+runs/
+wandb/
+*.safetensors
+*.gguf
+*.bin
+*.pt
+
+# Downloaded benchmarks and corpora: licensed third-party data is not redistributed here
+data/raw/
+data/cache/
+
+# Per-case model outputs that quote benchmark text stay local; summaries are published
+results/**/cases*.jsonl
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IFEval replies and checker output quote the benchmark prompts (CC BY-NC): local only
+results/ifeval/**/responses.jsonl
+results/ifeval/**/checker/
+results/ifeval/**/input_subset.jsonl
