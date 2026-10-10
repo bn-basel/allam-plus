@@ -35,3 +35,6 @@ Thumbs.db
 results/ifeval/**/responses.jsonl
 results/ifeval/**/checker/
 results/ifeval/**/input_subset.jsonl
+
+# Phase 2 training data (Wikipedia text + ALLaM-written questions): large, rebuilt by scripts/longdata.py
+data/long/*.jsonl

@@ -1,0 +1,43 @@
+{
+ "name": "long_v1__shipped_rope",
+ "rope": "shipped",
+ "adapter": "runs/long_v1/checkpoint-183",
+ "n": 14455,
+ "correct": 10044,
+ "acc": 0.6948,
+ "ci95": [
+  0.6873,
+  0.7023
+ ],
+ "macro_subject_acc": 0.6947,
+ "by_group": {
+  "Humanities": 0.7456,
+  "Language": 0.7333,
+  "Other": 0.7351,
+  "STEM": 0.6282,
+  "Social Science": 0.6564
+ },
+ "by_subject": {
+  "Accounting": 0.6892,
+  "Arabic Language": 0.6323,
+  "Arabic Language (General)": 0.8203,
+  "Arabic Language (Grammar)": 0.7726,
+  "Biology": 0.5032,
+  "Civics": 0.5913,
+  "Computer Science": 0.7066,
+  "Driving Test": 0.7217,
+  "Economics": 0.6712,
+  "General Knowledge": 0.7504,
+  "Geography": 0.6159,
+  "History": 0.6019,
+  "Islamic Studies": 0.8072,
+  "Law": 0.793,
+  "Management": 0.7067,
+  "Math": 0.6944,
+  "Natural Science": 0.8651,
+  "Philosophy": 0.7949,
+  "Physics": 0.5098,
+  "Political Science": 0.6048,
+  "Social Science": 0.7368
+ }
+}

@@ -70,3 +70,35 @@ system RAM (659 s per step). With offloading, 16K needs 12.1 GB and 21 s per ste
 
 **D12. LC-Eval claim verification is reported but not used as a target:** both versions score at chance (balanced
 accuracy 52%) and only change which answer they lean to.
+
+## 2026-10-08: Phase 2 (long context)
+
+**D13. Phase 2 training data is written by ALLaM itself, from Arabic Wikipedia, with no paid API.** (The DeepSeek key
+is not funded yet; ALLaM's outputs are Apache-2.0.)
+- Long reading: the original ALLaM, shown one short section (no long context), writes two question-answer pairs about
+  it; pairs are kept only if the answer's words come from the section, the question ends with a question mark and
+  nothing is in Latin letters. The section's article is then placed among other articles to make a 6K-16K-token
+  context, with three questions (from three articles) asked as a chat. Each question names its article
+  («بحسب مقالة «...»») so it is never ambiguous among other articles. A quarter are multiple choice; wrong options are
+  answers to other questions about the same article. The instruction is worded differently from our LC-Eval prompt.
+- Replay: the original ALLaM (YaRN off) answers short tasks about other Wikipedia sections; the YaRN model learns to
+  give the same answers, to win back the short-text loss YaRN causes (ArabicMMLU −1.4).
+- Plain text: ~100 whole long articles, every token trained.
+- Kept out: book text (the source of LC-Eval's Arabic part) and invented-fact needles. Articles are split 90/5/5 into
+  train/dev/spare by a hash of their id.
+Fallback if the generated questions prove too weak: our DeepSeek pipeline, once the key is funded.
+
+**D14. Checkpoint rule for Phase 2, fixed before training:** the checkpoint with the highest long-question score on
+the dev set (held-out Wikipedia articles; open questions scored by word-overlap F1, multiple choice by the first option letter
+anywhere in the reply) is chosen; on a tie the earlier one. Candidates: every 40th optimizer step and the last one (scoring takes ~15 minutes
+per checkpoint; checkpoints are still saved every 20 steps). Replay loss on dev is reported alongside. The tests are
+run on the chosen checkpoint only.
+
+Scoring note: the first version read only the reply's first character for multiple choice; the base model writes
+«بحسب مقالة ...، ... A. ...», so right answers scored 0. Fixed (first option letter anywhere in the reply) and the
+starting point re-scored from its saved replies before any checkpoint was scored.
+
+**D15. Phase 2 result: checkpoint 183 of long_v1 is the long-context model.** Chosen by D14 (dev long score 0.730, the
+highest). All four approved targets met: needle 16K 100% (≥ 98%), LC-Eval multiple choice 63.8% (≥ 60%),
+ArabicMMLU 68.8% (≥ 67.6%), Arabic IFEval not significantly lower (p = 0.91). Plan B (YaRN only for long requests)
+is not needed. Phase 3 continues training this adapter.

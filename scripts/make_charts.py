@@ -79,20 +79,25 @@ def heat_colour(v: float) -> str:
     return "h5" if v >= 1 else "h4" if v >= .9 else "h3" if v >= .75 else "h2" if v >= .5 else "h1" if v > 0 else "h0"
 
 
-def needle() -> None:
-    """Two heatmaps side by side: as shipped vs YaRN factor 4 (config only)."""
+NEEDLE_PANELS = {"shipped": "As released (trained on 4K)", "yarn4": "YaRN ×4, config only",
+                 "long_v1": "YaRN ×4 + long-context training"}
+
+
+def needle(name: str = "needle_phase1", keys: tuple = ("shipped", "yarn4"), cell_w: int = 74,
+           title: str = "Where ALLaM-7B stops finding the needle") -> None:
+    """Heatmaps side by side, one per model version."""
     s = load("phase1/needle/summary.json")
-    if not s or not {"shipped", "yarn4"} <= set(s):
+    if not s or not set(keys) <= set(s):
         return
     lengths, depths = ["2048", "4096", "8192", "16384"], [10, 30, 50, 70, 90]
-    cell_w, cell_h, gap, left, top = 74, 34, 80, 96, 118
+    cell_h, gap, left, top = 34, 40 if len(keys) > 2 else 80, 96, 118
     panel_w = cell_w * len(lengths)
-    body = header("Where ALLaM-7B stops finding the needle",
-                  "Arabic needle-in-a-haystack: 10 invented facts hidden at 5 depths in Arabic book text. "
-                  "Share found per cell (10 needles).")
-    for p, (key, title) in enumerate([("shipped", "As released (trained on 4K)"), ("yarn4", "YaRN ×4, config only, no training")]):
+    body = header(title, "Arabic needle-in-a-haystack: 10 invented facts hidden at 5 depths in Arabic book text. "
+                         "Share found per cell (10 needles).")
+    for p, key in enumerate(keys):
         x0 = left + p * (panel_w + gap)
-        body.append(text(x0 + panel_w / 2, top - 30, title, 13.5, "middle", weight="bold"))
+        body.append(text(x0 + panel_w / 2, top - 30, NEEDLE_PANELS[key], 13 if len(keys) > 2 else 13.5, "middle",
+                         weight="bold"))
         for j, L in enumerate(lengths):
             body.append(text(x0 + j * cell_w + cell_w / 2, top - 10, f"{int(L) // 1024}K", 12, "middle", "muted"))
         for i, d in enumerate(depths):
@@ -114,9 +119,9 @@ def needle() -> None:
     body.append(text(left - 12, top + len(depths) * cell_h + 20, "all", 12, "end", "muted"))
     body.append(text(left - 12, top - 10, "depth", 12, "end", "muted"))
     h = top + len(depths) * cell_h + 58
-    body.append(text(24, h - 8, f"Controls (no needle in the text) answered: as released "
-                     f"{s['shipped']['controls_answered']}, YaRN {s['yarn4']['controls_answered']}.", 11.5, colour="muted"))
-    save("needle_phase1", "Arabic needle-in-a-haystack, as released vs YaRN", left + 2 * panel_w + gap + 30, h + 6, body)
+    controls = ", ".join(f"{NEEDLE_PANELS[k].split(' (')[0].split(',')[0]} {s[k]['controls_answered']}" for k in keys)
+    body.append(text(24, h - 8, f"Controls (no needle in the text) answered: {controls}.", 11.5, colour="muted"))
+    save(name, title, left + len(keys) * panel_w + (len(keys) - 1) * gap + 30, h + 6, body)
 
 
 BASELINE_ROWS = [  # label, note, how to read the score from the result files
@@ -221,11 +226,61 @@ def memory() -> None:
     save("memory_phase1", "GPU memory by context and KV cache", w, top + ch + 40, body)
 
 
+PHASE2_ROWS = [  # label, note, {series: (file, key)}
+    ("Needle at 16K tokens", "10 hidden facts × 5 depths",
+     {"shipped": ("phase1/needle/summary.json", "shipped.by_length.16384.acc"),
+      "yarn4": ("phase1/needle/summary.json", "yarn4.by_length.16384.acc"),
+      "long": ("phase1/needle/summary.json", "long_v1.by_length.16384.acc")}),
+    ("LC-Eval, multiple choice", "HUMAIN's long-book test, 8-16K tokens",
+     {"shipped": ("lceval/shipped/summary.json", "mcq|all.acc"), "yarn4": ("lceval/yarn4/summary.json", "mcq|all.acc"),
+      "long": ("lceval/long_v1/summary.json", "mcq|all.acc")}),
+    ("ArabicMMLU", "knowledge, short questions",
+     {"shipped": ("arabicmmlu/shipped/summary.json", "acc"), "yarn4": ("arabicmmlu/yarn4/summary.json", "acc"),
+      "long": ("arabicmmlu/long_v1/summary.json", "acc")}),
+    ("Arabic IFEval", "every instruction followed",
+     {"shipped": ("ifeval/base_q8/summary.json", "prompt_strict"),
+      "yarn4": ("ifeval/base_q8_yarn4/summary.json", "prompt_strict"),
+      "long": ("ifeval/long_v1_q8_yarn4/summary.json", "prompt_strict")}),
+]
+PHASE2_SERIES = [("shipped", "As released (4K)", "base"), ("yarn4", "+ YaRN ×4, no training", "yarn"),
+                 ("long", "+ YaRN ×4 + long-context training (allam-plus)", "ours")]
+
+
+def phase2() -> None:
+    """Before/after for the long-context stage: long reading up, short-text quality unchanged."""
+    left, top, bar_w, bar_h, w = 300, 120, 420, 14, 860
+    body = header("ALLaM-7B reads 16K tokens, with no loss on short texts",
+                  "Long-context stage (Phase 2): QLoRA on one RTX 5080. Higher is better.")
+    x = 24
+    for _, name, colour in PHASE2_SERIES:
+        body += [rect(x, 76, 12, 12, colour, 3), text(x + 18, 86, name, 12)]
+        x += 18 + len(name) * 6.4 + 24
+    y = top
+    for label, note, src in PHASE2_ROWS:
+        vals = [(c, value(*src[k])) for k, _, c in PHASE2_SERIES if k in src]
+        vals = [(c, v) for c, v in vals if v is not None]
+        gh = len(vals) * (bar_h + 4)
+        body += [text(left - 14, y + gh / 2, label, 13.5, "end", weight="bold"),
+                 text(left - 14, y + gh / 2 + 15, note, 11, "end", "muted")]
+        for colour, v in vals:
+            body += [rect(left, y, bar_w, bar_h, "grid", 3), rect(left, y, max(bar_w * v, 2), bar_h, colour, 3),
+                     text(left + bar_w * v + 6, y + bar_h - 2, f"{v:.1%}", 11.5,
+                          weight="bold" if colour == "ours" else "normal")]
+            y += bar_h + 4
+        y += 22
+    for p in range(0, 101, 25):
+        body.append(text(left + bar_w * p / 100, y + 4, f"{p}%", 10.5, "middle", "muted"))
+    save("phase2_long_context", "Phase 2: long context before and after", w, y + 20, body)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     needle()
+    needle("needle_phase2", ("shipped", "yarn4", "long_v1"), 60,
+           "ALLaM-7B finds the needle anywhere in 16K tokens after training")
     baselines()
     memory()
+    phase2()
     print(", ".join(sorted(p.name for p in OUT.glob("*.svg"))))
 
 

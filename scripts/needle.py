@@ -144,7 +144,7 @@ def correct(reply: str, accept: list[str]) -> bool:
 def run(args) -> None:
     from common import generate, load_model
 
-    out_dir = RESULTS / args.rope
+    out_dir = RESULTS / (args.name or args.rope)
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / "cases.jsonl"
     done = {json.loads(l)["id"] for l in open(out, encoding="utf-8")} if out.exists() else set()
@@ -156,13 +156,13 @@ def run(args) -> None:
     print(f"{len(done)} done, {len(cases)} to run, rope={args.rope}", flush=True)
     if not cases:
         return
-    tok, model = load_model(args.rope)
+    tok, model = load_model(args.rope, args.adapter)
     with open(out, "a", encoding="utf-8", newline="\n") as f:
         for i, c in enumerate(cases):
             g = generate(tok, model, c["prompt"], max_new_tokens=48)
             rec = {k: v for k, v in c.items() if k != "prompt"} | {
                 "reply": g["text"], "correct": correct(g["text"], c["accept"]), "seconds": g["seconds"],
-                "peak_gb": g["peak_gb"], "rope": args.rope}
+                "peak_gb": g["peak_gb"], "rope": args.rope, "adapter": args.adapter}
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             f.flush()
             print(f"[{i + 1}/{len(cases)}] {c['id']} {'OK ' if rec['correct'] else 'no '} {g['seconds']}s "
@@ -212,6 +212,8 @@ def main() -> None:
     sub.add_parser("build").set_defaults(fn=build)
     r = sub.add_parser("run")
     r.add_argument("--rope", choices=["shipped", "yarn4"], required=True)
+    r.add_argument("--adapter", help="LoRA adapter folder (a trained checkpoint)")
+    r.add_argument("--name", help="results folder name (default: the rope setting)")
     r.add_argument("--max-length", type=int, default=max(LENGTHS))
     r.add_argument("--limit", type=int, default=0)
     r.set_defaults(fn=run)

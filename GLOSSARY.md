@@ -117,3 +117,20 @@ arguments instead of filling in values.
 **Activation offloading.** During training, the values kept for the backward pass (with gradient checkpointing: each
 layer's input, 128 MB per layer at 16K tokens) are copied to system RAM and brought back when needed. Costs some
 time over PCIe, saves ~4 GB of GPU memory at 16K.
+
+## Training (added in Phase 2)
+
+**Self-distillation.** Training a model to copy another version of itself. Here the original ALLaM (no YaRN) answers
+short tasks and the YaRN version learns to give the same answers, so short-text behaviour comes back.
+
+**Replay.** Mixing examples of old behaviour into new training so the new skill does not erase the old one
+("catastrophic forgetting"). Our replay examples are the self-distillation answers above.
+
+**Loss masking.** Only some tokens are graded. In a long chat the model reads 12,000 tokens of articles but is graded
+only on its three short answers: 1.3 M graded tokens out of 6.6 M read.
+
+**Grounding check.** A rule that keeps a generated answer only if most of its content words appear in the source
+section, so the model is not trained on invented answers.
+
+**Dev set / checkpoint rule.** Held-out examples used to pick which saved checkpoint to keep, with the rule written
+down before training; the real tests are run only on the chosen checkpoint, so they stay an honest exam.

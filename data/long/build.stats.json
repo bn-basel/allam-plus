@@ -1,0 +1,14 @@
+{
+ "train_replay_skipped": 206,
+ "train_longqa": 450,
+ "train_longqa_tokens": 5140302,
+ "train_replay": 919,
+ "train_replay_tokens": 233935,
+ "train_lm": 100,
+ "train_lm_tokens": 1188412,
+ "dev_replay_skipped": 1042,
+ "dev_longqa": 40,
+ "dev_longqa_tokens": 459938,
+ "dev_replay": 83,
+ "dev_replay_tokens": 23898
+}
