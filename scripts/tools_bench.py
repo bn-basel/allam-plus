@@ -11,6 +11,8 @@ Protocols:
   text   the plain-text tool format the receptionist ALLaM was trained on (scripts/models.py TEXT_TOOL_GUIDE): tools
          described in the system prompt, the model answers <tool_call>{"name": ..., "arguments": {...}}</tool_call>
          or a normal reply. Phase 3 re-runs the base with the new native template as well.
+  native the allam-plus format (scripts/toolformat.py): the same shape as "text" with the guide in Arabic; this is
+         what Phase 3 trains on, so before/after use it.
   paper  ArabFuncBench's own ALLaM protocol (their notebook): an Arabic instruction to answer with JSON
          {"function_called": ..., "arguments": ...}, tools and question in one user turn. Used only to reproduce
          their published ALLaM number; we decode greedily, they sampled at temperature 0.1.
@@ -108,6 +110,11 @@ BENCHES = {"aisa_dev": lambda: load_aisa("dev"), "aisa_test": lambda: load_aisa(
 # ---------- prompts and parsing ----------
 
 def build_prompt(tok, case: dict, protocol: str) -> str:
+    if protocol == "native":
+        from toolformat import render
+        msgs = render(case["system"].removeprefix(SYSTEM).strip() or None, [{"role": "user", "content": case["user"]}],
+                      case["tools"])
+        return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     if protocol == "text":
         msgs = text_tool_messages(case["system"], [{"role": "user", "content": case["user"]}], case["tools"])
         return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
@@ -117,7 +124,7 @@ def build_prompt(tok, case: dict, protocol: str) -> str:
 
 
 def parse(raw: str, protocol: str) -> dict:
-    if protocol == "text":
+    if protocol in ("text", "native"):
         _, calls = parse_text_tool_calls(raw)
         if not calls:
             return {"name": None, "args": {}, "called": False, "wellformed": None}
@@ -215,7 +222,7 @@ def main() -> None:
 
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--bench", choices=list(BENCHES), required=True)
-    ap.add_argument("--protocol", choices=["text", "paper"], default="text")
+    ap.add_argument("--protocol", choices=["text", "native", "paper"], default="text")
     ap.add_argument("--rope", choices=["shipped", "yarn4"], default="shipped")
     ap.add_argument("--adapter")
     ap.add_argument("--name")
@@ -240,9 +247,22 @@ def main() -> None:
             tok.pad_token = tok.unk_token or tok.eos_token
         prompts = {c["id"]: build_prompt(tok, c, args.protocol) for c in todo}
         todo.sort(key=lambda c: len(prompts[c["id"]]))
+        # batches of up to --batch prompts and ~8,000 tokens (prompt + answer room), and freed memory handed back
+        # after each one: fixed batches of 8 long prompts fragmented the memory pool until it spilled into system RAM
+        n_tok = {c["id"]: len(tok(prompts[c["id"]], add_special_tokens=False)["input_ids"]) + 256 for c in todo}
+        batches, cur = [], []
+        for c in todo:
+            if cur and (len(cur) >= args.batch or n_tok[c["id"]] * (len(cur) + 1) > 8000):
+                batches.append(cur)
+                cur = []
+            cur.append(c)
+        batches.append(cur)
+        done_n = 0
         with open(out, "a", encoding="utf-8", newline="\n") as f:
-            for b in range(0, len(todo), args.batch):
-                batch = todo[b: b + args.batch]
+            for batch in batches:
+                b = done_n
+                done_n += len(batch)
+                torch.cuda.empty_cache()
                 enc = tok([prompts[c["id"]] for c in batch], return_tensors="pt", padding=True,
                           add_special_tokens=False).to(model.device)
                 with torch.no_grad():

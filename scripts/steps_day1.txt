@@ -1,0 +1,10 @@
+# Phase 3 "before" numbers in the new tool format (most important first)
+uv run python scripts/tools_bench.py --bench arabfuncbench --protocol native
+uv run python scripts/tools_bench.py --bench aisa_dev --protocol native
+uv run python scripts/receptionist_eval.py --name base_native
+uv run python scripts/tools_bench.py --bench arabfuncbench --protocol native --rope yarn4 --adapter runs/long_v1/checkpoint-183 --name long_v1
+uv run python scripts/tools_bench.py --bench aisa_dev --protocol native --rope yarn4 --adapter runs/long_v1/checkpoint-183 --name long_v1
+uv run python scripts/receptionist_eval.py --name long_v1_native --rope yarn4 --adapter runs/long_v1/checkpoint-183
+# extras (old format, comparison rows)
+uv run python scripts/tools_bench.py --bench arabfuncbench --protocol text
+uv run python scripts/tools_bench.py --bench arabfuncbench --protocol text --adapter C:/WIP/projects/saudi-dialect/runs/allam_v1/checkpoint-414 --name receptionist

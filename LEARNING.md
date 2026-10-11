@@ -101,7 +101,12 @@ inside 6–16K tokens of other articles and asked the question at the end. No pa
   gone; Arabic IFEval unchanged. All four targets met.
 - The model went from 4K to 16K tokens: **4×**, on one 16 GB card.
 
-**What I learned.** _(after the check question)_
+**What I learned.**
+- Check question: "Why train on the original model's short answers, mistakes included?" I guessed it was to re-test
+  later. The real reason: the goal of replay is *"behave exactly as before on short texts"*, not "be smarter". Training
+  on only correct answers would move the model somewhere new (even a good change is a change, and then "no quality
+  loss" could not be claimed honestly), and open prompts like "summarise this" have no answer key anyway. ArabicMMLU
+  confirmed it worked: 68.8% vs 68.6%.
 
 **Notes.**
 - A scoring bug caught before it mattered: the first multiple-choice scorer read only the reply's first character,

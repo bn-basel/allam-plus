@@ -1,0 +1,5 @@
+# Phase 3 training night: start-point dev score, training (continues from its last checkpoint if it was stopped),
+# candidate dev scores, then tests on the rule's pick. Safe to re-run: finished steps are skipped or resume.
+[ -f results/tool_dev/start.json ] || uv run python scripts/tool_dev.py --adapter runs/long_v1/checkpoint-183 --name start
+if ls -d runs/tools_v1/checkpoint-* >/dev/null 2>&1; then R="--resume"; else R=""; fi; [ -d runs/tools_v1/checkpoint-537 ] || uv run python scripts/train_long.py --run tools_v1 --data data/tools/train.jsonl --init-adapter runs/long_v1/checkpoint-183 --lr 1e-4 --accum 8 --warmup 10 --save-every 50 $R
+sh scripts/phase3_pick_and_test.sh

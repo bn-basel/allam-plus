@@ -38,3 +38,7 @@ results/ifeval/**/input_subset.jsonl
 
 # Phase 2 training data (Wikipedia text + ALLaM-written questions): large, rebuilt by scripts/longdata.py
 data/long/*.jsonl
+
+# Phase 3 generated conversations and spend ledger: local (rebuilt by scripts/tooldata.py, toolbuild.py)
+data/tools/*.jsonl
+data/tools/guide_raw.txt

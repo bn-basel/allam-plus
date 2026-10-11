@@ -102,3 +102,29 @@ starting point re-scored from its saved replies before any checkpoint was scored
 highest). All four approved targets met: needle 16K 100% (≥ 98%), LC-Eval multiple choice 63.8% (≥ 60%),
 ArabicMMLU 68.8% (≥ 67.6%), Arabic IFEval not significantly lower (p = 0.91). Plan B (YaRN only for long requests)
 is not needed. Phase 3 continues training this adapter.
+
+## 2026-10-11: Phase 3 (Arabic tool calling)
+
+**D16. Phase 3 design.**
+- *Format:* the receptionist model's plain-text format (tools in the system prompt, `<tool_call>{json}</tool_call>`
+  lines, results in `<tool_result>` user turns), with the guide in Arabic. The Arabic guide and default system
+  sentence were written by our DeepSeek pipeline from the project's English spec (`data/tools/guide.json`); one
+  module (`scripts/toolformat.py`) renders the format for training, every benchmark and the Phase 4 server.
+- *General tool data:* our DeepSeek V4.1 Flash pipeline wrote a library of 102 tools in 18 everyday domains (tool
+  names in English, descriptions in Arabic) and ~3,200 conversations, 4 per call, reasoning off, across seven
+  scenarios: one call, parallel calls, chained calls, asking for a missing detail, no tool fits, tool error, and
+  follow-up requests; users in Modern Standard Arabic (55%) or Saudi dialect (45%). Rule checks keep a conversation
+  only if: tool names and arguments match the schemas (required present, types, enums); no Latin letters in user
+  text, and in replies only codes copied from tool results; every number in a reply after a tool call comes from the
+  conversation or the results; the scenario holds (e.g. no call in "no tool fits", two calls in one turn for
+  "parallel"); and the user turns do not overlap any benchmark request. Tools whose names match a benchmark tool
+  were dropped from the library.
+- *Mix:* general conversations (5% held out as dev, by generation job) + the receptionist conversations (its own
+  train/validation split) + Phase 2 replay (150 long chats, 30 long articles, 400 short answers).
+- *Training:* continues the Phase 2 adapter (`runs/long_v1/checkpoint-183`) with YaRN ×4, one pass.
+- *Checkpoint rule, fixed before training:* the highest share of right assistant turns on the dev conversations
+  (`scripts/tool_dev.py`); on a tie the earlier checkpoint.
+- *Budget:* a hard cap of $4.00 for all Phase 3 API use (Basel's key held $4.60); every call's reported cost is
+  logged in `data/tools/spend.jsonl`. The pilot cost $0.0002 per conversation.
+- *Before/after:* the base model and the Phase 2 model are also run in the new format (`--protocol native`), so the
+  comparison uses the same prompt.

@@ -1,0 +1,3079 @@
+{
+ "government e-services (IDs, residency permits, traffic fines, appointments)": [
+  {
+   "name": "check_traffic_fines",
+   "description": "يستعلم عن المخالفات المرورية المسجلة على مركبة أو شخص باستخدام رقم الهوية أو رقم اللوحة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "identity_number": {
+      "type": "string",
+      "description": "رقم الهوية الوطنية أو الإقامة الخاص بالشخص المطلوب الاستعلام عنه."
+     },
+     "plate_number": {
+      "type": "string",
+      "description": "رقم لوحة المركبة المطلوب الاستعلام عن مخالفاتها."
+     },
+     "include_paid": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كانت النتائج تشمل المخالفات المدفوعة سابقاً أم لا."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "book_government_appointment",
+   "description": "يحجز موعداً في أحد فروع الجهات الحكومية لإنهاء إجراء معين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "description": "نوع الخدمة الحكومية المطلوب حجز موعد لها.",
+      "enum": [
+       "id_renewal",
+       "residency_renewal",
+       "passport_issuance",
+       "traffic_services",
+       "civil_registry"
+      ]
+     },
+     "city": {
+      "type": "string",
+      "description": "المدينة التي يرغب المستخدم في الحجز فيها."
+     },
+     "preferred_date": {
+      "type": "string",
+      "description": "التاريخ المفضل للموعد بصيغة YYYY-MM-DD."
+     },
+     "branch_id": {
+      "type": "string",
+      "description": "المعرف الخاص بالفرع المحدد إذا كان معروفاً لدى المستخدم."
+     }
+    },
+    "required": [
+     "service_type",
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "check_id_status",
+   "description": "يتحقق من حالة الهوية الوطنية أو بطاقة الإقامة وما إذا كانت سارية أو منتهية أو قيد التجديد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "identity_number": {
+      "type": "string",
+      "description": "رقم الهوية الوطنية أو رقم الإقامة المطلوب التحقق من حالته."
+     },
+     "document_type": {
+      "type": "string",
+      "description": "نوع الوثيقة المطلوب التحقق منها.",
+      "enum": [
+       "national_id",
+       "residency_permit"
+      ]
+     }
+    },
+    "required": [
+     "identity_number"
+    ]
+   }
+  },
+  {
+   "name": "renew_residency_permit",
+   "description": "يقدم طلب تجديد رخصة الإقامة لمقيم بناءً على بياناته ومدة التجديد المطلوبة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "residency_number": {
+      "type": "string",
+      "description": "رقم الإقامة الخاص بالمقيم المطلوب تجديدها."
+     },
+     "renewal_duration_months": {
+      "type": "integer",
+      "description": "عدد أشهر التجديد المطلوبة للإقامة."
+     },
+     "sponsor_id": {
+      "type": "string",
+      "description": "رقم هوية الكفيل أو المنشأة المسؤولة عن الإقامة."
+     },
+     "payment_method": {
+      "type": "string",
+      "description": "طريقة الدفع المفضلة لرسوم التجديد.",
+      "enum": [
+       "online",
+       "bank_transfer",
+       "atm"
+      ]
+     }
+    },
+    "required": [
+     "residency_number",
+     "renewal_duration_months"
+    ]
+   }
+  },
+  {
+   "name": "pay_traffic_fine",
+   "description": "يسدد مخالفة مرورية محددة باستخدام رقم المخالفة وطريقة الدفع.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "fine_number": {
+      "type": "string",
+      "description": "الرقم المرجعي للمخالفة المرورية المطلوب سدادها."
+     },
+     "payment_method": {
+      "type": "string",
+      "description": "طريقة الدفع المستخدمة لتسديد المخالفة.",
+      "enum": [
+       "credit_card",
+       "mada",
+       "bank_transfer",
+       "sadad"
+      ]
+     },
+     "identity_number": {
+      "type": "string",
+      "description": "رقم هوية الشخص المسؤول عن المخالفة."
+     }
+    },
+    "required": [
+     "fine_number",
+     "payment_method"
+    ]
+   }
+  },
+  {
+   "name": "list_available_appointments",
+   "description": "يعرض المواعيد المتاحة في فرع حكومي محدد خلال نطاق زمني معين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "branch_id": {
+      "type": "string",
+      "description": "المعرف الخاص بالفرع الحكومي المطلوب عرض مواعيده."
+     },
+     "from_date": {
+      "type": "string",
+      "description": "تاريخ بداية النطاق الزمني للبحث بصيغة YYYY-MM-DD."
+     },
+     "to_date": {
+      "type": "string",
+      "description": "تاريخ نهاية النطاق الزمني للبحث بصيغة YYYY-MM-DD."
+     },
+     "service_type": {
+      "type": "string",
+      "description": "نوع الخدمة المطلوب البحث عن مواعيد لها.",
+      "enum": [
+       "id_renewal",
+       "residency_renewal",
+       "passport_issuance",
+       "traffic_services",
+       "civil_registry"
+      ]
+     }
+    },
+    "required": [
+     "branch_id"
+    ]
+   }
+  }
+ ],
+ "banking and payments": [
+  {
+   "name": "get_account_balance",
+   "description": "يجلب الرصيد الحالي لحساب بنكي محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي المطلوب الاستعلام عن رصيده."
+     },
+     "include_pending": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب تضمين المعاملات المعلّقة في حساب الرصيد."
+     },
+     "currency": {
+      "type": "string",
+      "description": "رمز العملة المطلوب عرض الرصيد بها، مثل SAR أو USD."
+     }
+    },
+    "required": [
+     "account_id"
+    ]
+   }
+  },
+  {
+   "name": "transfer_funds",
+   "description": "ينفّذ تحويلاً مالياً بين حسابين بنكيين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "from_account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي المرسل منه المبلغ."
+     },
+     "to_account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي المستلم للمبلغ."
+     },
+     "amount": {
+      "type": "number",
+      "description": "المبلغ المالي المطلوب تحويله."
+     },
+     "currency": {
+      "type": "string",
+      "description": "رمز العملة التي سيتم بها التحويل، مثل SAR أو USD."
+     },
+     "note": {
+      "type": "string",
+      "description": "ملاحظة اختيارية تُرفق مع عملية التحويل."
+     }
+    },
+    "required": [
+     "from_account_id",
+     "to_account_id",
+     "amount",
+     "currency"
+    ]
+   }
+  },
+  {
+   "name": "list_recent_transactions",
+   "description": "يستعرض قائمة بالمعاملات البنكية الأخيرة لحساب محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي المطلوب عرض معاملاته."
+     },
+     "from_date": {
+      "type": "string",
+      "description": "تاريخ بداية الفترة بصيغة YYYY-MM-DD."
+     },
+     "to_date": {
+      "type": "string",
+      "description": "تاريخ نهاية الفترة بصيغة YYYY-MM-DD."
+     },
+     "limit": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد المعاملات التي سيتم إرجاعها."
+     },
+     "transaction_type": {
+      "type": "string",
+      "description": "نوع المعاملات المطلوب عرضها.",
+      "enum": [
+       "credit",
+       "debit",
+       "all"
+      ]
+     }
+    },
+    "required": [
+     "account_id"
+    ]
+   }
+  },
+  {
+   "name": "pay_bill",
+   "description": "يسدّد فاتورة خدمة محددة من حساب بنكي.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي الذي سيتم الدفع منه."
+     },
+     "biller_code": {
+      "type": "string",
+      "description": "رمز الجهة المُصدِرة للفاتورة المطلوب سدادها."
+     },
+     "bill_number": {
+      "type": "string",
+      "description": "رقم الفاتورة المطلوب سدادها."
+     },
+     "amount": {
+      "type": "number",
+      "description": "المبلغ المالي المطلوب سداده."
+     }
+    },
+    "required": [
+     "account_id",
+     "biller_code",
+     "bill_number",
+     "amount"
+    ]
+   }
+  },
+  {
+   "name": "check_card_status",
+   "description": "يتحقق من حالة بطاقة بنكية ويوضح ما إذا كانت نشطة أو موقوفة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "card_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للبطاقة البنكية المطلوب التحقق من حالتها."
+     },
+     "account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي المرتبط بالبطاقة."
+     }
+    },
+    "required": [
+     "card_id"
+    ]
+   }
+  },
+  {
+   "name": "schedule_payment",
+   "description": "يجدول دفعة مالية متكررة أو مؤجلة من حساب بنكي.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "account_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحساب البنكي الذي سيتم الجدولة منه."
+     },
+     "beneficiary_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمستفيد الذي ستُحوّل إليه الدفعة."
+     },
+     "amount": {
+      "type": "number",
+      "description": "المبلغ المالي المطلوب جدولته في كل دفعة."
+     },
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بدء الجدولة بصيغة YYYY-MM-DD."
+     },
+     "frequency": {
+      "type": "string",
+      "description": "تكرار الدفعة المجدولة.",
+      "enum": [
+       "once",
+       "daily",
+       "weekly",
+       "monthly"
+      ]
+     }
+    },
+    "required": [
+     "account_id",
+     "beneficiary_id",
+     "amount",
+     "start_date",
+     "frequency"
+    ]
+   }
+  }
+ ],
+ "healthcare and clinics": [
+  {
+   "name": "search_hospitals",
+   "description": "يبحث عن المستشفيات المتاحة في مدينة محددة حسب التخصص الطبي.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يُراد البحث فيها عن المستشفيات."
+     },
+     "specialty": {
+      "type": "string",
+      "description": "التخصص الطبي المطلوب مثل القلب أو الأطفال."
+     },
+     "accepts_insurance": {
+      "type": "boolean",
+      "description": "يحدد ما إذا كان يجب عرض المستشفيات التي تقبل التأمين الطبي فقط."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "check_doctor_availability",
+   "description": "يتحقق من المواعيد المتاحة لطبيب معين في تاريخ محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "doctor_id": {
+      "type": "string",
+      "description": "المعرف الفريد للطبيب المراد التحقق من مواعيده."
+     },
+     "date": {
+      "type": "string",
+      "description": "التاريخ المطلوب التحقق منه بصيغة YYYY-MM-DD."
+     },
+     "clinic_id": {
+      "type": "string",
+      "description": "معرف العيادة التي يعمل بها الطبيب إذا كان يعمل في أكثر من عيادة."
+     }
+    },
+    "required": [
+     "doctor_id",
+     "date"
+    ]
+   }
+  },
+  {
+   "name": "book_appointment",
+   "description": "يحجز موعدًا طبيًا جديدًا مع طبيب في عيادة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "patient_id": {
+      "type": "string",
+      "description": "المعرف الفريد للمريض الذي يرغب في الحجز."
+     },
+     "doctor_id": {
+      "type": "string",
+      "description": "المعرف الفريد للطبيب المراد الحجز معه."
+     },
+     "clinic_id": {
+      "type": "string",
+      "description": "المعرف الفريد للعيادة التي سيتم الحجز فيها."
+     },
+     "appointment_datetime": {
+      "type": "string",
+      "description": "تاريخ ووقت الموعد المطلوب بصيغة YYYY-MM-DD HH:MM."
+     },
+     "reason": {
+      "type": "string",
+      "description": "سبب الزيارة أو الشكوى الطبية بشكل مختصر."
+     }
+    },
+    "required": [
+     "patient_id",
+     "doctor_id",
+     "clinic_id",
+     "appointment_datetime"
+    ]
+   }
+  },
+  {
+   "name": "cancel_appointment",
+   "description": "يلغي موعدًا طبيًا محددًا بناءً على معرف الموعد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "appointment_id": {
+      "type": "string",
+      "description": "المعرف الفريد للموعد المراد إلغاؤه."
+     },
+     "cancellation_reason": {
+      "type": "string",
+      "description": "سبب إلغاء الموعد بشكل اختياري."
+     }
+    },
+    "required": [
+     "appointment_id"
+    ]
+   }
+  },
+  {
+   "name": "get_lab_results",
+   "description": "يسترجع نتائج التحاليل الطبية لمريض معين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "patient_id": {
+      "type": "string",
+      "description": "المعرف الفريد للمريض المطلوب استرجاع نتائجه."
+     },
+     "test_type": {
+      "type": "string",
+      "description": "نوع التحليل المطلوب مثل الدم أو السكر.",
+      "enum": [
+       "blood",
+       "urine",
+       "glucose",
+       "lipid",
+       "other"
+      ]
+     },
+     "date_from": {
+      "type": "string",
+      "description": "تاريخ البداية للبحث عن النتائج بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "patient_id"
+    ]
+   }
+  },
+  {
+   "name": "find_pharmacy",
+   "description": "يبحث عن الصيدليات القريبة من موقع محدد أو في مدينة معينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة للبحث عن الصيدليات فيها."
+     },
+     "district": {
+      "type": "string",
+      "description": "اسم الحي داخل المدينة لتضييق نطاق البحث."
+     },
+     "is_24_hours": {
+      "type": "boolean",
+      "description": "يحدد ما إذا كان يجب عرض الصيدليات المفتوحة 24 ساعة فقط."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  }
+ ],
+ "education (schools and universities)": [
+  {
+   "name": "search_schools",
+   "description": "يبحث عن المدارس المتاحة في مدينة أو منطقة محددة حسب المرحلة الدراسية.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يُراد البحث عن مدارس فيها."
+     },
+     "education_level": {
+      "type": "string",
+      "description": "المرحلة الدراسية المطلوبة.",
+      "enum": [
+       "kindergarten",
+       "primary",
+       "intermediate",
+       "secondary"
+      ]
+     },
+     "school_type": {
+      "type": "string",
+      "description": "نوع المدرسة من حيث الجنس أو النظام التعليمي.",
+      "enum": [
+       "public",
+       "private",
+       "international",
+       "boys",
+       "girls"
+      ]
+     }
+    },
+    "required": [
+     "city",
+     "education_level"
+    ]
+   }
+  },
+  {
+   "name": "get_school_details",
+   "description": "يعرض التفاصيل الكاملة لمدرسة محددة مثل العنوان ووسائل التواصل والمرافق.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "school_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمدرسة المطلوب عرض تفاصيلها."
+     }
+    },
+    "required": [
+     "school_id"
+    ]
+   }
+  },
+  {
+   "name": "search_university_programs",
+   "description": "يبحث عن التخصصات والبرامج الأكاديمية المتاحة في الجامعات حسب الدرجة العلمية.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "major_keyword": {
+      "type": "string",
+      "description": "كلمة مفتاحية لاسم التخصص أو المجال الأكاديمي المطلوب."
+     },
+     "degree_level": {
+      "type": "string",
+      "description": "الدرجة العلمية المطلوبة للبرنامج.",
+      "enum": [
+       "diploma",
+       "bachelor",
+       "master",
+       "phd"
+      ]
+     },
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يُفضّل أن تكون الجامعة فيها."
+     },
+     "study_mode": {
+      "type": "string",
+      "description": "طريقة الدراسة المطلوبة للبرنامج.",
+      "enum": [
+       "onsite",
+       "online",
+       "hybrid"
+      ]
+     }
+    },
+    "required": [
+     "major_keyword",
+     "degree_level"
+    ]
+   }
+  },
+  {
+   "name": "check_admission_requirements",
+   "description": "يوضح شروط ومتطلبات القبول في برنامج أكاديمي محدد بجامعة معينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "university_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للجامعة المطلوب الاستعلام عن متطلباتها."
+     },
+     "program_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للبرنامج الأكاديمي المطلوب."
+     },
+     "applicant_type": {
+      "type": "string",
+      "description": "نوع المتقدم للبرنامج.",
+      "enum": [
+       "saudi",
+       "international",
+       "transfer",
+       "graduate"
+      ]
+     }
+    },
+    "required": [
+     "university_id",
+     "program_id"
+    ]
+   }
+  },
+  {
+   "name": "get_academic_calendar",
+   "description": "يستعرض المواعيد المهمة في التقويم الأكاديمي مثل بداية الدراسة والاختبارات والإجازات.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "institution_name": {
+      "type": "string",
+      "description": "اسم المدرسة أو الجامعة المطلوب عرض تقويمها الأكاديمي."
+     },
+     "academic_year": {
+      "type": "string",
+      "description": "السنة الدراسية المطلوبة بصيغة YYYY-MM-DD لبدايتها."
+     },
+     "event_type": {
+      "type": "string",
+      "description": "نوع الحدث الأكاديمي المطلوب عرضه.",
+      "enum": [
+       "semester_start",
+       "exams",
+       "holidays",
+       "registration"
+      ]
+     }
+    },
+    "required": [
+     "institution_name"
+    ]
+   }
+  },
+  {
+   "name": "calculate_gpa",
+   "description": "يحسب المعدل التراكمي بناءً على الدرجات وعدد الساعات المعتمدة للمقررات.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "grades": {
+      "type": "string",
+      "description": "قائمة الدرجات والساعات المعتمدة مفصولة بفواصل، مثال: A:3,B+:4."
+     },
+     "scale": {
+      "type": "string",
+      "description": "نظام التقدير المستخدم في الحساب.",
+      "enum": [
+       "4.0",
+       "5.0",
+       "percentage"
+      ]
+     },
+     "include_previous": {
+      "type": "boolean",
+      "description": "هل يتم دمج المعدل التراكمي السابق مع المعدل الجديد."
+     },
+     "previous_gpa": {
+      "type": "number",
+      "description": "قيمة المعدل التراكمي السابق إن وُجد."
+     }
+    },
+    "required": [
+     "grades",
+     "scale"
+    ]
+   }
+  }
+ ],
+ "online shopping and order tracking": [
+  {
+   "name": "get_product_details",
+   "description": "يعرض التفاصيل الكاملة لمنتج محدد مثل السعر والتوفر والمواصفات.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "product_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمنتج المطلوب عرض تفاصيله."
+     },
+     "include_reviews": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب تضمين تقييمات العملاء في النتيجة."
+     }
+    },
+    "required": [
+     "product_id"
+    ]
+   }
+  },
+  {
+   "name": "check_product_availability",
+   "description": "يتحقق من توفر منتج معين في المخزون وموعد التوصيل المتوقع.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "product_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمنتج المطلوب التحقق من توفره."
+     },
+     "quantity": {
+      "type": "integer",
+      "description": "الكمية المطلوبة للتحقق من كفاية المخزون."
+     },
+     "city": {
+      "type": "string",
+      "description": "المدينة التي يُراد معرفة موعد التوصيل إليها."
+     }
+    },
+    "required": [
+     "product_id"
+    ]
+   }
+  },
+  {
+   "name": "add_item_to_cart",
+   "description": "يضيف منتجاً محدداً إلى سلة التسوق الخاصة بالمستخدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "product_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمنتج المطلوب إضافته إلى السلة."
+     },
+     "quantity": {
+      "type": "integer",
+      "description": "عدد الوحدات المطلوب إضافتها من المنتج."
+     },
+     "variant": {
+      "type": "string",
+      "description": "الخيار المحدد للمنتج مثل اللون أو المقاس إن وُجد."
+     }
+    },
+    "required": [
+     "product_id",
+     "quantity"
+    ]
+   }
+  },
+  {
+   "name": "track_order",
+   "description": "يتابع حالة الطلب الحالي ويعرض مراحل الشحن والتوصيل.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "order_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للطلب المطلوب تتبعه."
+     },
+     "include_history": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب تضمين سجل مراحل الطلب السابقة."
+     }
+    },
+    "required": [
+     "order_id"
+    ]
+   }
+  },
+  {
+   "name": "cancel_order",
+   "description": "يلغي طلباً قائماً إذا كان لا يزال في مرحلة تسمح بالإلغاء.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "order_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للطلب المطلوب إلغاؤه."
+     },
+     "reason": {
+      "type": "string",
+      "description": "سبب إلغاء الطلب الذي يذكره المستخدم."
+     },
+     "confirm_cancellation": {
+      "type": "boolean",
+      "description": "تأكيد نهائي من المستخدم بتنفيذ عملية الإلغاء."
+     }
+    },
+    "required": [
+     "order_id",
+     "confirm_cancellation"
+    ]
+   }
+  }
+ ],
+ "flights and travel": [
+  {
+   "name": "search_flights",
+   "description": "يبحث عن الرحلات الجوية المتاحة بين مدينتين في تاريخ محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "origin": {
+      "type": "string",
+      "description": "مدينة المغادرة أو رمز المطار الذي تنطلق منه الرحلة."
+     },
+     "destination": {
+      "type": "string",
+      "description": "مدينة الوصول أو رمز المطار الذي تتجه إليه الرحلة."
+     },
+     "departure_date": {
+      "type": "string",
+      "description": "تاريخ المغادرة بصيغة YYYY-MM-DD."
+     },
+     "passengers": {
+      "type": "integer",
+      "description": "عدد المسافرين في الحجز."
+     },
+     "cabin_class": {
+      "type": "string",
+      "description": "درجة السفر المطلوبة للرحلة.",
+      "enum": [
+       "economy",
+       "business",
+       "first"
+      ]
+     }
+    },
+    "required": [
+     "origin",
+     "destination",
+     "departure_date"
+    ]
+   }
+  },
+  {
+   "name": "check_flight_status",
+   "description": "يتحقق من حالة رحلة جوية محددة باستخدام رقم الرحلة أو مسارها.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "flight_number": {
+      "type": "string",
+      "description": "رقم الرحلة الجوية المراد الاستعلام عن حالتها."
+     },
+     "flight_date": {
+      "type": "string",
+      "description": "تاريخ الرحلة بصيغة YYYY-MM-DD."
+     },
+     "airline_code": {
+      "type": "string",
+      "description": "الرمز المختصر لشركة الطيران المشغلة للرحلة."
+     }
+    },
+    "required": [
+     "flight_number",
+     "flight_date"
+    ]
+   }
+  },
+  {
+   "name": "get_flight_price",
+   "description": "يعرض أقل سعر متاح لرحلة جوية معينة مع تفاصيل الدرجة والشروط.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "flight_number": {
+      "type": "string",
+      "description": "رقم الرحلة الجوية المطلوب معرفة سعرها."
+     },
+     "flight_date": {
+      "type": "string",
+      "description": "تاريخ الرحلة بصيغة YYYY-MM-DD."
+     },
+     "cabin_class": {
+      "type": "string",
+      "description": "درجة السفر التي يُراد معرفة سعرها.",
+      "enum": [
+       "economy",
+       "business",
+       "first"
+      ]
+     },
+     "include_taxes": {
+      "type": "boolean",
+      "description": "هل يجب تضمين الضرائب والرسوم في السعر المعروض."
+     }
+    },
+    "required": [
+     "flight_number",
+     "flight_date"
+    ]
+   }
+  },
+  {
+   "name": "book_flight",
+   "description": "ينشئ حجزاً جديداً لرحلة جوية لمسافر واحد أو أكثر.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "flight_number": {
+      "type": "string",
+      "description": "رقم الرحلة الجوية المراد حجزها."
+     },
+     "flight_date": {
+      "type": "string",
+      "description": "تاريخ الرحلة بصيغة YYYY-MM-DD."
+     },
+     "passenger_name": {
+      "type": "string",
+      "description": "الاسم الكامل للمسافر كما هو في وثيقة السفر."
+     },
+     "passenger_count": {
+      "type": "integer",
+      "description": "عدد المسافرين المشمولين في الحجز."
+     },
+     "contact_phone": {
+      "type": "string",
+      "description": "رقم الهاتف للتواصل بشأن الحجز."
+     }
+    },
+    "required": [
+     "flight_number",
+     "flight_date",
+     "passenger_name"
+    ]
+   }
+  },
+  {
+   "name": "cancel_booking",
+   "description": "يلغي حجز رحلة جوية قائم ويعيد معلومات الاسترداد إن وجدت.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "booking_reference": {
+      "type": "string",
+      "description": "الرقم المرجعي للحجز المراد إلغاؤه."
+     },
+     "reason": {
+      "type": "string",
+      "description": "سبب إلغاء الحجز بشكل مختصر."
+     },
+     "request_refund": {
+      "type": "boolean",
+      "description": "هل يرغب المستخدم في طلب استرداد المبلغ المدفوع."
+     }
+    },
+    "required": [
+     "booking_reference"
+    ]
+   }
+  },
+  {
+   "name": "get_visa_requirements",
+   "description": "يوضح متطلبات التأشيرة للسفر إلى دولة معينة حسب جنسية المسافر.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "destination_country": {
+      "type": "string",
+      "description": "الدولة المقصودة بالسفر لمعرفة متطلبات تأشيرتها."
+     },
+     "nationality": {
+      "type": "string",
+      "description": "جنسية المسافر المستخدمة لتحديد متطلبات التأشيرة."
+     },
+     "travel_purpose": {
+      "type": "string",
+      "description": "الغرض من السفر لتحديد نوع التأشيرة المناسب.",
+      "enum": [
+       "tourism",
+       "business",
+       "study",
+       "transit"
+      ]
+     }
+    },
+    "required": [
+     "destination_country",
+     "nationality"
+    ]
+   }
+  }
+ ],
+ "hotels and holiday rentals": [
+  {
+   "name": "get_hotel_details",
+   "description": "يجلب التفاصيل الكاملة لفندق معين مثل المرافق وسياسات الإقامة والخدمات المتوفرة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "hotel_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للفندق المطلوب عرض تفاصيله."
+     },
+     "include_reviews": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب تضمين تقييمات النزلاء في النتائج."
+     }
+    },
+    "required": [
+     "hotel_id"
+    ]
+   }
+  },
+  {
+   "name": "check_room_availability",
+   "description": "يتحقق من توفر نوع غرفة محدد في فندق معين خلال فترة زمنية معينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "hotel_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للفندق المراد التحقق من توفر الغرف فيه."
+     },
+     "room_type": {
+      "type": "string",
+      "description": "نوع الغرفة المطلوب مثل غرفة مفردة أو جناح.",
+      "enum": [
+       "single",
+       "double",
+       "twin",
+       "suite",
+       "family"
+      ]
+     },
+     "check_in_date": {
+      "type": "string",
+      "description": "تاريخ تسجيل الوصول بصيغة YYYY-MM-DD."
+     },
+     "check_out_date": {
+      "type": "string",
+      "description": "تاريخ تسجيل المغادرة بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "hotel_id",
+     "room_type",
+     "check_in_date",
+     "check_out_date"
+    ]
+   }
+  },
+  {
+   "name": "search_holiday_rentals",
+   "description": "يبحث عن وحدات سكنية للعطلات مثل الشقق والفلل المتاحة للإيجار في منطقة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة أو المنطقة التي يرغب المستخدم في البحث فيها."
+     },
+     "check_in_date": {
+      "type": "string",
+      "description": "تاريخ بداية الإقامة بصيغة YYYY-MM-DD."
+     },
+     "check_out_date": {
+      "type": "string",
+      "description": "تاريخ نهاية الإقامة بصيغة YYYY-MM-DD."
+     },
+     "guests": {
+      "type": "integer",
+      "description": "عدد الضيوف المطلوب إسكانهم في الوحدة."
+     },
+     "property_type": {
+      "type": "string",
+      "description": "نوع العقار المطلوب استئجاره للعطلة.",
+      "enum": [
+       "apartment",
+       "villa",
+       "chalet",
+       "studio",
+       "room"
+      ]
+     }
+    },
+    "required": [
+     "city",
+     "check_in_date",
+     "check_out_date",
+     "guests"
+    ]
+   }
+  },
+  {
+   "name": "get_rental_details",
+   "description": "يجلب التفاصيل الكاملة لوحدة سكنية للعطلات مثل المساحة والمرافق وشروط الإيجار.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "rental_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للوحدة السكنية المطلوب عرض تفاصيلها."
+     },
+     "include_amenities": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب تضمين قائمة المرافق المتوفرة في الوحدة."
+     }
+    },
+    "required": [
+     "rental_id"
+    ]
+   }
+  },
+  {
+   "name": "get_cancellation_policy",
+   "description": "يستعلم عن سياسة الإلغاء وشروط استرداد المبلغ لحجز فندقي أو وحدة سكنية.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "booking_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للحجز المراد معرفة سياسة إلغائه."
+     },
+     "booking_type": {
+      "type": "string",
+      "description": "نوع الحجز سواء كان فندقاً أو وحدة سكنية للعطلات.",
+      "enum": [
+       "hotel",
+       "rental"
+      ]
+     }
+    },
+    "required": [
+     "booking_id",
+     "booking_type"
+    ]
+   }
+  }
+ ],
+ "taxis, buses and public transport": [
+  {
+   "name": "search_transport_routes",
+   "description": "يبحث عن مسارات النقل العام المتاحة بين موقعين في مدينة أو منطقة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "origin": {
+      "type": "string",
+      "description": "نقطة الانطلاق مثل اسم الحي أو المحطة أو المعلم."
+     },
+     "destination": {
+      "type": "string",
+      "description": "نقطة الوصول مثل اسم الحي أو المحطة أو المعلم."
+     },
+     "transport_mode": {
+      "type": "string",
+      "description": "وسيلة النقل المطلوبة.",
+      "enum": [
+       "bus",
+       "metro",
+       "train",
+       "tram",
+       "mixed"
+      ]
+     },
+     "departure_date": {
+      "type": "string",
+      "description": "تاريخ المغادرة بصيغة YYYY-MM-DD."
+     },
+     "max_transfers": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد التبديلات بين وسائل النقل المسموح بها."
+     }
+    },
+    "required": [
+     "origin",
+     "destination"
+    ]
+   }
+  },
+  {
+   "name": "estimate_trip_fare",
+   "description": "يقدّر تكلفة الرحلة المتوقعة لوسيلة نقل محددة بين موقعين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "origin": {
+      "type": "string",
+      "description": "نقطة الانطلاق للرحلة."
+     },
+     "destination": {
+      "type": "string",
+      "description": "نقطة الوصول للرحلة."
+     },
+     "transport_mode": {
+      "type": "string",
+      "description": "وسيلة النقل التي تُحسب لها التكلفة.",
+      "enum": [
+       "taxi",
+       "bus",
+       "metro",
+       "train",
+       "ride_share"
+      ]
+     },
+     "passenger_count": {
+      "type": "integer",
+      "description": "عدد الركاب الذين تشملهم التكلفة المقدرة."
+     },
+     "is_peak_hour": {
+      "type": "boolean",
+      "description": "هل تُحسب الرحلة في وقت ذروة قد يرفع السعر."
+     }
+    },
+    "required": [
+     "origin",
+     "destination",
+     "transport_mode"
+    ]
+   }
+  },
+  {
+   "name": "get_transport_schedule",
+   "description": "يجلب مواعيد الرحلات أو القطارات أو الحافلات المغادرة من محطة معينة في تاريخ محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "station_name": {
+      "type": "string",
+      "description": "اسم المحطة أو الموقف الذي تُطلب مواعيده."
+     },
+     "transport_mode": {
+      "type": "string",
+      "description": "وسيلة النقل المطلوب جدول مواعيدها.",
+      "enum": [
+       "bus",
+       "metro",
+       "train",
+       "tram"
+      ]
+     },
+     "service_date": {
+      "type": "string",
+      "description": "تاريخ الخدمة بصيغة YYYY-MM-DD."
+     },
+     "direction": {
+      "type": "string",
+      "description": "اتجاه الرحلة أو الوجهة النهائية إن كانت معروفة."
+     }
+    },
+    "required": [
+     "station_name",
+     "transport_mode",
+     "service_date"
+    ]
+   }
+  },
+  {
+   "name": "track_vehicle_location",
+   "description": "يعرض الموقع الحالي لمركبة نقل عام أو حافلة مدرسية برقم تعريفها.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "vehicle_id": {
+      "type": "string",
+      "description": "الرقم التعريفي للمركبة أو رمز الرحلة."
+     },
+     "transport_mode": {
+      "type": "string",
+      "description": "نوع المركبة المتعقَّبة.",
+      "enum": [
+       "bus",
+       "taxi",
+       "train",
+       "school_bus",
+       "ride_share"
+      ]
+     },
+     "include_eta": {
+      "type": "boolean",
+      "description": "هل يُطلب تضمين الوقت المتوقع للوصول إلى المحطة القادمة."
+     }
+    },
+    "required": [
+     "vehicle_id"
+    ]
+   }
+  },
+  {
+   "name": "request_taxi_booking",
+   "description": "ينشئ طلب حجز سيارة أجرة مع تفاصيل موقع الانطلاق والوجهة والوقت.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "pickup_location": {
+      "type": "string",
+      "description": "الموقع الذي ستصل إليه سيارة الأجرة."
+     },
+     "dropoff_location": {
+      "type": "string",
+      "description": "الوجهة النهائية للرحلة."
+     },
+     "pickup_time": {
+      "type": "string",
+      "description": "وقت الانطلاق المطلوب بصيغة YYYY-MM-DD HH:MM."
+     },
+     "passenger_count": {
+      "type": "integer",
+      "description": "عدد الركاب في الرحلة."
+     },
+     "vehicle_type": {
+      "type": "string",
+      "description": "نوع سيارة الأجرة المطلوب.",
+      "enum": [
+       "standard",
+       "family",
+       "accessible",
+       "premium"
+      ]
+     }
+    },
+    "required": [
+     "pickup_location",
+     "dropoff_location"
+    ]
+   }
+  },
+  {
+   "name": "get_transport_disruptions",
+   "description": "يبلّغ عن الأعطال أو التأخيرات أو التغييرات في خدمة النقل العام ضمن منطقة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city_or_region": {
+      "type": "string",
+      "description": "المدينة أو المنطقة التي يُستفسر عن اضطرابات النقل فيها."
+     },
+     "transport_mode": {
+      "type": "string",
+      "description": "وسيلة النقل التي يُراد معرفة حالة اضطراباتها.",
+      "enum": [
+       "bus",
+       "metro",
+       "train",
+       "tram",
+       "all"
+      ]
+     },
+     "route_id": {
+      "type": "string",
+      "description": "رقم الخط أو المسار المحدد للاستفسار عن حالته."
+     },
+     "report_date": {
+      "type": "string",
+      "description": "تاريخ الاضطراب المطلوب بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "city_or_region"
+    ]
+   }
+  }
+ ],
+ "weather and air quality": [
+  {
+   "name": "get_current_weather",
+   "description": "يعرض حالة الطقس الحالية في مدينة محددة داخل المملكة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة المطلوب معرفة طقسها."
+     },
+     "unit": {
+      "type": "string",
+      "enum": [
+       "celsius",
+       "fahrenheit"
+      ],
+      "description": "وحدة قياس درجة الحرارة المفضلة."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "get_weather_forecast",
+   "description": "يعرض توقعات الطقس لعدة أيام قادمة في مدينة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة المطلوب معرفة توقعات طقسها."
+     },
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بداية التوقعات بصيغة YYYY-MM-DD."
+     },
+     "days": {
+      "type": "integer",
+      "description": "عدد الأيام المطلوب توقعها بدءاً من تاريخ البداية."
+     }
+    },
+    "required": [
+     "city",
+     "start_date"
+    ]
+   }
+  },
+  {
+   "name": "get_air_quality_forecast",
+   "description": "يعرض توقعات جودة الهواء للأيام القادمة في مدينة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة المطلوب معرفة توقعات جودة هوائها."
+     },
+     "days": {
+      "type": "integer",
+      "description": "عدد الأيام المطلوب توقع جودة الهواء خلالها."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "check_weather_alerts",
+   "description": "يتحقق من وجود تنبيهات أو تحذيرات جوية نشطة في منطقة محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "region": {
+      "type": "string",
+      "description": "اسم المنطقة المطلوب التحقق من التنبيهات الجوية فيها."
+     },
+     "severity": {
+      "type": "string",
+      "enum": [
+       "low",
+       "moderate",
+       "high"
+      ],
+      "description": "مستوى خطورة التنبيهات المطلوب عرضها."
+     }
+    },
+    "required": [
+     "region"
+    ]
+   }
+  },
+  {
+   "name": "get_sunrise_sunset",
+   "description": "يعرض مواعيد شروق الشمس وغروبها في مدينة محددة لتاريخ معين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة المطلوب معرفة مواعيد الشروق والغروب فيها."
+     },
+     "date": {
+      "type": "string",
+      "description": "التاريخ المطلوب حساب المواعيد له بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "city",
+     "date"
+    ]
+   }
+  }
+ ],
+ "Islamic services (prayer times, Quran, zakat, Hajj and Umrah)": [
+  {
+   "name": "get_prayer_times",
+   "description": "يستخرج أوقات الصلوات الخمس ليوم محدد في مدينة معينة داخل المملكة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة السعودية التي يُراد معرفة أوقات الصلاة فيها."
+     },
+     "date": {
+      "type": "string",
+      "description": "تاريخ اليوم المطلوب بصيغة YYYY-MM-DD، ويُفهم اليوم الحالي إذا لم يُذكر."
+     },
+     "calculation_method": {
+      "type": "string",
+      "enum": [
+       "umm_al_qura",
+       "mwl",
+       "isna",
+       "egypt"
+      ],
+      "description": "طريقة الحساب الفقهية المعتمدة لتحديد أوقات الصلاة."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "search_quran_verses",
+   "description": "يبحث عن آيات قرآنية بالكلمات المفتاحية ويعرض نصها ورقمها واسم سورتها.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "الكلمة أو العبارة المراد البحث عنها في النص القرآني."
+     },
+     "surah_number": {
+      "type": "integer",
+      "description": "رقم السورة من 1 إلى 114 لتقييد البحث داخلها."
+     },
+     "max_results": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد الآيات المعروضة في النتيجة."
+     }
+    },
+    "required": [
+     "query"
+    ]
+   }
+  },
+  {
+   "name": "get_quran_surah",
+   "description": "يجلب نص سورة كاملة أو جزءاً محدداً منها مع رقم الجزء والصفحة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "surah_number": {
+      "type": "integer",
+      "description": "رقم السورة المطلوبة من 1 إلى 114."
+     },
+     "from_ayah": {
+      "type": "integer",
+      "description": "رقم الآية التي يبدأ منها العرض داخل السورة."
+     },
+     "to_ayah": {
+      "type": "integer",
+      "description": "رقم الآية التي ينتهي عندها العرض داخل السورة."
+     },
+     "include_tafsir": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يُراد إرفاق تفسير مختصر للآيات."
+     }
+    },
+    "required": [
+     "surah_number"
+    ]
+   }
+  },
+  {
+   "name": "find_hajj_umrah_services",
+   "description": "يبحث عن خدمات الحج والعمرة المتاحة كالتصاريح والحملات والمواعيد في مدينة معينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "enum": [
+       "hajj_package",
+       "umrah_package",
+       "transport",
+       "accommodation",
+       "permit"
+      ],
+      "description": "نوع خدمة الحج أو العمرة المطلوب البحث عنها."
+     },
+     "city": {
+      "type": "string",
+      "description": "المدينة السعودية التي يُراد البحث عن الخدمة فيها."
+     },
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بداية الرحلة أو الخدمة بصيغة YYYY-MM-DD."
+     },
+     "pilgrims_count": {
+      "type": "integer",
+      "description": "عدد المعتمرين أو الحجاج المراد ترتيب الخدمة لهم."
+     }
+    },
+    "required": [
+     "service_type"
+    ]
+   }
+  },
+  {
+   "name": "get_islamic_date",
+   "description": "يحول التاريخ الميلادي إلى تاريخ هجري ويبين المناسبات الإسلامية المرتبطة به.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "gregorian_date": {
+      "type": "string",
+      "description": "التاريخ الميلادي المراد تحويله بصيغة YYYY-MM-DD."
+     },
+     "include_occasions": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يُراد إظهار المناسبات الدينية في ذلك التاريخ."
+     }
+    },
+    "required": [
+     "gregorian_date"
+    ]
+   }
+  }
+ ],
+ "real estate and home rentals": [
+  {
+   "name": "search_rental_properties",
+   "description": "يبحث عن العقارات المتاحة للإيجار بناءً على المدينة ونطاق السعر وعدد الغرف.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يُراد البحث عن العقارات للإيجار فيها."
+     },
+     "max_monthly_rent": {
+      "type": "number",
+      "description": "الحد الأقصى للإيجار الشهري بالريال السعودي."
+     },
+     "min_bedrooms": {
+      "type": "integer",
+      "description": "الحد الأدنى لعدد غرف النوم المطلوبة."
+     },
+     "property_type": {
+      "type": "string",
+      "description": "نوع العقار المطلوب.",
+      "enum": [
+       "apartment",
+       "villa",
+       "studio",
+       "townhouse",
+       "floor"
+      ]
+     },
+     "furnished": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان العقار مفروشًا أم غير مفروش."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "get_property_details",
+   "description": "يعرض التفاصيل الكاملة لعقار محدد بواسطة رقمه المرجعي.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "property_id": {
+      "type": "string",
+      "description": "الرقم المرجعي الفريد للعقار المراد عرض تفاصيله."
+     }
+    },
+    "required": [
+     "property_id"
+    ]
+   }
+  },
+  {
+   "name": "schedule_property_viewing",
+   "description": "يحجز موعدًا لمعاينة عقار في تاريخ ووقت محددين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "property_id": {
+      "type": "string",
+      "description": "الرقم المرجعي للعقار المراد معاينته."
+     },
+     "viewing_date": {
+      "type": "string",
+      "description": "تاريخ المعاينة بصيغة YYYY-MM-DD."
+     },
+     "viewing_time": {
+      "type": "string",
+      "description": "وقت المعاينة المفضل بصيغة HH:MM بنظام 24 ساعة."
+     },
+     "contact_phone": {
+      "type": "string",
+      "description": "رقم جوال العميل لتأكيد الموعد."
+     }
+    },
+    "required": [
+     "property_id",
+     "viewing_date",
+     "viewing_time"
+    ]
+   }
+  },
+  {
+   "name": "estimate_property_price",
+   "description": "يقدّر القيمة السوقية أو الإيجار العادل لعقار بناءً على موقعه ومواصفاته.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "المدينة التي يقع فيها العقار."
+     },
+     "district": {
+      "type": "string",
+      "description": "الحي الذي يقع فيه العقار."
+     },
+     "area_sqm": {
+      "type": "number",
+      "description": "مساحة العقار بالمتر المربع."
+     },
+     "bedrooms": {
+      "type": "integer",
+      "description": "عدد غرف النوم في العقار."
+     },
+     "property_age_years": {
+      "type": "integer",
+      "description": "عمر العقار بالسنوات منذ تاريخ بنائه."
+     }
+    },
+    "required": [
+     "city",
+     "area_sqm",
+     "bedrooms"
+    ]
+   }
+  },
+  {
+   "name": "check_rental_contract_status",
+   "description": "يتحقق من حالة عقد إيجار قائم باستخدام رقم العقد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "contract_number": {
+      "type": "string",
+      "description": "رقم عقد الإيجار المراد الاستعلام عن حالته."
+     }
+    },
+    "required": [
+     "contract_number"
+    ]
+   }
+  },
+  {
+   "name": "list_neighborhood_amenities",
+   "description": "يعرض الخدمات والمرافق القريبة من حي سكني معين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "المدينة التي يقع فيها الحي."
+     },
+     "district": {
+      "type": "string",
+      "description": "اسم الحي المراد معرفة مرافقه."
+     },
+     "amenity_type": {
+      "type": "string",
+      "description": "نوع المرفق المطلوب البحث عنه.",
+      "enum": [
+       "schools",
+       "hospitals",
+       "mosques",
+       "malls",
+       "parks",
+       "transport"
+      ]
+     },
+     "max_distance_km": {
+      "type": "number",
+      "description": "أقصى مسافة بالكيلومترات للبحث عن المرافق القريبة."
+     }
+    },
+    "required": [
+     "city",
+     "district"
+    ]
+   }
+  }
+ ],
+ "electricity, water and mobile/internet bills": [
+  {
+   "name": "get_utility_bill",
+   "description": "يسترجع تفاصيل فاتورة الخدمة المحددة للمستخدم خلال فترة زمنية معينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "enum": [
+       "electricity",
+       "water",
+       "internet",
+       "mobile"
+      ],
+      "description": "نوع الخدمة التي يراد الاستعلام عن فاتورتها."
+     },
+     "bill_month": {
+      "type": "string",
+      "description": "الشهر المطلوب بصيغة YYYY-MM."
+     },
+     "account_number": {
+      "type": "string",
+      "description": "رقم الحساب المرتبط بالخدمة إن كان متاحاً."
+     }
+    },
+    "required": [
+     "service_type"
+    ]
+   }
+  },
+  {
+   "name": "check_outstanding_balance",
+   "description": "يعرض الرصيد المستحق غير المسدد لخدمة معينة لدى المستخدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "enum": [
+       "electricity",
+       "water",
+       "internet",
+       "mobile"
+      ],
+      "description": "نوع الخدمة المراد معرفة رصيدها المستحق."
+     },
+     "include_previous": {
+      "type": "boolean",
+      "description": "هل يتم تضمين المتأخرات من الفترات السابقة في النتيجة."
+     }
+    },
+    "required": [
+     "service_type"
+    ]
+   }
+  },
+  {
+   "name": "get_consumption_history",
+   "description": "يسترجع سجل الاستهلاك لخدمة محددة خلال فترة زمنية يحددها المستخدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "enum": [
+       "electricity",
+       "water",
+       "internet",
+       "mobile"
+      ],
+      "description": "نوع الخدمة المراد معرفة سجل استهلاكها."
+     },
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بداية الفترة بصيغة YYYY-MM-DD."
+     },
+     "end_date": {
+      "type": "string",
+      "description": "تاريخ نهاية الفترة بصيغة YYYY-MM-DD."
+     },
+     "unit": {
+      "type": "string",
+      "enum": [
+       "kwh",
+       "m3",
+       "gb",
+       "sar"
+      ],
+      "description": "وحدة القياس المطلوبة لعرض الاستهلاك."
+     }
+    },
+    "required": [
+     "service_type",
+     "start_date",
+     "end_date"
+    ]
+   }
+  },
+  {
+   "name": "list_linked_accounts",
+   "description": "يعرض جميع الحسابات المرتبطة بالمستخدم في خدمات الكهرباء والماء والاتصالات والإنترنت.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "enum": [
+       "electricity",
+       "water",
+       "internet",
+       "mobile"
+      ],
+      "description": "نوع الخدمة لتصفية الحسابات المرتبطة بها."
+     },
+     "active_only": {
+      "type": "boolean",
+      "description": "هل يتم عرض الحسابات النشطة فقط دون غيرها."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "report_service_issue",
+   "description": "يقدم بلاغاً عن مشكلة في خدمة الكهرباء أو الماء أو الإنترنت أو الاتصالات لدى المستخدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "service_type": {
+      "type": "string",
+      "enum": [
+       "electricity",
+       "water",
+       "internet",
+       "mobile"
+      ],
+      "description": "نوع الخدمة التي تتعلق بها المشكلة."
+     },
+     "issue_type": {
+      "type": "string",
+      "enum": [
+       "outage",
+       "low_pressure",
+       "slow_speed",
+       "billing_error",
+       "other"
+      ],
+      "description": "تصنيف المشكلة المراد الإبلاغ عنها."
+     },
+     "description": {
+      "type": "string",
+      "description": "وصف مختصر للمشكلة وتفاصيلها."
+     },
+     "account_number": {
+      "type": "string",
+      "description": "رقم الحساب المرتبط بالخدمة إن كان متاحاً."
+     },
+     "preferred_contact_time": {
+      "type": "string",
+      "description": "الوقت المفضل للتواصل بصيغة YYYY-MM-DD HH:MM."
+     }
+    },
+    "required": [
+     "service_type",
+     "issue_type",
+     "description"
+    ]
+   }
+  }
+ ],
+ "restaurants and food delivery": [
+  {
+   "name": "search_restaurants",
+   "description": "يبحث عن المطاعم المتاحة حسب الموقع ونوع المطبخ.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يُراد البحث فيها عن المطاعم."
+     },
+     "cuisine_type": {
+      "type": "string",
+      "description": "نوع المطبخ المطلوب مثل عربي أو إيطالي أو آسيوي."
+     },
+     "minimum_rating": {
+      "type": "number",
+      "description": "أقل تقييم مقبول للمطعم من ٠ إلى ٥."
+     },
+     "max_results": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد النتائج المطلوب عرضها."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "get_restaurant_menu",
+   "description": "يعرض قائمة الأصناف والأسعار لمطعم محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "restaurant_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمطعم المطلوب عرض قائمته."
+     },
+     "category": {
+      "type": "string",
+      "description": "تصنيف الأصناف المطلوبة مثل المقبلات أو الأطباق الرئيسية أو الحلويات."
+     },
+     "include_unavailable": {
+      "type": "boolean",
+      "description": "هل يتم تضمين الأصناف غير المتوفرة حالياً في القائمة."
+     }
+    },
+    "required": [
+     "restaurant_id"
+    ]
+   }
+  },
+  {
+   "name": "check_delivery_availability",
+   "description": "يتحقق من إمكانية توصيل الطلب إلى عنوان معين والوقت المتوقع للتوصيل.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "restaurant_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمطعم الذي يُراد التحقق من التوصيل منه."
+     },
+     "delivery_address": {
+      "type": "string",
+      "description": "العنوان الكامل المراد التحقق من إمكانية التوصيل إليه."
+     },
+     "delivery_date": {
+      "type": "string",
+      "description": "تاريخ التوصيل المطلوب بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "restaurant_id",
+     "delivery_address"
+    ]
+   }
+  },
+  {
+   "name": "place_food_order",
+   "description": "ينشئ طلب طعام جديد من مطعم محدد مع الأصناف والكميات.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "restaurant_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للمطعم الذي سيتم الطلب منه."
+     },
+     "items": {
+      "type": "string",
+      "description": "قائمة الأصناف والكميات المطلوبة بصيغة نصية منظمة."
+     },
+     "delivery_address": {
+      "type": "string",
+      "description": "العنوان الكامل لتوصيل الطلب."
+     },
+     "payment_method": {
+      "type": "string",
+      "description": "طريقة الدفع المطلوبة للطلب.",
+      "enum": [
+       "cash",
+       "card",
+       "wallet"
+      ]
+     },
+     "order_notes": {
+      "type": "string",
+      "description": "ملاحظات إضافية على الطلب مثل طلبات خاصة أو تعليمات التوصيل."
+     }
+    },
+    "required": [
+     "restaurant_id",
+     "items",
+     "delivery_address"
+    ]
+   }
+  },
+  {
+   "name": "track_food_order",
+   "description": "يتابع حالة طلب طعام حالي ويعرض مرحلة التوصيل.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "order_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للطلب المراد متابعته."
+     }
+    },
+    "required": [
+     "order_id"
+    ]
+   }
+  },
+  {
+   "name": "cancel_food_order",
+   "description": "يلغي طلب طعام قائم إذا كانت حالة الطلب تسمح بالإلغاء.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "order_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للطلب المراد إلغاؤه."
+     },
+     "cancellation_reason": {
+      "type": "string",
+      "description": "سبب إلغاء الطلب إن وُجد."
+     }
+    },
+    "required": [
+     "order_id"
+    ]
+   }
+  }
+ ],
+ "events, cinema and entertainment tickets": [
+  {
+   "name": "search_events",
+   "description": "يبحث عن الفعاليات المتاحة في مدينة أو مجال محدد خلال فترة زمنية معينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي تُقام فيها الفعالية مثل الرياض أو جدة."
+     },
+     "category": {
+      "type": "string",
+      "description": "تصنيف الفعالية المطلوبة.",
+      "enum": [
+       "concert",
+       "theater",
+       "festival",
+       "sports",
+       "family",
+       "comedy"
+      ]
+     },
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بداية البحث بصيغة YYYY-MM-DD."
+     },
+     "end_date": {
+      "type": "string",
+      "description": "تاريخ نهاية البحث بصيغة YYYY-MM-DD."
+     },
+     "max_price": {
+      "type": "number",
+      "description": "أقصى سعر للتذكرة بالريال السعودي."
+     }
+    },
+    "required": [
+     "city"
+    ]
+   }
+  },
+  {
+   "name": "get_event_details",
+   "description": "يعرض التفاصيل الكاملة لفعالية محددة مثل الموقع والمواعيد والأسعار.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للفعالية المطلوبة."
+     },
+     "include_seat_map": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب إدراج خريطة المقاعد في النتيجة."
+     }
+    },
+    "required": [
+     "event_id"
+    ]
+   }
+  },
+  {
+   "name": "check_ticket_availability",
+   "description": "يتحقق من توفر التذاكر لفعالية أو عرض سينمائي في تاريخ ووقت محددين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للفعالية أو العرض."
+     },
+     "date": {
+      "type": "string",
+      "description": "تاريخ العرض المطلوب بصيغة YYYY-MM-DD."
+     },
+     "showtime": {
+      "type": "string",
+      "description": "وقت العرض المطلوب بصيغة HH:MM بنظام 24 ساعة."
+     },
+     "quantity": {
+      "type": "integer",
+      "description": "عدد التذاكر المطلوب التحقق من توفرها."
+     }
+    },
+    "required": [
+     "event_id",
+     "date"
+    ]
+   }
+  },
+  {
+   "name": "book_tickets",
+   "description": "يحجز عدداً محدداً من التذاكر لفعالية أو عرض سينمائي ويرجع رقم الحجز.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "description": "المعرّف الفريد للفعالية أو العرض المراد حجزه."
+     },
+     "date": {
+      "type": "string",
+      "description": "تاريخ العرض المراد حجزه بصيغة YYYY-MM-DD."
+     },
+     "showtime": {
+      "type": "string",
+      "description": "وقت العرض المراد حجزه بصيغة HH:MM بنظام 24 ساعة."
+     },
+     "quantity": {
+      "type": "integer",
+      "description": "عدد التذاكر المراد حجزها."
+     },
+     "seat_class": {
+      "type": "string",
+      "description": "فئة المقاعد المطلوبة.",
+      "enum": [
+       "standard",
+       "premium",
+       "vip"
+      ]
+     }
+    },
+    "required": [
+     "event_id",
+     "date",
+     "showtime",
+     "quantity"
+    ]
+   }
+  },
+  {
+   "name": "cancel_booking",
+   "description": "يلغي حجزاً قائماً باستخدام رقم الحجز ويعيد حالة الإلغاء.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "booking_reference": {
+      "type": "string",
+      "description": "رقم الحجز الفريد المراد إلغاؤه."
+     },
+     "reason": {
+      "type": "string",
+      "description": "سبب إلغاء الحجز بشكل اختياري."
+     }
+    },
+    "required": [
+     "booking_reference"
+    ]
+   }
+  },
+  {
+   "name": "list_cinema_showtimes",
+   "description": "يعرض أوقات العروض السينمائية المتاحة لفيلم معين في مدينة وتاريخ محددين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "movie_title": {
+      "type": "string",
+      "description": "عنوان الفيلم المراد عرض أوقاته."
+     },
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يُعرض فيها الفيلم."
+     },
+     "date": {
+      "type": "string",
+      "description": "تاريخ العروض المطلوبة بصيغة YYYY-MM-DD."
+     },
+     "language": {
+      "type": "string",
+      "description": "لغة العرض المطلوبة.",
+      "enum": [
+       "arabic",
+       "english",
+       "french",
+       "hindi"
+      ]
+     }
+    },
+    "required": [
+     "movie_title",
+     "city",
+     "date"
+    ]
+   }
+  }
+ ],
+ "jobs and human resources": [
+  {
+   "name": "search_job_openings",
+   "description": "يبحث عن الوظائف الشاغرة المتاحة بناءً على المسمى الوظيفي والمدينة ونوع الدوام.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "job_title": {
+      "type": "string",
+      "description": "المسمى الوظيفي المطلوب البحث عنه مثل مهندس أو محاسب."
+     },
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يرغب المستخدم في العمل بها داخل المملكة."
+     },
+     "employment_type": {
+      "type": "string",
+      "enum": [
+       "full_time",
+       "part_time",
+       "contract",
+       "internship"
+      ],
+      "description": "نوع الدوام المطلوب للوظيفة."
+     },
+     "min_salary": {
+      "type": "integer",
+      "description": "الحد الأدنى للراتب الشهري بالريال السعودي."
+     },
+     "posted_within_days": {
+      "type": "integer",
+      "description": "عدد الأيام الأخيرة التي أُعلن فيها عن الوظيفة."
+     }
+    },
+    "required": [
+     "job_title"
+    ]
+   }
+  },
+  {
+   "name": "get_job_details",
+   "description": "يعرض التفاصيل الكاملة لوظيفة شاغرة محددة باستخدام رقم الإعلان.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "job_id": {
+      "type": "string",
+      "description": "الرقم التعريفي الفريد لإعلان الوظيفة."
+     },
+     "include_requirements": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب تضمين متطلبات الوظيفة والمؤهلات المطلوبة."
+     }
+    },
+    "required": [
+     "job_id"
+    ]
+   }
+  },
+  {
+   "name": "submit_job_application",
+   "description": "يقدّم طلب توظيف لوظيفة محددة باستخدام بيانات المتقدم ورقم الإعلان.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "job_id": {
+      "type": "string",
+      "description": "الرقم التعريفي للوظيفة المراد التقديم عليها."
+     },
+     "applicant_name": {
+      "type": "string",
+      "description": "الاسم الكامل للمتقدم على الوظيفة."
+     },
+     "email": {
+      "type": "string",
+      "description": "البريد الإلكتروني للتواصل مع المتقدم."
+     },
+     "phone": {
+      "type": "string",
+      "description": "رقم الجوال للتواصل مع المتقدم."
+     },
+     "cover_letter": {
+      "type": "string",
+      "description": "نص رسالة التقديم أو نبذة مختصرة عن المتقدم."
+     }
+    },
+    "required": [
+     "job_id",
+     "applicant_name",
+     "email"
+    ]
+   }
+  },
+  {
+   "name": "check_application_status",
+   "description": "يتحقق من حالة طلب توظيف سابق باستخدام رقم الطلب أو بريد المتقدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "application_id": {
+      "type": "string",
+      "description": "الرقم التعريفي لطلب التوظيف المراد الاستعلام عنه."
+     },
+     "applicant_email": {
+      "type": "string",
+      "description": "البريد الإلكتروني المستخدم عند تقديم الطلب."
+     }
+    },
+    "required": [
+     "application_id"
+    ]
+   }
+  },
+  {
+   "name": "schedule_interview",
+   "description": "يحدد موعد مقابلة عمل للمتقدم بناءً على التاريخ والوقت المفضلين.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "application_id": {
+      "type": "string",
+      "description": "الرقم التعريفي لطلب التوظيف المرتبط بالمقابلة."
+     },
+     "interview_date": {
+      "type": "string",
+      "description": "تاريخ المقابلة بصيغة YYYY-MM-DD."
+     },
+     "interview_time": {
+      "type": "string",
+      "description": "وقت المقابلة بصيغة الساعة والدقيقة مثل 14:30."
+     },
+     "interview_mode": {
+      "type": "string",
+      "enum": [
+       "in_person",
+       "video",
+       "phone"
+      ],
+      "description": "طريقة إجراء المقابلة."
+     },
+     "location": {
+      "type": "string",
+      "description": "مكان المقابلة أو رابط الاجتماع المرئي إن وُجد."
+     }
+    },
+    "required": [
+     "application_id",
+     "interview_date",
+     "interview_time"
+    ]
+   }
+  },
+  {
+   "name": "calculate_salary_benefits",
+   "description": "يحسب الراتب الإجمالي والمزايا المتوقعة بناءً على الراتب الأساسي والبدلات.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "basic_salary": {
+      "type": "number",
+      "description": "الراتب الأساسي الشهري بالريال السعودي."
+     },
+     "housing_allowance": {
+      "type": "number",
+      "description": "بدل السكن الشهري بالريال السعودي."
+     },
+     "transport_allowance": {
+      "type": "number",
+      "description": "بدل النقل الشهري بالريال السعودي."
+     },
+     "include_gosi": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان يجب احتساب اشتراك التأمينات الاجتماعية."
+     }
+    },
+    "required": [
+     "basic_salary"
+    ]
+   }
+  }
+ ],
+ "sports and fitness": [
+  {
+   "name": "find_sports_facilities",
+   "description": "يبحث عن المرافق الرياضية القريبة من موقع المستخدم حسب نوع الرياضة والمدينة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "city": {
+      "type": "string",
+      "description": "اسم المدينة التي يرغب المستخدم في البحث فيها عن المرافق الرياضية."
+     },
+     "sport_type": {
+      "type": "string",
+      "description": "نوع الرياضة المطلوبة مثل كرة القدم أو السباحة أو اللياقة البدنية.",
+      "enum": [
+       "football",
+       "swimming",
+       "gym",
+       "tennis",
+       "running",
+       "padel"
+      ]
+     },
+     "max_results": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد النتائج التي يريد المستخدم عرضها."
+     }
+    },
+    "required": [
+     "city",
+     "sport_type"
+    ]
+   }
+  },
+  {
+   "name": "book_fitness_class",
+   "description": "يحجز مقعدًا في حصة لياقة بدنية محددة في مركز رياضي.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "facility_id": {
+      "type": "string",
+      "description": "المعرف الفريد للمركز الرياضي الذي تُقام فيه الحصة."
+     },
+     "class_name": {
+      "type": "string",
+      "description": "اسم الحصة التدريبية المطلوب حجزها."
+     },
+     "class_date": {
+      "type": "string",
+      "description": "تاريخ الحصة بصيغة YYYY-MM-DD."
+     },
+     "participants_count": {
+      "type": "integer",
+      "description": "عدد الأشخاص الذين سيحضرون الحصة."
+     }
+    },
+    "required": [
+     "facility_id",
+     "class_name",
+     "class_date"
+    ]
+   }
+  },
+  {
+   "name": "get_match_schedule",
+   "description": "يعرض جدول مباريات فريق أو دوري رياضي خلال فترة زمنية محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "team_or_league": {
+      "type": "string",
+      "description": "اسم الفريق أو الدوري الذي يريد المستخدم معرفة جدول مبارياته."
+     },
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بداية الفترة بصيغة YYYY-MM-DD."
+     },
+     "end_date": {
+      "type": "string",
+      "description": "تاريخ نهاية الفترة بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "team_or_league"
+    ]
+   }
+  },
+  {
+   "name": "calculate_calories_burned",
+   "description": "يحسب عدد السعرات الحرارية المحروقة بناءً على نوع النشاط ومدته ووزن المستخدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "activity_type": {
+      "type": "string",
+      "description": "نوع النشاط الرياضي الذي مارسه المستخدم.",
+      "enum": [
+       "walking",
+       "running",
+       "cycling",
+       "swimming",
+       "weightlifting",
+       "football"
+      ]
+     },
+     "duration_minutes": {
+      "type": "integer",
+      "description": "مدة النشاط الرياضي بالدقائق."
+     },
+     "weight_kg": {
+      "type": "number",
+      "description": "وزن المستخدم بالكيلوغرام لتحسين دقة الحساب."
+     },
+     "intensity": {
+      "type": "string",
+      "description": "شدة النشاط الرياضي الممارس.",
+      "enum": [
+       "low",
+       "medium",
+       "high"
+      ]
+     }
+    },
+    "required": [
+     "activity_type",
+     "duration_minutes"
+    ]
+   }
+  },
+  {
+   "name": "track_daily_steps",
+   "description": "يسجل عدد الخطوات اليومية للمستخدم ويقارنها بهدفه المحدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "steps_count": {
+      "type": "integer",
+      "description": "عدد الخطوات التي مشاها المستخدم اليوم."
+     },
+     "goal_steps": {
+      "type": "integer",
+      "description": "الهدف اليومي لعدد الخطوات الذي يسعى المستخدم لتحقيقه."
+     },
+     "record_date": {
+      "type": "string",
+      "description": "تاريخ تسجيل الخطوات بصيغة YYYY-MM-DD."
+     }
+    },
+    "required": [
+     "steps_count"
+    ]
+   }
+  },
+  {
+   "name": "check_team_standing",
+   "description": "يستعلم عن ترتيب فريق معين في جدول الدوري الرياضي.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "team_name": {
+      "type": "string",
+      "description": "اسم الفريق الذي يريد المستخدم معرفة ترتيبه."
+     },
+     "league_name": {
+      "type": "string",
+      "description": "اسم الدوري الذي يشارك فيه الفريق."
+     },
+     "season_year": {
+      "type": "integer",
+      "description": "السنة التي يبدأ فيها الموسم الرياضي المطلوب."
+     }
+    },
+    "required": [
+     "team_name",
+     "league_name"
+    ]
+   }
+  }
+ ],
+ "personal productivity (calendar, reminders, notes, messages)": [
+  {
+   "name": "create_calendar_event",
+   "description": "ينشئ موعدًا جديدًا في التقويم الشخصي مع تحديد التاريخ والوقت والعنوان.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "title": {
+      "type": "string",
+      "description": "عنوان الموعد أو اسم الحدث الذي سيظهر في التقويم."
+     },
+     "date": {
+      "type": "string",
+      "description": "تاريخ الموعد بصيغة YYYY-MM-DD."
+     },
+     "start_time": {
+      "type": "string",
+      "description": "وقت بداية الموعد بصيغة HH:MM على مدار 24 ساعة."
+     },
+     "duration_minutes": {
+      "type": "integer",
+      "description": "مدة الموعد بالدقائق، والقيمة الافتراضية ستون دقيقة إذا لم تُحدد."
+     },
+     "location": {
+      "type": "string",
+      "description": "مكان إقامة الموعد أو رابط الاجتماع إن وُجد."
+     }
+    },
+    "required": [
+     "title",
+     "date",
+     "start_time"
+    ]
+   }
+  },
+  {
+   "name": "list_calendar_events",
+   "description": "يستعرض المواعيد الموجودة في التقويم ضمن نطاق زمني محدد.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "start_date": {
+      "type": "string",
+      "description": "تاريخ بداية النطاق الزمني للبحث بصيغة YYYY-MM-DD."
+     },
+     "end_date": {
+      "type": "string",
+      "description": "تاريخ نهاية النطاق الزمني للبحث بصيغة YYYY-MM-DD."
+     },
+     "include_cancelled": {
+      "type": "boolean",
+      "description": "يحدد ما إذا كانت المواعيد الملغاة ستُضمَّن في النتائج."
+     }
+    },
+    "required": [
+     "start_date",
+     "end_date"
+    ]
+   }
+  },
+  {
+   "name": "set_reminder",
+   "description": "يضبط تذكيرًا مرتبطًا بوقت أو تاريخ محدد لتنبيه المستخدم في الوقت المناسب.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "reminder_text": {
+      "type": "string",
+      "description": "النص أو الرسالة التي سيتم تذكير المستخدم بها."
+     },
+     "remind_at": {
+      "type": "string",
+      "description": "التاريخ والوقت المطلوب للتذكير بصيغة YYYY-MM-DD HH:MM."
+     },
+     "priority": {
+      "type": "string",
+      "enum": [
+       "low",
+       "medium",
+       "high"
+      ],
+      "description": "مستوى أهمية التذكير لترتيب التنبيهات."
+     },
+     "repeat_daily": {
+      "type": "boolean",
+      "description": "يحدد ما إذا كان التذكير سيتكرر يوميًا في نفس الوقت."
+     }
+    },
+    "required": [
+     "reminder_text",
+     "remind_at"
+    ]
+   }
+  },
+  {
+   "name": "create_note",
+   "description": "ينشئ ملاحظة نصية جديدة ويحفظها في دفتر ملاحظات المستخدم.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "note_title": {
+      "type": "string",
+      "description": "عنوان الملاحظة الذي يلخص محتواها."
+     },
+     "note_body": {
+      "type": "string",
+      "description": "المحتوى النصي الكامل للملاحظة."
+     },
+     "tags": {
+      "type": "string",
+      "description": "وسوم مفصولة بفواصل لتصنيف الملاحظة وتسهيل البحث عنها."
+     },
+     "is_pinned": {
+      "type": "boolean",
+      "description": "يحدد ما إذا كانت الملاحظة ستُثبَّت في أعلى قائمة الملاحظات."
+     }
+    },
+    "required": [
+     "note_title",
+     "note_body"
+    ]
+   }
+  },
+  {
+   "name": "search_notes",
+   "description": "يبحث في ملاحظات المستخدم عن كلمات مفتاحية أو وسوم محددة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "الكلمة أو العبارة المطلوب البحث عنها داخل الملاحظات."
+     },
+     "tag_filter": {
+      "type": "string",
+      "description": "وسم محدد لتصفية نتائج البحث حسب التصنيف."
+     },
+     "max_results": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد الملاحظات التي ستُعاد في النتائج."
+     }
+    },
+    "required": [
+     "query"
+    ]
+   }
+  },
+  {
+   "name": "send_message",
+   "description": "يرسل رسالة نصية إلى جهة اتصال محددة عبر قناة المراسلة المختارة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "recipient": {
+      "type": "string",
+      "description": "اسم جهة الاتصال أو معرّفها الذي ستُرسل إليه الرسالة."
+     },
+     "message_body": {
+      "type": "string",
+      "description": "النص الكامل للرسالة التي سيتم إرسالها."
+     },
+     "channel": {
+      "type": "string",
+      "enum": [
+       "sms",
+       "email",
+       "chat"
+      ],
+      "description": "قناة الإرسال المستخدمة لتوصيل الرسالة."
+     },
+     "schedule_at": {
+      "type": "string",
+      "description": "التاريخ والوقت المطلوب لإرسال الرسالة لاحقًا بصيغة YYYY-MM-DD HH:MM."
+     }
+    },
+    "required": [
+     "recipient",
+     "message_body",
+     "channel"
+    ]
+   }
+  }
+ ],
+ "news, encyclopedia lookups and unit conversion": [
+  {
+   "name": "search_news",
+   "description": "يبحث عن الأخبار المنشورة خلال فترة زمنية محددة حسب الموضوع أو الكلمة المفتاحية.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "الكلمة المفتاحية أو الموضوع المراد البحث عنه في الأخبار."
+     },
+     "date_from": {
+      "type": "string",
+      "description": "تاريخ بداية البحث بصيغة YYYY-MM-DD."
+     },
+     "date_to": {
+      "type": "string",
+      "description": "تاريخ نهاية البحث بصيغة YYYY-MM-DD."
+     },
+     "language": {
+      "type": "string",
+      "description": "لغة الأخبار المطلوبة.",
+      "enum": [
+       "ar",
+       "en"
+      ]
+     },
+     "max_results": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد الأخبار التي يتم إرجاعها."
+     }
+    },
+    "required": [
+     "query"
+    ]
+   }
+  },
+  {
+   "name": "get_news_by_category",
+   "description": "يجلب أبرز الأخبار ضمن تصنيف معين مثل الرياضة أو الاقتصاد أو التقنية.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "category": {
+      "type": "string",
+      "description": "تصنيف الأخبار المطلوبة.",
+      "enum": [
+       "general",
+       "sports",
+       "business",
+       "technology",
+       "health",
+       "culture"
+      ]
+     },
+     "region": {
+      "type": "string",
+      "description": "المنطقة الجغرافية التي تغطيها الأخبار.",
+      "enum": [
+       "saudi_arabia",
+       "gulf",
+       "arab_world",
+       "international"
+      ]
+     },
+     "max_results": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد الأخبار التي يتم إرجاعها."
+     }
+    },
+    "required": [
+     "category"
+    ]
+   }
+  },
+  {
+   "name": "lookup_encyclopedia",
+   "description": "يبحث في الموسوعات عن مقال أو موضوع محدد ويعيد ملخصاً للمعلومات.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "topic": {
+      "type": "string",
+      "description": "الموضوع أو المصطلح المراد البحث عنه في الموسوعة."
+     },
+     "language": {
+      "type": "string",
+      "description": "لغة المقال المطلوب.",
+      "enum": [
+       "ar",
+       "en"
+      ]
+     },
+     "summary_only": {
+      "type": "boolean",
+      "description": "تحديد ما إذا كان المطلوب ملخصاً موجزاً فقط بدلاً من المقال الكامل."
+     }
+    },
+    "required": [
+     "topic"
+    ]
+   }
+  },
+  {
+   "name": "get_encyclopedia_summary",
+   "description": "يعيد فقرة تعريفية موجزة عن شخصية أو مكان أو مفهوم محدد من الموسوعة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "title": {
+      "type": "string",
+      "description": "العنوان الدقيق للمقال المطلوب تلخيصه."
+     },
+     "max_sentences": {
+      "type": "integer",
+      "description": "الحد الأقصى لعدد الجمل في الملخص."
+     },
+     "language": {
+      "type": "string",
+      "description": "لغة الملخص المطلوب.",
+      "enum": [
+       "ar",
+       "en"
+      ]
+     }
+    },
+    "required": [
+     "title"
+    ]
+   }
+  },
+  {
+   "name": "convert_units",
+   "description": "يحوّل قيمة رقمية من وحدة قياس إلى وحدة أخرى من نفس الفئة.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "value": {
+      "type": "number",
+      "description": "القيمة الرقمية المراد تحويلها."
+     },
+     "from_unit": {
+      "type": "string",
+      "description": "الوحدة الأصلية للقيمة.",
+      "enum": [
+       "m",
+       "km",
+       "cm",
+       "ft",
+       "mi",
+       "kg",
+       "g",
+       "lb",
+       "c",
+       "f",
+       "l",
+       "ml",
+       "gal"
+      ]
+     },
+     "to_unit": {
+      "type": "string",
+      "description": "الوحدة المطلوب التحويل إليها.",
+      "enum": [
+       "m",
+       "km",
+       "cm",
+       "ft",
+       "mi",
+       "kg",
+       "g",
+       "lb",
+       "c",
+       "f",
+       "l",
+       "ml",
+       "gal"
+      ]
+     }
+    },
+    "required": [
+     "value",
+     "from_unit",
+     "to_unit"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,92 @@
+{
+ "bench": "arabfuncbench",
+ "protocol": "native",
+ "rope": "yarn4",
+ "adapter": "runs/long_v1/checkpoint-183",
+ "all": {
+  "n": 1000,
+  "fn_acc": 0.516,
+  "fn_acc_ci95": [
+   0.485,
+   0.5469
+  ],
+  "arg_em": 0.1363,
+  "no_call_acc": 0.995,
+  "aef1": 0.7545,
+  "lcr": 0.9206,
+  "call_rate": 0.33,
+  "wellformed": "320/330"
+ },
+ "by_group": {
+  "ecommerce": {
+   "n": 200,
+   "fn_acc": 0.605,
+   "fn_acc_ci95": [
+    0.5359,
+    0.6702
+   ],
+   "arg_em": 0.2625,
+   "no_call_acc": 1.0,
+   "aef1": 0.8374,
+   "lcr": 0.9609,
+   "call_rate": 0.415,
+   "wellformed": "81/83"
+  },
+  "education": {
+   "n": 200,
+   "fn_acc": 0.615,
+   "fn_acc_ci95": [
+    0.546,
+    0.6797
+   ],
+   "arg_em": 0.1062,
+   "no_call_acc": 1.0,
+   "aef1": 0.5643,
+   "lcr": 0.8956,
+   "call_rate": 0.43,
+   "wellformed": "85/86"
+  },
+  "government": {
+   "n": 200,
+   "fn_acc": 0.335,
+   "fn_acc_ci95": [
+    0.2732,
+    0.403
+   ],
+   "arg_em": 0.075,
+   "no_call_acc": 0.975,
+   "aef1": 0.9107,
+   "lcr": 1.0,
+   "call_rate": 0.16,
+   "wellformed": "29/32"
+  },
+  "healthcare": {
+   "n": 200,
+   "fn_acc": 0.49,
+   "fn_acc_ci95": [
+    0.4216,
+    0.5588
+   ],
+   "arg_em": 0.0625,
+   "no_call_acc": 1.0,
+   "aef1": 0.8851,
+   "lcr": 0.977,
+   "call_rate": 0.29,
+   "wellformed": "58/58"
+  },
+  "islamic_services": {
+   "n": 200,
+   "fn_acc": 0.535,
+   "fn_acc_ci95": [
+    0.4659,
+    0.6028
+   ],
+   "arg_em": 0.175,
+   "no_call_acc": 1.0,
+   "aef1": 0.7114,
+   "lcr": 0.8209,
+   "call_rate": 0.355,
+   "wellformed": "67/71"
+  }
+ }
+}

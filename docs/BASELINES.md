@@ -84,3 +84,26 @@ Prompt reading (prefill) runs at ~4,400–8,000 tokens/s up to 16K.
 
 "Spills": more than the card's memory, so Windows moves the rest to system RAM and the step becomes very slow.
 With the chunked loss and activation offloading, **16K-token examples train on this card**.
+
+## Tool-calling starting points for Phase 3 (measured 2026-10-11)
+
+ArabFuncBench (1,000 native-MSA cases; published for comparison: best 92.4% (a commercial API model), Fanar-9B 87.1%, AceGPT-7B 22.4% right
+tool, no ALLaM row) and our formats. "Right tool" = their TSA; "argument match" = their AEF1.
+
+| Model and prompt | Right tool | Argument match | Rightly no call | Calls a tool |
+|---|---|---|---|---|
+| ALLaM base, the paper's JSON prompt | 85.2% | 0.81 | 30% | 94% |
+| ALLaM base, earlier English tool guide | 93.6% | 0.79 | 96% | 76% |
+| ALLaM base, new Arabic tool guide (Phase 3 format) | 65.9% | 0.72 | 94% | 50% |
+| Phase 2 model, new Arabic tool guide | 51.6% | 0.75 | 99.5% | 33% |
+| Receptionist model, its own format | 78.4% | 0.84 | 22% | 98% |
+
+| New Arabic tool format | AISA right tool | AISA exact arguments | Receptionist test v2 |
+|---|---|---|---|
+| ALLaM base | 68.8% | 10.8% | 36.3% |
+| Phase 2 model | 78.5% | 2.0% | 39.4% |
+| Receptionist model (its own format, earlier project) | 85.1% | 31.2% | 87.5% |
+
+With the Arabic guide, untrained ALLaM calls tools far less often than with the earlier English one (50% vs 76% of
+ArabFuncBench cases), so its score in the new format starts lower. Phase 3 trains the Arabic format directly; both
+columns are reported. (The paper-prompt run is missing 1 of 1,000 cases after an interrupted run.)

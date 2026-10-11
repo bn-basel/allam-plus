@@ -55,7 +55,8 @@ def encode(ex: dict, tok) -> dict:
     labels = [tid if any(s <= a and b <= e for s, e in spans) and b > a else -100
               for tid, (a, b) in zip(enc["input_ids"], enc["offset_mapping"])]
     # train exactly as tested: the tokens before the first answer must equal the test prompt's tokens
-    first_prompt = tok.apply_chat_template(msgs[:1], add_generation_prompt=True, tokenize=False)
+    first = next(i for i, m in enumerate(msgs) if m["role"] == "assistant")
+    first_prompt = tok.apply_chat_template(msgs[:first], add_generation_prompt=True, tokenize=False)
     p_ids = tok(first_prompt, add_special_tokens=False)["input_ids"]
     assert enc["input_ids"][: len(p_ids)] == p_ids, "training tokens differ from the test prompt's tokens"
     return {"input_ids": enc["input_ids"], "labels": labels}
@@ -93,6 +94,8 @@ def main() -> None:
     ap.add_argument("--max-steps", type=int, default=0)
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--init-adapter", help="start from this trained adapter (e.g. the Phase 2 checkpoint) instead of a "
+                                           "fresh LoRA")
     args = ap.parse_args()
 
     from transformers import AutoTokenizer
@@ -117,7 +120,7 @@ def main() -> None:
     n_tokens = sum(len(encoded[i]["input_ids"]) for i in order)
     n_trained = sum(sum(l != -100 for l in encoded[i]["labels"]) for i in order)
     info = {"args": vars(args), "examples": len(examples), "kinds": {k: sum(e["kind"] == k for e in examples)
-            for k in ("longqa", "lm", "replay")}, "steps": total_steps, "tokens_seen": n_tokens,
+            for k in sorted({e["kind"] for e in examples})}, "steps": total_steps, "tokens_seen": n_tokens,
             "tokens_trained": n_trained, "max_len": max(len(v["input_ids"]) for v in encoded.values()),
             "encode_seconds": round(time.time() - t0)}
     print(json.dumps(info, indent=1), flush=True)
@@ -143,6 +146,9 @@ def main() -> None:
         model = PeftModel.from_pretrained(model, ckpts[-1], is_trainable=True)
         start_step = int(ckpts[-1].name.split("-")[1])
         print(f"resuming from {ckpts[-1].name}", flush=True)
+    elif args.init_adapter:
+        model = PeftModel.from_pretrained(model, args.init_adapter, is_trainable=True)
+        print(f"starting from {args.init_adapter}", flush=True)
     else:
         model = get_peft_model(model, LoraConfig(r=args.rank, lora_alpha=2 * args.rank, lora_dropout=0.05,
                                                  target_modules="all-linear", task_type="CAUSAL_LM"))
