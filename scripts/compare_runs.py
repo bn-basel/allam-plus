@@ -11,6 +11,13 @@ Rule for the receptionist tuning round (docs/DECISIONS.md D19, fixed before trai
 model only if B reaches the 85% target on the receptionist test v2 and nothing else breaks: ArabFuncBench and AISA
 right-tool not significantly lower (paired p < 0.05 with more lost than gained), needle at 16K >= 98%, LC-Eval
 multiple choice >= 60%, ArabicMMLU >= 67.6%, Arabic IFEval not significantly lower than A.
+
+    uv run python scripts/compare_runs.py --a tools_v2 --b tools_v3 --rule d23
+
+Rule for the fix round (D23, fixed before training): B replaces A only if, on the 90-task agent test (Q4_K_M served,
+scripts/agent_bench.py), the 60 tasks for the three skills are clearly better (more gained than lost, paired
+p < 0.05) and the 30 other tasks not significantly worse; the receptionist test v2 not significantly lower; and the
+same guards as D19 for ArabFuncBench, AISA, needle, LC-Eval, ArabicMMLU and IFEval.
 """
 
 import argparse
@@ -21,6 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 R = ROOT / "results"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 
 def rows(path: Path) -> list[dict]:
@@ -60,8 +68,16 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--a", default="tools_v1")
     ap.add_argument("--b", default="tools_v2")
+    ap.add_argument("--rule", choices=["d19", "d23"], default="d19")
     args = ap.parse_args()
     res = {}
+    if args.rule == "d23":  # the agent test, Q4_K_M served (scripts/agent_bench.py), paired
+        import agent_bench
+        for g, r in agent_bench.compare(f"{args.a}_q4", f"{args.b}_q4").items():
+            res[f"agent {g}"] = {"n": r["n"], "a": r["a"] / max(1, r["n"]), "b": r["b"] / max(1, r["n"]),
+                                 "gained": r["gained"], "lost": r["lost"], "p": r["p"], "complete": r["n"] == 90 or
+                                 g != "all"}
+        print()
     print(f"| test | {args.a} | {args.b} | gained | lost | paired p |\n|---|---|---|---|---|---|")
     for t in TESTS:
         a, b = cases(t, args.a), cases(t, args.b)
@@ -76,8 +92,14 @@ def main() -> None:
                   "complete": len(both) == len(a) == len(b)}
         print(f"| {t} (n={len(both)}) | {acc_a:.1%} | {acc_b:.1%} | {g} | {l} | {res[t]['p']:.3f} |")
     worse = lambda t: t in res and res[t]["lost"] > res[t]["gained"] and res[t]["p"] < 0.05
+    better = lambda t: t in res and res[t]["gained"] > res[t]["lost"] and res[t]["p"] < 0.05  # noqa: E731
+    first = ({"agent skills clearly better (60 tasks, paired p < 0.05)": better("agent skills (all three)"),
+              "agent regression tasks not significantly worse": "agent regression" in res and
+              not worse("agent regression"),
+              "receptionist v2 not significantly lower": "receptionist" in res and not worse("receptionist")}
+             if args.rule == "d23" else {"receptionist v2 >= 85%": res.get("receptionist", {}).get("b", 0) >= 0.85})
     checks = {
-        "receptionist v2 >= 85%": res.get("receptionist", {}).get("b", 0) >= 0.85,
+        **first,
         "ArabFuncBench not significantly lower": "arabfuncbench" in res and not worse("arabfuncbench"),
         "AISA not significantly lower": "aisa_dev" in res and not worse("aisa_dev"),
         "needle 16K >= 98%": res.get("needle_16k", {}).get("b", 0) >= 0.98,
@@ -88,12 +110,13 @@ def main() -> None:
     print()
     for k, v in checks.items():
         print(f"{'ok  ' if v else 'FAIL'} {k}")
-    missing = [t for t in TESTS if t not in res or not res[t]["complete"]]
+    needed = TESTS + (["agent all"] if args.rule == "d23" else [])
+    missing = [t for t in needed if t not in res or not res[t]["complete"]]
     if missing:
         print(f"\nnot complete yet: {', '.join(missing)}")
     verdict = args.b if all(checks.values()) and not missing else args.a
-    print(f"\nrelease model by rule D19: {verdict}")
-    out = R / "compare" / f"{args.a}__vs__{args.b}.json"
+    print(f"\nrelease model by rule {args.rule.upper()}: {verdict}")
+    out = R / "compare" / f"{args.a}__vs__{args.b}{'__d23' if args.rule == 'd23' else ''}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"tests": res, "checks": checks, "missing": missing, "release": verdict}, indent=1),
                    encoding="utf-8")

@@ -195,3 +195,32 @@ it is a trade at the same overall level, not a clear improvement. tools_v1 stays
   with an 8-bit KV cache it needs 11.5 GB at full speed. Q4_K_M at 16K: 12.2 GB (16-bit cache) or 8.6 GB (8-bit).
 - *LangGraph demo checker:* currency codes are now compared without regard to letter case (the tool accepts "sar"),
   changed after the first run: one Q4 task moved from fail to pass (the reply was right). Both files: 17 of 20.
+
+**D23. Fix round (tools_v3): data, test and rules, fixed before training** (13 Oct, Basel's go).
+- *Why the three Phase 4 failures happened, traced to our own data:* the rule "every number in a reply must appear in
+  the conversation" (D16) threw out every reply that computed a number, so the model never saw a total or a
+  difference worked out; the "parallel" scenario taught "two requests in one message → two calls at once" with no
+  counter-examples where the second needs the first one's result; the "clarify" scenario left out one detail at a
+  time, never the date and time of a booking together.
+- *New data* (our DeepSeek pipeline, `scripts/tooldata.py convos --round fix`): three scenarios (`FIX_KINDS`):
+  dependent (one message, the second call in a new turn after the first result), clarify_action (an action with two
+  or more required details missing: ask one question ending in ؟ that names them all), compute (totals, differences,
+  quantities stated in the reply, including follow-ups without a new call). Every job names its tools and always gives
+  today's date (so no date is guessed). Rules added: a reply may state a number only if it is in the conversation,
+  is exactly a sum, difference, product or quotient of two such numbers, or ends a written equation whose arithmetic
+  checks out; a compute conversation must contain such a number; a dependent one needs two call turns for one user
+  message; a clarify_action one must ask (؟) before an action tool runs. The Phase 3 conversations get the same
+  verdicts under the new code (0 of 3,184 changed). The demo's four tool areas are not in the library, so the agent
+  test stays unseen.
+- *Mix* (`scripts/toolbuild.py --fix`): the new conversations (5% held out by job into dev_v3) + replay word for word
+  from the tools_v1 training file: 700 general, 400 receptionist, 200 short answers, 60 long chats, 10 long articles.
+- *Training:* continues tools_v2 checkpoint 180, learning rate 5e-5, YaRN ×4, one pass.
+- *Agent test, frozen before training* (`data/agent_test/tasks_v1.json`, SHA-256 60921984…): 90 tasks on ten tools in
+  four unseen areas: 20 dependent, 20 missing details, 20 arithmetic, 30 regression (single, parallel, no tool, tool
+  error, follow-up), run through LangGraph on the Q4_K_M release file served by llama-server (`scripts/agent_bench.py`).
+- *Checkpoint rule:* on dev_v3, the highest share of right turns in the new conversations among checkpoints whose
+  general and receptionist turns are each at most 1 point below tools_v2's; if none beats tools_v2 there, tools_v2
+  stays and nothing else runs.
+- *Release rule* (`scripts/compare_runs.py --rule d23`): tools_v3 replaces tools_v2 only if the 60 skill tasks are
+  clearly better (paired p < 0.05), the 30 regression tasks and the receptionist test v2 are not significantly worse,
+  and the D19 guards hold (ArabFuncBench, AISA, needle 16K ≥ 98%, LC-Eval ≥ 60%, ArabicMMLU ≥ 67.6%, IFEval).

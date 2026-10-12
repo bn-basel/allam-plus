@@ -172,23 +172,83 @@ def track_shipment(tracking_number: str) -> str:
 TOOLS = [find_car_service_centers, get_service_price, book_car_service, get_gold_price, convert_currency,
          estimate_shipping_cost, track_shipment]
 
+# A fourth area, used by the larger agent test (scripts/agent_bench.py) together with the seven above.
+TECHNICIANS = {
+    "الرياض": [{"technician_id": "501", "name": "فني السباكة أبو خالد", "services": ["سباكة"], "rating": 4.7},
+               {"technician_id": "502", "name": "مؤسسة النور للكهرباء", "services": ["كهرباء"], "rating": 4.5},
+               {"technician_id": "503", "name": "فني التكييف السريع", "services": ["تكييف"], "rating": 4.3}],
+    "جدة": [{"technician_id": "601", "name": "ورشة الساحل للتكييف", "services": ["تكييف", "كهرباء"], "rating": 4.6},
+            {"technician_id": "602", "name": "فني الدهانات الحديثة", "services": ["دهان"], "rating": 4.4}],
+    "الدمام": [{"technician_id": "701", "name": "مؤسسة الشرقية للصيانة", "services": ["سباكة", "دهان"],
+                "rating": 4.2}],
+}
+VISIT_FEES = {"سباكة": 120, "كهرباء": 100, "تكييف": 150, "دهان": 200}
+BUSY = {("501", "2026-10-17", "09:00"): ["11:00", "16:00"]}
+
+
+@tool(parse_docstring=True)
+def find_technicians(city: str, service: str) -> str:
+    """البحث عن فنيي صيانة منزلية في مدينة لخدمة معينة.
+
+    Args:
+        city: اسم المدينة
+        service: الخدمة: سباكة أو كهرباء أو تكييف أو دهان
+    """
+    found = [t for t in TECHNICIANS.get(_city(city), []) if service.strip() in t["services"]]
+    return _out({"technicians": [{k: v for k, v in t.items() if k != "services"} for t in found]})
+
+
+@tool(parse_docstring=True)
+def get_visit_fee(service: str) -> str:
+    """رسوم زيارة الفني لخدمة صيانة منزلية بالريال السعودي.
+
+    Args:
+        service: الخدمة: سباكة أو كهرباء أو تكييف أو دهان
+    """
+    fee = VISIT_FEES.get(service.strip())
+    return _out({"service": service.strip(), "visit_fee_sar": fee} if fee else
+                {"error": "خدمة غير معروفة", "services": list(VISIT_FEES)})
+
+
+@tool(parse_docstring=True)
+def book_technician_visit(technician_id: str, date: str, time: str, district: str) -> str:
+    """حجز زيارة فني صيانة إلى المنزل.
+
+    Args:
+        technician_id: رقم الفني من نتائج البحث
+        date: التاريخ بصيغة YYYY-MM-DD
+        time: الوقت بصيغة HH:MM (24 ساعة)
+        district: الحي الذي سيزوره الفني
+    """
+    tid, d, t = _digits(technician_id), _digits(date), _digits(time)
+    if not any(x["technician_id"] == tid for xs in TECHNICIANS.values() for x in xs):
+        return _out({"error": "رقم الفني غير موجود"})
+    if (tid, d, t) in BUSY:
+        return _out({"error": "الفني مشغول في هذا الوقت", "available_times": BUSY[(tid, d, t)]})
+    return _out({"status": "confirmed", "visit_number": "77" + tid + t.replace(":", ""), "technician_id": tid,
+                 "date": d, "time": t, "district": district})
+
+
+ALL_TOOLS = TOOLS + [find_technicians, get_visit_fee, book_technician_visit]
+
 
 # ---------------------------------------------------------------- the graph
 
-def build_agent(server: str, max_tokens: int = 512):
+def build_agent(server: str, max_tokens: int = 512, tools: list | None = None):
     from langchain_openai import ChatOpenAI
     from langgraph.graph import END, START, MessagesState, StateGraph
     from langgraph.prebuilt import ToolNode, tools_condition
 
+    tools = tools or TOOLS
     llm = ChatOpenAI(base_url=server.rstrip("/") + "/v1", api_key="local", model="allam-plus", temperature=0,
-                     max_tokens=max_tokens).bind_tools(TOOLS)
+                     max_tokens=max_tokens).bind_tools(tools)
 
     def model(state: MessagesState):
         return {"messages": [llm.invoke(state["messages"])]}
 
     g = StateGraph(MessagesState)
     g.add_node("model", model)
-    g.add_node("tools", ToolNode(TOOLS))
+    g.add_node("tools", ToolNode(tools))
     g.add_edge(START, "model")
     g.add_conditional_edges("model", tools_condition)  # tool_calls -> "tools", otherwise END
     g.add_edge("tools", "model")
@@ -223,14 +283,24 @@ def _arg_ok(want, got) -> bool:
 
 
 def check(task: dict, msgs: list) -> dict:
-    """Pass/fail for one task, with the reasons."""
-    calls = [c for m in msgs if getattr(m, "tool_calls", None) for c in m.tool_calls]
+    """Pass/fail for one task, with the reasons. Each call keeps the number of the model step that made it."""
+    calls, step = [], 0
+    for m in msgs:
+        if m.type == "ai":
+            step += 1
+            calls += [{"name": c["name"], "args": c["args"], "step": step} for c in (m.tool_calls or [])]
     reply = next((m.content for m in reversed(msgs) if m.type == "ai" and m.content), "") or ""
     return check_parts(task, calls, reply)
 
 
 def check_parts(task: dict, calls: list[dict], reply: str) -> dict:
     problems = []
+    first, then = task.get("sequential", [None, None])
+    if first:  # the second tool needs the first one's result: it must come in a later step, not alongside
+        a = min((c.get("step", 0) for c in calls if c["name"] == first), default=None)
+        b = [c.get("step", 0) for c in calls if c["name"] == then]
+        if a is not None and b and min(b) <= a:
+            problems.append(f"{then} called before {first}'s result came back")
     for want in task.get("expect_calls", []):
         if not any(c["name"] == want["name"] and all(_arg_ok(v, c["args"].get(k)) for k, v in want.get("args", {}).items())
                    for c in calls):
@@ -247,7 +317,7 @@ def check_parts(task: dict, calls: list[dict], reply: str) -> dict:
         if _norm(bad) in _norm(reply):
             problems.append(f"reply has {bad!r}")
     return {"id": task["id"], "kind": task["kind"], "pass": not problems, "problems": problems,
-            "calls": [{"name": c["name"], "args": c["args"]} for c in calls], "reply": reply}
+            "calls": [{k: c[k] for k in ("name", "args", "step") if k in c} for c in calls], "reply": reply}
 
 
 def run_tasks(server: str, name: str) -> None:

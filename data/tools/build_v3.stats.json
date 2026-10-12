@@ -1,0 +1,31 @@
+{
+ "train_v3": {
+  "fix_clarify_action": 192,
+  "fix_compute": 193,
+  "fix_dependent": 142,
+  "general_chain": 46,
+  "general_clarify": 86,
+  "general_error": 37,
+  "general_multi_turn": 71,
+  "general_no_tool": 143,
+  "general_parallel": 86,
+  "general_single": 231,
+  "phase2_lm": 10,
+  "phase2_longqa": 60,
+  "phase2_replay": 200,
+  "receptionist_tool": 400
+ },
+ "dev_v3": {
+  "fix_clarify_action": 16,
+  "fix_compute": 4,
+  "fix_dependent": 8,
+  "general_chain": 10,
+  "general_clarify": 6,
+  "general_error": 11,
+  "general_multi_turn": 7,
+  "general_no_tool": 34,
+  "general_parallel": 15,
+  "general_single": 26,
+  "receptionist_tool": 58
+ }
+}

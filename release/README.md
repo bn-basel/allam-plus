@@ -67,6 +67,35 @@ print(r.choices[0].message.tool_calls)   # get_gold_price {"karat": 21}
 
 Ollama 0.40 or later: `ollama create allam-plus -f Modelfile`, then use its chat API with `tools`.
 
+<details>
+<summary><b>Transformers + PEFT (the adapter)</b></summary>
+
+The adapter in `adapter/` goes on top of the original model with YaRN ×4 set in its config (as in training; the
+model was trained and tested in 4-bit NF4, as below):
+
+```python
+import torch
+from huggingface_hub import hf_hub_download
+from peft import PeftModel
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+base = "humain-ai/ALLaM-7B-Instruct-preview"
+config = AutoConfig.from_pretrained(base)
+config.rope_parameters = {"rope_theta": 1e6, "rope_type": "yarn", "factor": 4.0, "original_max_position_embeddings": 4096}
+config.max_position_embeddings = 16384
+tok = AutoTokenizer.from_pretrained(base)
+tok.chat_template = open(hf_hub_download("bnbasel/allam-plus-7b", "chat_template.jinja"), encoding="utf-8").read()
+model = AutoModelForCausalLM.from_pretrained(
+    base, config=config, device_map="auto", dtype=torch.bfloat16,
+    quantization_config=BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
+                                           bnb_4bit_compute_dtype=torch.bfloat16))
+model = PeftModel.from_pretrained(model, "bnbasel/allam-plus-7b", subfolder="adapter")
+
+prompt = tok.apply_chat_template(messages, tools=tools, add_generation_prompt=True, tokenize=False)
+# the reply holds <tool_call>{"name": ..., "arguments": {...}}</tool_call> lines for any tool calls
+```
+</details>
+
 The 16K setting (YaRN ×4) and the chat template are stored in the GGUF files, so no extra flags are needed.
 Write tool names in English and descriptions in Arabic or English; the model sees the tools after a short Arabic guide
 and answers with one `<tool_call>{"name": ..., "arguments": {...}}</tool_call>` line per call, which the server turns

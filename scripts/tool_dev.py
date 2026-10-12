@@ -17,6 +17,14 @@ earlier checkpoint. The benchmarks are run only on the chosen one.
 Rule for the receptionist tuning round (D19, also fixed before training): the highest share of right receptionist
 turns among the checkpoints whose general-tool turns are at most 1 point below the reference's; on a tie, the earlier
 checkpoint. If no checkpoint qualifies, or none beats the reference on receptionist turns, the reference stays.
+
+    uv run python scripts/tool_dev.py --dev v3 --adapter runs/tools_v3/checkpoint-60
+    uv run python scripts/tool_dev.py --dev v3 --report tools_v3 --rule fix --ref tools_v2__checkpoint-180
+
+Rule for the fix round (D23, fixed before training), on dev_v3 (the dev set plus the fix round's held-out
+conversations): the highest share of right turns in the new conversations ("fix") among checkpoints whose general and
+receptionist turns are each at most 1 point below tools_v2's; on a tie the earlier; if none beats tools_v2 on the new
+turns, tools_v2 stays.
 """
 
 import argparse
@@ -48,9 +56,14 @@ def main() -> None:
     ap.add_argument("--name")
     ap.add_argument("--rope", default="yarn4")
     ap.add_argument("--report")
-    ap.add_argument("--rule", choices=["all", "receptionist"], default="all")
-    ap.add_argument("--ref", help="reference result for --rule receptionist, e.g. tools_v1__checkpoint-400")
+    ap.add_argument("--rule", choices=["all", "receptionist", "fix"], default="all")
+    ap.add_argument("--ref", help="reference result for --rule receptionist/fix, e.g. tools_v1__checkpoint-400")
+    ap.add_argument("--dev", choices=["v1", "v3"], default="v1",
+                    help="v3: dev_v3.jsonl (dev + the fix round's held-out conversations), results in results/tool_dev_v3")
     args = ap.parse_args()
+    global DEV, OUT
+    if args.dev == "v3":
+        DEV, OUT = DEV.with_name("dev_v3.jsonl"), OUT.with_name("tool_dev_v3")
     if args.report:
         return report(args.report, args.rule, args.ref)
 
@@ -85,7 +98,7 @@ def main() -> None:
 
 def report(run: str, rule: str = "all", ref: str | None = None) -> None:
     files = sorted(OUT.glob(f"{run}__checkpoint-*.json"), key=lambda p: int(p.stem.split("-")[-1]))
-    first = OUT / (f"{ref}.json" if rule == "receptionist" else "start.json")
+    first = OUT / (f"{ref}.json" if rule in ("receptionist", "fix") else "start.json")
     rows = ([json.loads(first.read_text(encoding="utf-8"))] if first.exists() else []) + \
            [json.loads(p.read_text(encoding="utf-8")) for p in files]
     keys = [k for k in rows[0] if k.startswith("right")] if rows else []
@@ -98,6 +111,14 @@ def report(run: str, rule: str = "all", ref: str | None = None) -> None:
         ok = [r for r in cands if r["right_general"] >= base["right_general"] - 0.01]
         best = max(ok, key=lambda r: (r["right_receptionist"], -int(r["name"].split("-")[-1])), default=None)
         if best is None or best["right_receptionist"] <= base["right_receptionist"]:
+            best = base
+        print(f"\nchosen by the rule: {best['name']}")
+    elif rule == "fix":
+        base = json.loads(first.read_text(encoding="utf-8"))
+        ok = [r for r in cands if r["right_general"] >= base["right_general"] - 0.01
+              and r["right_receptionist"] >= base["right_receptionist"] - 0.01]
+        best = max(ok, key=lambda r: (r["right_fix"], -int(r["name"].split("-")[-1])), default=None)
+        if best is None or best["right_fix"] <= base["right_fix"]:
             best = base
         print(f"\nchosen by the rule: {best['name']}")
     elif cands:

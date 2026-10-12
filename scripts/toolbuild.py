@@ -2,6 +2,7 @@
 
     uv run python scripts/toolbuild.py                      # -> data/tools/train.jsonl, data/tools/dev.jsonl
     uv run python scripts/toolbuild.py --focus              # -> data/tools/train_v2.jsonl (receptionist round)
+    uv run python scripts/toolbuild.py --fix                # -> data/tools/train_v3.jsonl, dev_v3.jsonl (fix round)
 
 Every conversation is rendered with the allam-plus tool format (scripts/toolformat.py) into plain
 system/user/assistant messages, which train_long.py trains on (every assistant turn: tool-call lines and replies).
@@ -104,5 +105,49 @@ def focus() -> None:
     print(json.dumps(dict(sorted(stats.items())), indent=1), f"\n{len(out)} examples -> data/tools/train_v2.jsonl")
 
 
+FIX_REPLAY = {"general": 700, "receptionist": 400, "longqa": 60, "lm": 10, "replay": 200}
+
+
+def fix() -> None:
+    """The fix round (tools_v3, docs/DECISIONS.md D23): the new conversations for three skills (a second call that waits
+    for the first one's result, asking for missing details before an action, arithmetic on results), 5% held out by
+    generation job, plus replay drawn word for word from the tools_v1 training file so nothing else is forgotten.
+    Only conversations whose job gave today's date are used, so no date in them was guessed.
+    -> data/tools/train_v3.jsonl, and data/tools/dev_v3.jsonl = dev.jsonl + the held-out new conversations."""
+    rng = random.Random(61)
+    lib = json.loads((T / "library.json").read_text(encoding="utf-8"))
+    tools = {t["name"]: t for d in lib.values() for t in d}
+    new_train, new_dev = [], []
+    for r in map(json.loads, open(T / "convos_fix.jsonl", encoding="utf-8")):
+        if r["rejected"] or not r["today"]:
+            continue
+        d = date.fromisoformat(r["today"])
+        system = f"تاريخ اليوم: {WEEKDAYS_AR[d.weekday()]} {r['today']}"
+        offered = [{"type": "function", "function": tools[n]} for n in r["tools"]]
+        ex = {"id": r["id"], "kind": "tool", "source": "fix", "scenario": r["kind"], "dialect": r["dialect"],
+              "messages": render(system, openai_messages(r["messages"]), offered)}
+        job = r["id"].split("-")[0]
+        (new_dev if int(hashlib.sha256(job.encode()).hexdigest(), 16) % 100 < 5 else new_train).append(ex)
+    rows = [json.loads(l) for l in open(T / "train.jsonl", encoding="utf-8")]
+    replay = []
+    for key, n in FIX_REPLAY.items():
+        if key in ("receptionist", "general"):
+            pool = [e for e in rows if e.get("source") == key]
+        else:
+            pool = [e for e in rows if e.get("source") == "phase2" and e["kind"] == key]
+        replay += rng.sample(pool, min(n, len(pool)))
+    train = new_train + replay
+    rng.shuffle(train)
+    dev = [json.loads(l) for l in open(T / "dev.jsonl", encoding="utf-8")] + new_dev
+    for name, out in (("train_v3", train), ("dev_v3", dev)):
+        with open(T / f"{name}.jsonl", "w", encoding="utf-8", newline="\n") as f:
+            for e in out:
+                f.write(json.dumps(e, ensure_ascii=False) + "\n")
+    stats = {name: dict(sorted(Counter(f"{e.get('source')}_{e.get('scenario') or e['kind']}" for e in out).items()))
+             for name, out in (("train_v3", train), ("dev_v3", dev))}
+    print(json.dumps(stats, indent=1))
+    (T / "build_v3.stats.json").write_text(json.dumps(stats, indent=1), encoding="utf-8")
+
+
 if __name__ == "__main__":
-    focus() if sys.argv[1:] == ["--focus"] else main()
+    {"--focus": focus, "--fix": fix}.get(sys.argv[1] if sys.argv[1:] else "", main)()

@@ -1,0 +1,12 @@
+# Fix round (docs/DECISIONS.md D23): chained calls, asking for missing details, arithmetic. One long run, best
+# overnight (about 9 to 10 hours). Safe to stop and re-run: training continues from its last checkpoint, finished
+# steps are skipped.
+#   & "C:\Program Files\Git\bin\bash.exe" scripts/gpu_block.sh 11 scripts/steps_tools_v3.txt
+[ -f data/tools/train_v3.jsonl ] || uv run python scripts/toolbuild.py --fix
+# 1. the baseline: tools_v2 on the 90-task agent test (Q4_K_M served) and on the new dev set
+[ -f results/agent_test/tools_v2_q4.json ] && grep -q '"passed"' results/agent_test/tools_v2_q4.json || sh scripts/agent_test_served.sh tools_v2
+[ -f results/tool_dev_v3/tools_v2__checkpoint-180.json ] || uv run python scripts/tool_dev.py --dev v3 --adapter runs/tools_v2/checkpoint-180
+# 2. training: continues tools_v2 checkpoint 180, half the Phase 3 learning rate
+if ls -d runs/tools_v3/checkpoint-* >/dev/null 2>&1; then R="--resume"; else R=""; fi; [ -f runs/tools_v3/DONE ] || { uv run python scripts/train_long.py --run tools_v3 --data data/tools/train_v3.jsonl --init-adapter runs/tools_v2/checkpoint-180 --lr 5e-5 --accum 8 --warmup 10 --save-every 60 $R && [ ! -f runs/tools_v3/PAUSE ] && touch runs/tools_v3/DONE; }
+# 3. pick a checkpoint by rule, then the tests (the agent test first) and the comparison with tools_v2
+sh scripts/tools_v3_pick_and_test.sh
