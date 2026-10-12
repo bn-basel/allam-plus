@@ -1,0 +1,57 @@
+# Ollama setup for allam-plus-7b with a Go template: for Ollama before 0.40, or with OLLAMA_GO_TEMPLATE=1.
+# (written by scripts/make_template.py; the Jinja template inside the GGUF, chat_template.jinja, is the reference)
+#   ollama create allam-plus -f Modelfile.go-template
+#
+# It builds the same turns as the reference: the Arabic tool guide and one JSON line per tool in the system turn,
+# <tool_call> lines in assistant turns, <tool_result> lines in user turns, same-role turns merged, ALLaM's [INST]
+# format around them. One known difference: Go prints each tool's "parameters" (and past calls' arguments) as compact
+# JSON in its own key order, where training used "key": value spacing; docs/PHASE4.md has the scores through it.
+# Ollama adds the first <s> itself, so the first turn starts with " [INST]"; later turns write <s> explicitly.
+
+FROM ./allam-plus-7b-Q4_K_M.gguf
+
+TEMPLATE """{{- $sys := "" }}
+{{- range .Messages }}{{ if eq .Role "system" }}{{ $sys = .Content }}{{ end }}{{ end }}
+{{- if .Tools }}
+{{- if not $sys }}{{ $sys = "أنت مساعد مفيد ترد باللغة العربية." }}{{ end }}
+{{- $sys = printf "%s\n\n%s\n" $sys "يمكنك استخدام الأدوات المدرجة أدناه. لاستدعاء أداة، رد بهذا السطر فقط ولا شيء آخر:\n<tool_call>{\"name\": \"<اسم الأداة>\", \"arguments\": {<الوسائط بصيغة JSON>}}</tool_call>\nلاستدعاء عدة أدوات دفعة واحدة، اكتب سطرًا واحدًا كهذا لكل استدعاء. تعود نتائج الأدوات على شكل <tool_result>...</tool_result>. إذا لم تناسب أي أداة الطلب، أو كان هناك تفصيل مطلوب مفقود، فرد على المستخدم بشكل عادي. الأدوات:" }}
+{{- range $i, $t := .Tools }}
+{{- if $i }}{{ $sys = printf "%s\n" $sys }}{{ end }}
+{{- $sys = printf "%s{\"name\": %s, \"description\": %s, \"parameters\": %s}" $sys (json $t.Function.Name) (json $t.Function.Description) (json $t.Function.Parameters) }}
+{{- end }}
+{{- end }}
+{{- $prev := "" }}
+{{- $first := true }}
+{{- range .Messages }}
+{{- if eq .Role "system" }}{{ continue }}{{ end }}
+{{- $role := .Role }}
+{{- $text := .Content }}
+{{- if eq .Role "tool" }}{{ $role = "user" }}{{ $text = printf "<tool_result>%s</tool_result>" .Content }}{{ end }}
+{{- if .ToolCalls }}
+{{- $role = "assistant" }}
+{{- if .Content }}{{ $text = printf "%s\n" .Content }}{{ else }}{{ $text = "" }}{{ end }}
+{{- range $j, $c := .ToolCalls }}
+{{- if $j }}{{ $text = printf "%s\n" $text }}{{ end }}
+{{- $text = printf "%s<tool_call>{\"name\": %s, \"arguments\": %s}</tool_call>" $text (json $c.Function.Name) (json $c.Function.Arguments) }}
+{{- end }}
+{{- end }}
+{{- if eq $role $prev }}
+{{- "\n" }}{{ $text }}
+{{- else }}
+{{- if eq $prev "user" }} [/INST]{{ else if eq $prev "assistant" }} </s>{{ end }}
+{{- if eq $role "user" }}{{ if not $first }}<s>{{ end }} [INST] {{ if and $first $sys }}<<SYS>>
+{{ $sys }}
+<</SYS>>
+
+{{ end }}{{ $text }}
+{{- else }} {{ $text }}
+{{- end }}
+{{- $first = false }}
+{{- end }}
+{{- $prev = $role }}
+{{- end }}
+{{- if eq $prev "user" }} [/INST]{{ end }}"""
+
+PARAMETER stop "</s>"
+PARAMETER temperature 0
+PARAMETER num_ctx 16384

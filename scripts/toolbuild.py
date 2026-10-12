@@ -1,6 +1,7 @@
 """Phase 3: assemble the tool-calling training and dev sets.
 
     uv run python scripts/toolbuild.py                      # -> data/tools/train.jsonl, data/tools/dev.jsonl
+    uv run python scripts/toolbuild.py --focus              # -> data/tools/train_v2.jsonl (receptionist round)
 
 Every conversation is rendered with the allam-plus tool format (scripts/toolformat.py) into plain
 system/user/assistant messages, which train_long.py trains on (every assistant turn: tool-call lines and replies).
@@ -79,5 +80,29 @@ def main() -> None:
     (T / "build.stats.json").write_text(json.dumps(dict(sorted(stats.items())), indent=1), encoding="utf-8")
 
 
+FOCUS = {"receptionist": None, "general": 500, "longqa": 100, "lm": 20, "replay": 200}  # None = all of them
+
+
+def focus() -> None:
+    """The receptionist tuning round (tools_v2, docs/DECISIONS.md D19): a second pass over every receptionist
+    conversation, with enough general tool conversations and Phase 2 replay that the rest is not forgotten. Drawn from
+    data/tools/train.jsonl (already rendered, so word for word what tools_v1 trained on); dev stays the same."""
+    rng = random.Random(59)
+    rows = [json.loads(l) for l in open(T / "train.jsonl", encoding="utf-8")]
+    out = []
+    for key, n in FOCUS.items():
+        if key in ("receptionist", "general"):
+            pool = [e for e in rows if e.get("source") == key]
+        else:
+            pool = [e for e in rows if e.get("source") == "phase2" and e["kind"] == key]
+        out += pool if n is None else rng.sample(pool, min(n, len(pool)))
+    rng.shuffle(out)
+    with open(T / "train_v2.jsonl", "w", encoding="utf-8", newline="\n") as f:
+        for e in out:
+            f.write(json.dumps(e, ensure_ascii=False) + "\n")
+    stats = Counter(f"{e.get('source')}_{e['kind']}" for e in out)
+    print(json.dumps(dict(sorted(stats.items())), indent=1), f"\n{len(out)} examples -> data/tools/train_v2.jsonl")
+
+
 if __name__ == "__main__":
-    main()
+    focus() if sys.argv[1:] == ["--focus"] else main()

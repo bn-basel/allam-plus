@@ -11,6 +11,12 @@ greedy, up to 200 new tokens. A turn is right when:
 - the reference replies in text: the reply makes no tool call.
 Checkpoint rule, fixed before training (docs/DECISIONS.md D16): the highest share of right turns; on a tie, the
 earlier checkpoint. The benchmarks are run only on the chosen one.
+
+    uv run python scripts/tool_dev.py --report tools_v2 --rule receptionist --ref tools_v1__checkpoint-400
+
+Rule for the receptionist tuning round (D19, also fixed before training): the highest share of right receptionist
+turns among the checkpoints whose general-tool turns are at most 1 point below the reference's; on a tie, the earlier
+checkpoint. If no checkpoint qualifies, or none beats the reference on receptionist turns, the reference stays.
 """
 
 import argparse
@@ -42,9 +48,11 @@ def main() -> None:
     ap.add_argument("--name")
     ap.add_argument("--rope", default="yarn4")
     ap.add_argument("--report")
+    ap.add_argument("--rule", choices=["all", "receptionist"], default="all")
+    ap.add_argument("--ref", help="reference result for --rule receptionist, e.g. tools_v1__checkpoint-400")
     args = ap.parse_args()
     if args.report:
-        return report(args.report)
+        return report(args.report, args.rule, args.ref)
 
     from common import generate, load_model
     from toolformat import parse
@@ -75,17 +83,24 @@ def main() -> None:
     print(json.dumps({k: v for k, v in s.items() if k != "rows"}, indent=1))
 
 
-def report(run: str) -> None:
+def report(run: str, rule: str = "all", ref: str | None = None) -> None:
     files = sorted(OUT.glob(f"{run}__checkpoint-*.json"), key=lambda p: int(p.stem.split("-")[-1]))
-    start = OUT / "start.json"
-    rows = ([json.loads(start.read_text(encoding="utf-8"))] if start.exists() else []) + \
+    first = OUT / (f"{ref}.json" if rule == "receptionist" else "start.json")
+    rows = ([json.loads(first.read_text(encoding="utf-8"))] if first.exists() else []) + \
            [json.loads(p.read_text(encoding="utf-8")) for p in files]
     keys = [k for k in rows[0] if k.startswith("right")] if rows else []
     print("| checkpoint | " + " | ".join(keys) + " |\n|---|" + "---|" * len(keys))
     for r in rows:
-        print(f"| {r['name'].split('__')[-1]} | " + " | ".join(f"{r.get(k, 0):.3f}" for k in keys) + " |")
-    cands = [r for r in rows if "checkpoint" in r["name"]]
-    if cands:
+        print(f"| {r['name'].replace('__', ' ')} | " + " | ".join(f"{r.get(k, 0):.3f}" for k in keys) + " |")
+    cands = [r for r in rows if r["name"].startswith(run + "__")]
+    if rule == "receptionist":
+        base = json.loads(first.read_text(encoding="utf-8"))
+        ok = [r for r in cands if r["right_general"] >= base["right_general"] - 0.01]
+        best = max(ok, key=lambda r: (r["right_receptionist"], -int(r["name"].split("-")[-1])), default=None)
+        if best is None or best["right_receptionist"] <= base["right_receptionist"]:
+            best = base
+        print(f"\nchosen by the rule: {best['name']}")
+    elif cands:
         best = max(cands, key=lambda r: (r["right"], -int(r["name"].split("-")[-1])))
         print(f"\nchosen by the rule: {best['name']}")
 

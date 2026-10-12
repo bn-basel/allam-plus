@@ -3,6 +3,7 @@
     uv run python scripts/tools_bench.py --bench aisa_dev --protocol text [--adapter ...] [--limit 50]
     uv run python scripts/tools_bench.py --bench arabfuncbench --protocol paper
     uv run python scripts/tools_bench.py --bench arabfuncbench --protocol text
+    uv run python scripts/tools_bench.py --bench arabfuncbench --protocol served --server http://127.0.0.1:8095 --name q8
 
 Each case: one Arabic user request, a few candidate tools, and either one expected call (name + arguments) or "no
 call" (the request needs none of the tools). The model gets one turn and we read its first tool call.
@@ -13,6 +14,9 @@ Protocols:
          or a normal reply. Phase 3 re-runs the base with the new native template as well.
   native the allam-plus format (scripts/toolformat.py): the same shape as "text" with the guide in Arabic; this is
          what Phase 3 trains on, so before/after use it.
+  served the allam-plus format through a running server's OpenAI chat API (--server URL, scripts/served.py): the
+         request carries the system message, the user turn and the tools; the GGUF's chat template builds the prompt
+         and llama-server returns standard tool_calls. This is what an app gets.
   paper  ArabFuncBench's own ALLaM protocol (their notebook): an Arabic instruction to answer with JSON
          {"function_called": ..., "arguments": ...}, tools and question in one user turn. Used only to reproduce
          their published ALLaM number; we decode greedily, they sampled at temperature 0.1.
@@ -216,19 +220,41 @@ def summarize(rows: list[dict]) -> dict:
     return {"all": block(rows), "by_group": {g: block(v) for g, v in sorted(groups.items())}}
 
 
-def main() -> None:
-    import torch
-    from common import load_model
+def run_served(cases: list[dict], url: str, out: Path, model: str | None = None) -> None:
+    from served import chat
+    with open(out, "a", encoding="utf-8", newline="\n") as f:
+        for i, c in enumerate(cases, 1):
+            r = chat(url, c["system"].removeprefix(SYSTEM).strip() or None, [{"role": "user", "content": c["user"]}],
+                     c["tools"], model=model)
+            if r["tool_calls"]:
+                tc = r["tool_calls"][0]
+                ok = tc["name"] is not None and isinstance(tc["arguments"], dict)
+                pred = {"name": tc["name"], "args": tc["arguments"] if ok else {}, "called": True, "wellformed": ok}
+            else:
+                pred = {"name": None, "args": {}, "called": False, "wellformed": None}
+            rec = {"id": c["id"], "group": c["group"], "gold_name": c["gold_name"], "pred_name": pred["name"],
+                   "pred_args": pred["args"], "called": pred["called"], "wellformed": pred["wellformed"],
+                   **score(c, pred), "raw": r["raw"], "seconds": r["seconds"]}
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            f.flush()
+            if i % 100 == 0:
+                print(f"{i}/{len(cases)}", flush=True)
 
+
+def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--bench", choices=list(BENCHES), required=True)
-    ap.add_argument("--protocol", choices=["text", "native", "paper"], default="text")
+    ap.add_argument("--protocol", choices=["text", "native", "paper", "served"], default="text")
     ap.add_argument("--rope", choices=["shipped", "yarn4"], default="shipped")
     ap.add_argument("--adapter")
     ap.add_argument("--name")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--server", help="OpenAI-compatible server URL, for --protocol served")
+    ap.add_argument("--server-model", help="model name to send (Ollama needs it)")
     args = ap.parse_args()
+    if (args.protocol == "served") != bool(args.server):
+        sys.exit("--protocol served goes with --server URL")
     name = args.name or ("base" if not args.adapter else args.adapter.replace("/", "_").replace("\\", "_").replace(":", ""))
     name += f"__{args.protocol}" + ("" if args.rope == "shipped" else f"__{args.rope}")
     out_dir = ROOT / "results" / "tools" / args.bench / name
@@ -240,7 +266,12 @@ def main() -> None:
         cases = cases[: args.limit]
     done = {json.loads(l)["id"] for l in open(out, encoding="utf-8")} if out.exists() else set()
     todo = [c for c in cases if c["id"] not in done]
-    if todo:
+    if todo and args.server:
+        run_served(todo, args.server, out, args.server_model)
+    elif todo:
+        import torch
+        from common import load_model
+
         tok, model = load_model(args.rope, args.adapter)
         tok.padding_side = "left"
         if tok.pad_token is None:
@@ -279,6 +310,7 @@ def main() -> None:
                 print(f"{b + len(batch)}/{len(todo)}", flush=True)
     rows = [json.loads(l) for l in open(out, encoding="utf-8")]
     summary = {"bench": args.bench, "protocol": args.protocol, "rope": args.rope, "adapter": args.adapter,
+               "server": args.server,
                **summarize(rows)}
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(summary["all"], indent=1))

@@ -9,7 +9,7 @@ change measured against the untouched model:
 4. **Fast quantised releases**: GGUF 4/8-bit with a speed and memory table.
 5. **No loss of Arabic quality**: ArabicMMLU and Arabic IFEval before and after.
 
-**Status:** Phases 1–3 done; Phase 4 (serving and release) next. **ALLaM-7B now reads 16K tokens (4× its original
+**Status:** Phases 1–3 done; Phase 4 (serving and release) built, its GPU tests pending. **ALLaM-7B now reads 16K tokens (4× its original
 4K) and calls tools in Arabic, with no loss on general Arabic tasks**, all trained on one RTX 5080.
 
 | | As released | **allam-plus** |
@@ -26,7 +26,7 @@ change measured against the untouched model:
 
 ![Long context](docs/charts/phase2_long_context.svg)
 
-Details: [baselines](docs/BASELINES.md) · [long context](docs/PHASE2.md) · [tool calling](docs/PHASE3.md)
+Details: [baselines](docs/BASELINES.md) · [long context](docs/PHASE2.md) · [tool calling](docs/PHASE3.md) · [serving](docs/PHASE4.md)
 
 Decisions and reasons: [docs/DECISIONS.md](docs/DECISIONS.md) · Learning log: [LEARNING.md](LEARNING.md) ·
 Terms: [GLOSSARY.md](GLOSSARY.md)

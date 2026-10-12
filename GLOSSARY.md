@@ -151,3 +151,33 @@ similar; Arabic values: share of predicted argument values written in Arabic (or
 
 **Pinned memory.** System RAM locked in place so the GPU can copy it faster. It cannot be paged out, so if a program
 keeps a lot of it, everything else on the computer slows down.
+
+## Serving (added in Phase 4)
+
+**Chat template.** A small program stored inside the model files (written in Jinja) that turns a list of messages
+into the exact text the model reads. Example: `[{"role": "user", "content": "مرحبا"}]` becomes `<s> [INST] مرحبا [/INST]`.
+Apps like llama-server, LM Studio and Ollama use it, not our Python, so it must match training word for word.
+
+**OpenAI-compatible API.** The request and reply shape most agent tools speak: `messages`, `tools`, and in the reply
+`tool_calls` with a name and JSON arguments. Any server that speaks it can sit behind LangGraph or the OpenAI SDK.
+
+**Tool-call parser.** The server code that finds `<tool_call>{...}</tool_call>` in the model's text and hands it back
+as a standard `tool_calls` entry, so the app never sees our format.
+
+**Lazy grammar.** A rule the server switches on only once the model starts a tool call: from `<tool_call>` on, the
+next tokens must form JSON that fits one of the offered tools (right name, right argument names and types). Before
+that, the model writes freely. Example: it cannot misspell `get_gold_price` or give `karat` as text.
+
+**Space prefix (tokenizer).** Whether the tokenizer adds a space before a piece of text. llama.cpp did it after every
+`<s>`, ALLaM's own tokenizer does not, so " [INST]" became two tokens instead of one. Same words, different tokens:
+the model reads something slightly different from training.
+
+**Prefill (assistant).** Ending a request with an unfinished assistant message so the model continues it. Useful to
+force a start ("الجواب:"), but it is why a request ending on an assistant message renders differently.
+
+**Agent / LangGraph.** An agent is a loop: the model answers or asks for tools, the tools run, the model reads the
+results, until it answers in text. LangGraph writes that loop as a graph of steps (nodes) and arrows (edges), so each
+part can be seen, tested and changed. Example: `model → tools → model → END`.
+
+**Modelfile (Ollama).** Ollama's recipe for a model: which GGUF file, default settings (context size, temperature,
+stop word) and, for older versions, the template.

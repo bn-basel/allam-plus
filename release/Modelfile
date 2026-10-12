@@ -1,0 +1,11 @@
+# Ollama setup for allam-plus-7b.
+#   ollama create allam-plus -f Modelfile
+#   then use Ollama's chat API (or its OpenAI-compatible /v1) with "tools" as usual.
+# Ollama 0.40 and later build the prompt with the chat template inside the GGUF (the same one llama-server uses), so
+# no TEMPLATE is needed here. For older Ollama, or with OLLAMA_GO_TEMPLATE=1, use Modelfile.go-template instead.
+
+FROM ./allam-plus-7b-Q4_K_M.gguf
+
+PARAMETER stop "</s>"
+PARAMETER temperature 0
+PARAMETER num_ctx 16384

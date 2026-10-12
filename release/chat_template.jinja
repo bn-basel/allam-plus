@@ -1,0 +1,71 @@
+{#- allam-plus chat template: ALLaM-7B-Instruct's own template, plus tools in Arabic.
+    Tools go in the system turn after a short Arabic guide, one JSON object per line. The model calls a tool with a
+    line <tool_call>{"name": ..., "arguments": {...}}</tool_call>; each tool result comes back in a user turn as
+    <tool_result>...</tool_result>. Turns of the same role are merged, because ALLaM's template needs user and
+    assistant turns to alternate. -#}
+{%- set default_system = "أنت مساعد مفيد ترد باللغة العربية." -%}
+{%- set guide = "يمكنك استخدام الأدوات المدرجة أدناه. لاستدعاء أداة، رد بهذا السطر فقط ولا شيء آخر:\n<tool_call>{\"name\": \"<اسم الأداة>\", \"arguments\": {<الوسائط بصيغة JSON>}}</tool_call>\nلاستدعاء عدة أدوات دفعة واحدة، اكتب سطرًا واحدًا كهذا لكل استدعاء. تعود نتائج الأدوات على شكل <tool_result>...</tool_result>. إذا لم تناسب أي أداة الطلب، أو كان هناك تفصيل مطلوب مفقود، فرد على المستخدم بشكل عادي. الأدوات:" -%}
+{%- if messages and messages[0]['role'] == 'system' -%}
+    {%- set system_text = messages[0]['content'] or '' -%}
+    {%- set rest = messages[1:] -%}
+{%- else -%}
+    {%- set system_text = '' -%}
+    {%- set rest = messages -%}
+{%- endif -%}
+{%- if tools -%}
+    {%- set ns_tools = namespace(lines='') -%}
+    {%- for t in tools -%}
+        {%- set f = t['function'] if t['function'] is defined else t -%}
+        {%- set line = '{"name": ' ~ (f['name'] | tojson) ~ ', "description": ' ~ ((f['description'] if f['description'] is defined else '') | tojson) ~ ', "parameters": ' ~ ((f['parameters'] if f['parameters'] is defined else {}) | tojson) ~ '}' -%}
+        {%- set ns_tools.lines = ns_tools.lines ~ ('\n' if not loop.first else '') ~ line -%}
+    {%- endfor -%}
+    {%- set system_text = (system_text or default_system) ~ '\n\n' ~ guide ~ '\n' ~ ns_tools.lines -%}
+{%- endif -%}
+{%- set ns = namespace(turns=[], role='', text='') -%}
+{%- for m in rest -%}
+    {%- if m['tool_calls'] is defined and m['tool_calls'] -%}
+        {%- set role = 'assistant' -%}
+        {%- set before = (m['content'] or '') | trim -%}
+        {%- set ns_calls = namespace(lines='') -%}
+        {%- for tc in m['tool_calls'] -%}
+            {%- set f = tc['function'] if tc['function'] is defined else tc -%}
+            {%- set args = f['arguments'] if f['arguments'] is defined else {} -%}
+            {%- set args_text = args if args is string else (args | tojson) -%}
+            {%- set ns_calls.lines = ns_calls.lines ~ ('\n' if not loop.first else '') ~ '<tool_call>{"name": ' ~ (f['name'] | tojson) ~ ', "arguments": ' ~ args_text ~ '}</tool_call>' -%}
+        {%- endfor -%}
+        {%- set text = (before ~ '\n' if before else '') ~ ns_calls.lines -%}
+    {%- elif m['role'] == 'tool' -%}
+        {%- set role = 'user' -%}
+        {%- set text = '<tool_result>' ~ m['content'] ~ '</tool_result>' -%}
+    {%- else -%}
+        {%- set role = m['role'] -%}
+        {%- set text = m['content'] or '' -%}
+    {%- endif -%}
+    {%- if ns.role == role -%}
+        {%- set ns.text = ns.text ~ '\n' ~ text -%}
+    {%- else -%}
+        {%- if ns.role -%}
+            {%- set ns.turns = ns.turns + [{'role': ns.role, 'content': ns.text}] -%}
+        {%- endif -%}
+        {%- set ns.role = role -%}
+        {%- set ns.text = text -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- if ns.role -%}
+    {%- set ns.turns = ns.turns + [{'role': ns.role, 'content': ns.text}] -%}
+{%- endif -%}
+{%- for message in ns.turns -%}
+    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}
+        {{- raise_exception('Conversation roles must alternate user/assistant/user/assistant/...') -}}
+    {%- endif -%}
+    {%- if loop.index0 == 0 and system_text -%}
+        {%- set content = '<<SYS>>\n' ~ system_text ~ '\n<</SYS>>\n\n' ~ message['content'] -%}
+    {%- else -%}
+        {%- set content = message['content'] -%}
+    {%- endif -%}
+    {%- if message['role'] == 'user' -%}
+        {{- bos_token ~ ' [INST] ' ~ (content | trim) ~ ' [/INST]' -}}
+    {%- elif message['role'] == 'assistant' -%}
+        {{- ' ' ~ (content | trim) ~ ' ' ~ eos_token -}}
+    {%- endif -%}
+{%- endfor -%}

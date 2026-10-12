@@ -1,0 +1,7 @@
+# Receptionist tuning round (optional; docs/DECISIONS.md D19). One long run, best overnight: about 1.2 h training,
+# 1.5 h dev scores, then up to 6 h of tests (only if a checkpoint qualifies). Safe to stop and re-run: training
+# continues from its last checkpoint, finished tests are skipped.
+#   & "C:\Program Files\Git\bin\bash.exe" scripts/gpu_block.sh 10 scripts/steps_tools_v2.txt
+[ -f data/tools/train_v2.jsonl ] || uv run python scripts/toolbuild.py --focus
+if ls -d runs/tools_v2/checkpoint-* >/dev/null 2>&1; then R="--resume"; else R=""; fi; [ -f runs/tools_v2/DONE ] || { uv run python scripts/train_long.py --run tools_v2 --data data/tools/train_v2.jsonl --init-adapter runs/tools_v1/checkpoint-400 --lr 5e-5 --accum 8 --warmup 10 --save-every 60 $R && [ ! -f runs/tools_v2/PAUSE ] && touch runs/tools_v2/DONE; }
+sh scripts/tools_v2_pick_and_test.sh

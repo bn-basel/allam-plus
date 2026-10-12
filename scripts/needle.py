@@ -9,6 +9,7 @@ where its long-context reading breaks down.
     uv run python scripts/needle.py run --rope shipped         # run them with one position setting
     uv run python scripts/needle.py run --rope yarn4
     uv run python scripts/needle.py report
+    uv run python scripts/needle.py run --rope yarn4 --server http://127.0.0.1:8095 --name q8_served  # a served GGUF
 
 Design (v1): 10 needles (data/needle/needles_v1.json) × 4 lengths (2K/4K/8K/16K tokens, prompt + 64 tokens of
 answer room) × 5 depths (10/30/50/70/90% of the haystack) = 200 cases, plus 10 controls at 2K with no needle (does the
@@ -156,10 +157,18 @@ def run(args) -> None:
     print(f"{len(done)} done, {len(cases)} to run, rope={args.rope}", flush=True)
     if not cases:
         return
-    tok, model = load_model(args.rope, args.adapter)
+    if args.server:  # through the chat API: the same user message, the GGUF's template and position setting
+        from served import chat
+    else:
+        tok, model = load_model(args.rope, args.adapter)
     with open(out, "a", encoding="utf-8", newline="\n") as f:
         for i, c in enumerate(cases):
-            g = generate(tok, model, c["prompt"], max_new_tokens=48)
+            if args.server:
+                user = c["prompt"].removeprefix("<s> [INST] ").removesuffix(" [/INST]")
+                g = chat(args.server, None, [{"role": "user", "content": user}], None, 48)
+                g = {"text": g["text"] or "", "seconds": g["seconds"], "peak_gb": 0.0}
+            else:
+                g = generate(tok, model, c["prompt"], max_new_tokens=48)
             rec = {k: v for k, v in c.items() if k != "prompt"} | {
                 "reply": g["text"], "correct": correct(g["text"], c["accept"]), "seconds": g["seconds"],
                 "peak_gb": g["peak_gb"], "rope": args.rope, "adapter": args.adapter}
@@ -216,6 +225,7 @@ def main() -> None:
     r.add_argument("--name", help="results folder name (default: the rope setting)")
     r.add_argument("--max-length", type=int, default=max(LENGTHS))
     r.add_argument("--limit", type=int, default=0)
+    r.add_argument("--server", help="OpenAI-compatible server URL: run through a served GGUF's chat API")
     r.set_defaults(fn=run)
     sub.add_parser("report").set_defaults(fn=report)
     args = ap.parse_args()

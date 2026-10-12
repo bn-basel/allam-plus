@@ -149,3 +149,32 @@ the model must ask for, a tool that returns an error, and requests no tool can h
 - Overnight lesson: activation offloading with *pinned* memory made PyTorch hold 27.7 GB of system RAM and slowed
   training 15×. Unpinned memory can be paged out by Windows, so training stayed fast. A slow GPU job can be a RAM
   problem, not only a GPU-memory problem.
+
+## Step 4 — Serving: the model as apps and agents see it
+
+**Concept.** So far every test built the prompt in our own Python. A real app does not: it sends a standard request
+(messages + a list of tools) to a server, and the server builds the prompt from the *chat template* stored inside the
+model file, then reads the tool calls back out of the model's text. Three things must all be right for the trained
+skill to survive: the template (same words), the tokenizer (same tokens), and the parser (finds the calls).
+Example: the same request `{"messages": [...], "tools": [get_gold_price]}` must reach the model as exactly the text it
+was trained on, with the Arabic tool guide in the system turn, and come back as
+`"tool_calls": [{"function": {"name": "get_gold_price", "arguments": "{\"karat\": 21}"}}]`.
+
+**What we did.**
+- Wrote the chat template once (`release/chat_template.jinja`) and checked it against the training text on 16,224
+  prompts (all identical through transformers; 12,011 of 12,013 through llama-server, the 2 being `250.0` vs `250`
+  in an old call).
+- llama-server read the `<tool_call>` format from the template by itself, returned standard `tool_calls`, and even
+  built a grammar from the tool schemas. No extra proxy needed.
+- Found a hidden mismatch: llama.cpp's tokenizer put an extra space token after every `<s>`, so the text was right
+  but the tokens were not (0 of 300 matched). One flag in the GGUF fixed it (300 of 300).
+- Put the 16K setting into the GGUF too, so a user needs no special flags.
+- Added a "served" mode to every benchmark, a LangGraph agent with 20 scripted Arabic tasks on tools the model never
+  saw, and Ollama files. The GPU tests wait for Basel's block (`scripts/steps_phase4.txt`).
+
+**What I learned.** _(after the check question)_
+
+**Notes.**
+- "The text matches" is not "the tokens match". Always compare token ids too.
+- The earlier tests sent token ids straight to the server, which is why they never hit the space problem: a good
+  reason to also test the exact path users take.

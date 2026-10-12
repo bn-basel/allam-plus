@@ -137,3 +137,37 @@ grew to 27.7 GB of system RAM during tools_v1, slowing steps from ~6 s to 75–9
 and AISA far above base, needle 100%, LC-Eval 64.7%, ArabicMMLU 69.2%, IFEval 42.3%. Missed: receptionist test v2
 83.1% against the 85% target (the receptionist-only model: 87.5%; paired p = 0.21). Reported as the cost of a general
 model; options for a tuning round are left to Basel.
+
+**D19. Optional receptionist tuning round (tools_v2), rules fixed before training** (12 Oct). Basel runs it when the
+PC is free (`scripts/steps_tools_v2.txt`).
+- *Data:* a second pass over all 1,095 receptionist conversations, with 500 general tool conversations, 100 long
+  question chats, 20 long articles and 200 short replay answers, all drawn word for word from the tools_v1 training
+  file (`scripts/toolbuild.py --focus`, 1,915 examples). Dev set unchanged.
+- *Training:* continues tools_v1 checkpoint 400, half the learning rate (5e-5), 239 steps, YaRN ×4.
+- *Checkpoint rule:* the highest share of right receptionist dev turns among checkpoints whose general-tool dev turns
+  are at most 1 point below tools_v1's (86.4%); if none beats tools_v1's 77.1% receptionist turns, tools_v1 stays and
+  nothing else is run.
+- *Release rule:* tools_v2 replaces tools_v1 only if it reaches 85% on the receptionist test v2 and nothing else
+  breaks: ArabFuncBench and AISA right-tool not significantly lower (paired p < 0.05), needle 16K ≥ 98%, LC-Eval
+  ≥ 60%, ArabicMMLU ≥ 67.6%, IFEval not significantly lower (`scripts/compare_runs.py`).
+
+**D20. Phase 4 serving design** (12 Oct).
+- *One chat template in the model:* `release/chat_template.jinja` (written by `scripts/make_template.py`) turns a
+  standard OpenAI request (system, messages with `tool_calls` and tool results, `tools`) into exactly the training
+  text. Checked against `render()` + ALLaM's template on 16,224 prompts through transformers (all identical) and on
+  12,013 prompts through llama-server (identical except 2, where a past call's argument `250.0` comes back as `250`).
+- *llama-server reads the format from the template:* its automatic parser finds the `<tool_call>` markers, returns
+  standard `tool_calls`, and from the first `<tool_call>` constrains the JSON to the request's tool schemas (a "lazy
+  grammar"). No proxy is needed. Arguments sent as JSON strings (LangChain, the OpenAI SDK) are parsed back, so the
+  prompt does not change.
+- *A tokenizer flag:* llama.cpp's tokenizer adds a space token after every `<s>` (`add_space_prefix`), which ALLaM's
+  own tokenizer does not: through the chat API all 300 sampled prompts had different tokens from training. The release
+  GGUFs set `tokenizer.ggml.add_space_prefix = false`; then all 300 matched. (The tests so far sent token ids
+  directly, so they were not affected.)
+- *16K inside the file:* the release GGUFs carry YaRN ×4 (context 16,384, original 4,096), so no command-line flags
+  are needed (`scripts/finalize_gguf.py`, which copies the weights byte for byte with new metadata).
+- *Ollama:* version 0.40 serves through llama-server with the GGUF's own template, so `release/Modelfile` has no
+  template. `release/Modelfile.go-template` is for older Ollama; Go prints the tool schemas as compact JSON, so it is
+  not word for word, and its cost is measured.
+- *Served scores:* every benchmark gained a `--server` mode (`scripts/served.py`) that sends the real OpenAI request,
+  so the release numbers measure what an app gets: weights, template, tokenizer, parser and grammar together.
