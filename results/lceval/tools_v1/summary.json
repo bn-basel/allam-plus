@@ -1,0 +1,38 @@
+{
+ "mcq|4-8K": {
+  "n": 16,
+  "acc": 0.75
+ },
+ "mcq|8-16K": {
+  "n": 208,
+  "acc": 0.6394
+ },
+ "mcq|all": {
+  "n": 224,
+  "acc": 0.6473
+ },
+ "claims|4-8K": {
+  "n": 4,
+  "claim_acc": 0.45,
+  "balanced_acc": 0.4091,
+  "said_true": 0.9,
+  "all_claims_right": 0.0,
+  "always_true_baseline": 0.55
+ },
+ "claims|8-16K": {
+  "n": 67,
+  "claim_acc": 0.5612,
+  "balanced_acc": 0.5238,
+  "said_true": 0.794,
+  "all_claims_right": 0.0299,
+  "always_true_baseline": 0.5642
+ },
+ "claims|all": {
+  "n": 71,
+  "claim_acc": 0.5549,
+  "balanced_acc": 0.5172,
+  "said_true": 0.8,
+  "all_claims_right": 0.0282,
+  "always_true_baseline": 0.5634
+ }
+}

@@ -1,0 +1,4781 @@
+{
+ "name": "tools_v1__checkpoint-100",
+ "turns": 530,
+ "right": 0.6962,
+ "right_calls": 0.5701,
+ "right_general": 0.7364,
+ "right_receptionist": 0.6677,
+ "right_replies": 0.7816,
+ "rows": [
+  {
+   "id": "t0007-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"check_team_standing\", \"arguments\": {\"team_name\": \"الهلال\", \"league_name\": \"الدوري السعودي للمحترفين\", \"season_year\": 2026}}</tool_call>"
+  },
+  {
+   "id": "t0007-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "ترتيب نادي الهلال في الدوري السعودي للمحترفين لموسم 2026 هو المركز الثاني، وله 48 نقطة من 22 مباراة، فاز في 14 منها وتعادل في 6 وخسر في 2."
+  },
+  {
+   "id": "t0007-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"track_food_order\", \"arguments\": {\"order_id\": \"أ ب ٩٨٧٦\"}}</tool_call>"
+  },
+  {
+   "id": "t0007-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "طلبك رقم أ ب ٩٨٧٦ قيد التوصيل، وقد خرج من المطعم وهو الآن مع مندوب التوصيل. من المتوقع وصوله خلال 15 دقيقة."
+  },
+  {
+   "id": "t0007-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"running\", \"duration_minutes\": 45, \"weight_kg\": 70}}</tool_call>"
+  },
+  {
+   "id": "t0007-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "حرقت حوالي 420 سعرة حرارية خلال 45 دقيقة من الجري بسرعة متوسطة."
+  },
+  {
+   "id": "t0007-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"track_daily_steps\", \"arguments\": {\"steps_count\": 8500, \"goal_steps\": 10000, \"record_date\": \"2026-02-22\"}}</tool_call>"
+  },
+  {
+   "id": "t0007-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تسجيل 8500 خطوة اليوم، ولم تحقق هدفك اليومي البالغ 10000 خطوة بعد، ويتبقى لك 1500 خطوة."
+  },
+  {
+   "id": "t0033-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "عاصمة أستراليا هي مدينة كانبرا."
+  },
+  {
+   "id": "t0033-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أنا بخير، شكراً لسؤالك اللطيف. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0033-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "شكراً لك، هذا لطف منك. أنا هنا متى احتجت أي مساعدة."
+  },
+  {
+   "id": "t0033-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لا أستطيع التواصل مع الآخرين نيابة عنك، فهذا يتعارض مع سياسات الخصوصية. يمكنك إبلاغه بنفسك أو ترك رسالة له."
+  },
+  {
+   "id": "t0033-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "قراءة الكتب يومياً لها فوائد عديدة، منها توسيع المفردات، تنمية التفكير النقدي، وزيادة المعرفة العامة. كما تساعد على تحسين التركيز وتقوية الذاكرة. هل تود معرفة المزيد عن فوائد القراءة؟"
+  },
+  {
+   "id": "t0033-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "نعم، القراءة اليومية تقوي الذاكرة وتحسن التركيز، لأنها تحفز الدماغ على معالجة المعلومات الجديدة."
+  },
+  {
+   "id": "t0118-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أطول سلسلة جبال في العالم هي سلسلة جبال الأنديز في أمريكا الجنوبية، وتمتد على طول الساحل الغربي للقارة."
+  },
+  {
+   "id": "t0118-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أنا بخير، شكراً لسؤالك اللطيف. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0118-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لا أستطيع حجز تذاكر السفر، فهذا خارج نطاق خدماتي. يمكنك التحقق من مواعيد الرحلات المتاحة عبر مواقع شركات الطيران."
+  },
+  {
+   "id": "t0118-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بالتأكيد. البناء الضوئي هو عملية تقوم بها النباتات لتحويل الطاقة الشمسية إلى طاقة كيميائية، حيث تمتص النباتات الضوء من الشمس وتستخدمه لتحويل ثاني أكسيد الكربون والماء إلى جلوكوز وأكسجين. هذه العملية تحدث في البلاستيدات الخضراء داخل خلايا النبات."
+  },
+  {
+   "id": "t0142-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أهلاً بك. أطول جبل في العالم هو قمة إفرست، ويبلغ ارتفاعه نحو 8849 مترًا فوق سطح البحر."
+  },
+  {
+   "id": "t0142-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لا أستطيع إرسال رسائل صوتية، ولا أستطيع التواصل مع الآخرين نيابةً عنك. يمكنك إرسال رسالة نصية أو بريد إلكتروني إليها."
+  },
+  {
+   "id": "t0142-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أنا بخير، شكراً لسؤالك. لم أفعل شيئاً بعد، سأبدأ العمل الآن."
+  },
+  {
+   "id": "t0142-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"list_calendar_events\", \"arguments\": {\"start_date\": \"2025-01-01\", \"end_date\": \"2025-01-02\", \"include_cancelled\": false}}</tool_call>"
+  },
+  {
+   "id": "t0169-0",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"running\", \"duration_minutes\": 45, \"weight_kg\": 78, \"intensity\": \"medium\"}}</tool_call>\n<tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"أصفهان\", \"max_sentences\": 3, \"language\": \"ar\"}}</tool_call>"
+  },
+  {
+   "id": "t0169-0",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"running\", \"duration_minutes\": 45, \"weight_kg\": 78, \"intensity\": \"medium\"}}</tool_call>\n<tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"أصفهان\", \"max_sentences\": 3, \"language\": \"ar\"}}</tool_call>"
+  },
+  {
+   "id": "t0169-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"weightlifting\", \"duration_minutes\": 60, \"weight_kg\": 85, \"intensity\": \"high\"}}</tool_call>\n<tool_call>{\"name\": \"get_match_schedule\", \"arguments\": {\"team_or_league\": \"الهلال\", \"start_date\": \"2024-01-01\", \"end_date\": \"2024-01-31\"}}</tool_call>"
+  },
+  {
+   "id": "t0169-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "جلسة رفع الأثقال لمدة 60 دقيقة بشدة عالية مع وزن 85 كيلوغراماً تحرق حوالي 480 سعرة حرارية. أما جدول مباريات الهلال السعودي في الفترة من 2024-01-01 إلى 2024-01-31 فهو كالتالي:\n- 2024-01-05 ضد الأهلي في الدوري السعودي.\n- 2024-01-14 ضد النصر في كأس الملك.\n- 2024-01-22 ضد الاتحاد في الدوري السعودي."
+  },
+  {
+   "id": "t0169-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"swimming\", \"duration_minutes\": 30, \"weight_kg\": 70, \"intensity\": \"low\"}}</tool_call>\n<tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"جبل طويق\", \"max_sentences\": 3, \"language\": \"ar\"}}</tool_call>"
+  },
+  {
+   "id": "t0169-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"swimming\", \"duration_minutes\": 30, \"weight_kg\": 70, \"intensity\": \"low\"}}</tool_call>\n<tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"جبل طويق\", \"max_sentences\": 3, \"language\": \"ar\"}}</tool_call>\n\nعدد السعرات الحرارية التي حرقتها خلال السباحة لمدة 30 دقيقة بشدة منخفضة هو 210 سعرة حرارية. أما جبل"
+  },
+  {
+   "id": "t0169-3",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"cycling\", \"duration_minutes\": 90, \"weight_kg\": 92, \"intensity\": \"high\"}}</tool_call>\n<tool_call>{\"name\": \"get_match_schedule\", \"arguments\": {\"team_or_league\": \"برشلونة\", \"start_date\": \"2024-02-01\", \"end_date\": \"2024-02-29\"}}</tool_call>"
+  },
+  {
+   "id": "t0169-3",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "عند ركوب الدراجة بشدة عالية لمدة 90 دقيقة، يحرق الشخص حوالي 1020 سعرة حرارية. أما جدول مباريات برشلونة من 2024-02-01 إلى 2024-02-29 فهو كالتالي:\n2024-02-04: إشبيلية، الدوري الإسباني\n2024-02-11: ريال مدريد، الدوري الإسباني\n2024-02-20: نابولي، دوري أبطال أوروبا"
+  },
+  {
+   "id": "t0199-0",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"check_weather_alerts\", \"arguments\": {\"region\": \"جدة\", \"severity\": \"high\"}}</tool_call>\n<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"جدة\", \"date\": \"2026-09-10\"}}</tool_call>"
+  },
+  {
+   "id": "t0199-0",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_air_quality_forecast\", \"arguments\": {\"city\": \"جدة\", \"days\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0199-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_air_quality_forecast\", \"arguments\": {\"city\": \"الرياض\", \"days\": 3}}</tool_call>\n<tool_call>{\"name\": \"check_weather_alerts\", \"arguments\": {\"region\": \"الرياض\"}}</tool_call>"
+  },
+  {
+   "id": "t0199-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "توقعات جودة الهواء في الرياض للأيام الثلاثة القادمة كالتالي: اليوم 2026-09-10 جودة الهواء مقبولة، وغداً 2026-09-11 جودة الهواء جيدة، وبعد غد 2026-09-12 جودة الهواء جيدة. أما التنبيهات الجوية فلا توجد حالياً في الرياض."
+  },
+  {
+   "id": "t0199-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_weather_forecast\", \"arguments\": {\"city\": \"أبها\", \"start_date\": \"2026-09-11\", \"days\": 2}}</tool_call>\n<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"أبها\", \"date\": \"2026-09-11\"}}</tool_call>"
+  },
+  {
+   "id": "t0199-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_weather_forecast\", \"arguments\": {\"city\": \"أبها\", \"start_date\": \"2026-09-12\", \"days\": 1}}</tool_call>\n<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"أبها\", \"date\": \"2026-09-12\"}}</tool_call>"
+  },
+  {
+   "id": "t0205-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"book_appointment\", \"arguments\": {\"patient_id\": \"٤٥٦٧٨\", \"doctor_id\": \"٢٣٤\", \"clinic_id\": \"النخبة\", \"appointment_datetime\": \"2024-07-15 10:30\", \"reason\": \"ألم متكرر في الصدر\"}}</tool_call>"
+  },
+  {
+   "id": "t0205-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم حجز موعدك بنجاح. رقم الموعد: APPT-٩٨٧٦، مع الطبيب ٢٣٤ في عيادة النخبة، بتاريخ ٢٠٢٤-٠٧-١٥ الساعة ١٠:٣٠ صباحًا، والسبب: ألم متكرر في الصدر."
+  },
+  {
+   "id": "t0205-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"cancel_appointment\", \"arguments\": {\"appointment_id\": \"54321\", \"cancellation_reason\": \"سأسافر خارج المدينة في ذلك اليوم.\"}}</tool_call>"
+  },
+  {
+   "id": "t0205-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم إلغاء موعدك رقم ٥٤٣٢١ بنجاح، وسبب الإلغاء: سأسافر خارج المدينة في ذلك اليوم."
+  },
+  {
+   "id": "t0205-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_hotel_details\", \"arguments\": {\"hotel_id\": \"الواحة الذهبية\", \"include_reviews\": true}}</tool_call>"
+  },
+  {
+   "id": "t0205-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_hotel_details\", \"arguments\": {\"hotel_id\": \"الواحة الذهبية\", \"include_reviews\": true}}</tool_call>"
+  },
+  {
+   "id": "t0205-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"book_appointment\", \"arguments\": {\"patient_id\": \"889\", \"doctor_id\": \"55\", \"clinic_id\": \"الأمل\", \"appointment_datetime\": \"2024-08-01 09:00\", \"reason\": \"متابعة تطعيمات\"}}</tool_call>"
+  },
+  {
+   "id": "t0205-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم حجز الموعد بنجاح. رقم الموعد: APPT-١٢٣٤، للمريض ٨٨٩، مع الطبيب ٥٥، في عيادة الأمل، يوم ٢٠٢٤-٠٨-٠١ الساعة ٠٩:٠٠، لمتابعة التطعيمات."
+  },
+  {
+   "id": "t0239-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"check_weather_alerts\", \"arguments\": {\"region\": \"أبها\", \"severity\": \"high\"}}</tool_call>\n<tool_call>{\"name\": \"check_weather_alerts\", \"arguments\": {\"region\": \"تبوك\", \"severity\": \"high\"}}</tool_call>"
+  },
+  {
+   "id": "t0239-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_weather_forecast\", \"arguments\": {\"city\": \"أبها\", \"start_date\": \"2025-01-01\", \"days\": 3}}</tool_call>\n<tool_call>{\"name\": \"get_weather_forecast\", \"arguments\": {\"city\": \"تبوك\", \"start_date\": \"2025-01-01\", \"days\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0318-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_salary_benefits\", \"arguments\": {\"basic_salary\": 6000, \"housing_allowance\": 1500, \"transport_allowance\": 500}}</tool_call>"
+  },
+  {
+   "id": "t0318-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بناءً على البيانات التي قدمتها، يكون الراتب الإجمالي 8000 ريال، والراتب الصافي بعد خصم اشتراك التأمينات الاجتماعية 7430 ريالاً، والمزايا الإجمالية 2000 ريال."
+  },
+  {
+   "id": "t0318-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "سأحسب لك اشتراك التأمينات الاجتماعية فقط.\n<tool_call>{\"name\": \"calculate_salary_benefits\", \"arguments\": {\"basic_salary\": 6000, \"housing_allowance\": 1500, \"transport_allowance\": 500, \"include_gosi\": false}}</tool_call>"
+  },
+  {
+   "id": "t0332-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"request_taxi_booking\", \"arguments\": {\"pickup_location\": \"مطار الملك خالد\", \"dropoff_location\": \"فندق الفيصلية\", \"pickup_time\": \"2025-01-01 08:00\", \"passenger_count\": 2, \"vehicle_type\": \"family\"}}</tool_call>"
+  },
+  {
+   "id": "t0332-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تأكيد حجز سيارة الأجرة رقم TAX-482913، من مطار الملك خالد إلى فندق الفيصلية في الرياض، لشخصين، في الساعة 8:00 صباحاً، بتكلفة تقديرية 45 ريالاً."
+  },
+  {
+   "id": "t0332-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_transport_disruptions\", \"arguments\": {\"city_or_region\": \"دبي\", \"transport_mode\": \"metro\"}}</tool_call>"
+  },
+  {
+   "id": "t0332-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "نعم، هناك تأخير في الخط الأحمر للمترو في مدينة دبي اليوم، بتاريخ 2025-06-11، بسبب أعمال صيانة طارئة بين محطتي الاتحاد وبرجمان، ومن المتوقع أن يستمر التأخير 15 دقيقة."
+  },
+  {
+   "id": "t0332-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_transport_routes\", \"arguments\": {\"origin\": \"حي المعادي\", \"destination\": \"وسط البلد\", \"transport_mode\": \"mixed\", \"departure_date\": \"2025-07-01\", \"max_transfers\": 1}}</tool_call>"
+  },
+  {
+   "id": "t0332-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "من حي المعادي إلى وسط البلد في القاهرة، باستخدام وسائل نقل مختلطة وبحد أقصى تبديل واحد، يستغرق الأمر حوالي 35 دقيقة. المسار يتضمن المترو من محطة المعادي إلى محطة السادات، ثم السير على الأقدام إلى وسط البلد."
+  },
+  {
+   "id": "t0339-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أنا بخير، شكرًا لسؤالك اللطيف. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0339-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لا أستطيع إرسال رسائل نصية نيابة عنك. يمكنك إرسال رسالة نصية إلى صديقك بنفسك."
+  },
+  {
+   "id": "t0339-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أطول سلسلة جبال في العالم هي سلسلة جبال الأنديز في أمريكا الجنوبية، وتمتد على طول الساحل الغربي للقارة."
+  },
+  {
+   "id": "t0353-0",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_weather_forecast\", \"arguments\": {\"city\": \"الرياض\", \"start_date\": \"2024-05-20\", \"days\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0353-0",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أتمكن من العثور على بيانات الطقس للتاريخ المحدد. يرجى التحقق من صحة التاريخ أو المحاولة بتاريخ لاحق."
+  },
+  {
+   "id": "t0353-1",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_air_quality_forecast\", \"arguments\": {\"city\": \"جدة\", \"days\": 2}}</tool_call>"
+  },
+  {
+   "id": "t0353-1",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "خدمة توقعات جودة الهواء غير متاحة حالياً. نعتذر عن الإزعاج."
+  },
+  {
+   "id": "t0353-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"أبها\", \"date\": \"2024-06-15\"}}</tool_call>"
+  },
+  {
+   "id": "t0353-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"أبها\"}}</tool_call>"
+  },
+  {
+   "id": "t0353-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"calculate_salary_benefits\", \"arguments\": {\"basic_salary\": 8000, \"housing_allowance\": 2000, \"transport_allowance\": 500, \"include_gosi\": true}}</tool_call>"
+  },
+  {
+   "id": "t0353-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "يبدو أن الراتب الأساسي غير صالح. يجب أن يكون قيمة موجبة."
+  },
+  {
+   "id": "t0383-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أطول سلسلة جبال في العالم هي سلسلة جبال الأنديز في أمريكا الجنوبية، وتمتد على طول الساحل الغربي للقارة."
+  },
+  {
+   "id": "t0383-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أنا بخير، شكراً لسؤالك اللطيف. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0383-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أعتذر، لا أستطيع تقديم وصفات طبخ أو تعليمات تحضير الطعام. يمكنني مساعدتك في أمور أخرى."
+  },
+  {
+   "id": "t0383-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بكل سرور، إليك قصيدة قصيرة عن البحر:\n\nيا بحرُ يا بحرُ يا من لا يُجاراك\nأنتَ الأمانُ وأنتَ لي خيرُ جارٍ\nفيكَ الأمانُ وفيكَ كلُّ خيرٍ\nفكيفَ لا أشتاقُ إليكَ يا بحرُ؟\n\nأتمنى أن تعجبك."
+  },
+  {
+   "id": "t0406-1",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_university_programs\", \"arguments\": {\"major_keyword\": \"إدارة الأعمال\", \"degree_level\": \"master\"}}</tool_call>"
+  },
+  {
+   "id": "t0406-1",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_university_programs\", \"arguments\": {\"major_keyword\": \"إدارة الأعمال\", \"degree_level\": \"master\", \"study_mode\": \"online\"}}</tool_call>"
+  },
+  {
+   "id": "t0406-1",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت برنامجين لماجستير إدارة الأعمال عبر الإنترنت في الرياض: ماجستير إدارة الأعمال التنفيذي من جامعة الملك سعود ومدته سنتان، وماجستير إدارة الأعمال من جامعة الأمير سلطان ومدته 18 شهراً."
+  },
+  {
+   "id": "t0406-2",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"list_cinema_showtimes\", \"arguments\": {\"movie_title\": \"الرسالة\", \"city\": \"جدة\", \"date\": \"2026-11-12\"}}</tool_call>"
+  },
+  {
+   "id": "t0406-2",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"list_cinema_showtimes\", \"arguments\": {\"movie_title\": \"الرسالة\", \"city\": \"جدة\", \"date\": \"2026-11-12\", \"language\": \"arabic\"}}</tool_call>"
+  },
+  {
+   "id": "t0406-2",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أوقات عرض فيلم الرسالة في جدة يوم 2026-11-12 هي:\n\n- سينما العرب مول: 14:00، 18:30، 21:45\n- فوكس سينما ريد سي مول: 16:15، 20:00\n\nأتمنى لك مشاهدة ممتعة."
+  },
+  {
+   "id": "t0410-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أطول سلسلة جبال في العالم هي سلسلة جبال الأنديز في أمريكا الجنوبية، وتمتد على طول الساحل الغربي للقارة."
+  },
+  {
+   "id": "t0410-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "صباح النور، بخير والحمد لله. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0410-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أعتذر، لا أستطيع تنفيذ ذلك."
+  },
+  {
+   "id": "t0410-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم تُجرَ بطولة كأس العالم لكرة القدم عام ألفين واثنين وعشرين بعد، وستُقام في قطر عام ألفين واثنين وثلاثين."
+  },
+  {
+   "id": "t0455-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_current_weather\", \"arguments\": {\"city\": \"الرياض\"}}</tool_call>\n<tool_call>{\"name\": \"get_consumption_history\", \"arguments\": {\"service_type\": \"internet\", \"start_date\": \"2025-01-01\", \"end_date\": \"2025-05-01\"}}</tool_call>"
+  },
+  {
+   "id": "t0455-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "حالة الطقس في الرياض الآن: مشمس، ودرجة الحرارة 32 درجة مئوية. أما استهلاك الإنترنت من بداية الشهر إلى أمس، فهو 45 جيجابايت، بمعدل يومي 5 جيجابايت."
+  },
+  {
+   "id": "t0455-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_consumption_history\", \"arguments\": {\"service_type\": \"water\", \"start_date\": \"2024-03-15\", \"end_date\": \"2024-04-01\"}}</tool_call>\n<tool_call>{\"name\": \"get_air_quality_forecast\", \"arguments\": {\"city\": \"مكة\", \"days\": 2}}</tool_call>"
+  },
+  {
+   "id": "t0455-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "استهلاك الماء من 2024-03-15 إلى 2024-04-01 بلغ 12 مترًا مكعبًا، بمعدل يومي 0.67 متر مكعب. أما توقعات جودة الهواء في مكة لمدة يومين فهي: يوم 2024-04-11 جودة الهواء متوسطة، ويوم 2024-04-12 جودة الهواء جيدة."
+  },
+  {
+   "id": "t0455-3",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_consumption_history\", \"arguments\": {\"service_type\": \"mobile\", \"start_date\": \"2024-03-01\", \"end_date\": \"2024-03-31\", \"unit\": \"sar\"}}</tool_call>\n<tool_call>{\"name\": \"get_consumption_history\", \"arguments\": {\"service_type\": \"mobile\", \"start_date\": \"2024-03-01\", \"end_date\": \"2024-03-31\", \"unit\": \"gb\"}}</tool_call>"
+  },
+  {
+   "id": "t0455-3",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_air_quality_forecast\", \"arguments\": {\"city\": \"الرياض\", \"days\": 7}}</tool_call>"
+  },
+  {
+   "id": "t0473-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_holiday_rentals\", \"arguments\": {\"city\": \"جدة\", \"check_in_date\": \"2026-01-20\", \"check_out_date\": \"2026-01-24\", \"guests\": 2, \"property_type\": \"apartment\"}}</tool_call>"
+  },
+  {
+   "id": "t0473-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت لك شقتين في جدة:\nشقة الروضة الفندقية:\n- المدينة: جدة\n- تاريخ بداية الإقامة: 2026-01-20\n- تاريخ نهاية الإقامة: 2026-01-24\n- عدد الضيوف: 2\n- نوع العقار: شقة\n- السعر لليلة: 380 ريال سعودي\n- التقييم: 4.6\n\nشقة الكورنيش الشرقية:\n- المدينة: جدة\n- تاريخ بداية الإقامة: 2026-01-20\n- تاريخ نهاية الإقامة: 2026-01-24\n- عدد الضيوف: 2\n- نوع العقار: شقة\n- السعر لليلة: 520 ريال سعودي\n- التقييم: 4.8\n\nهل تود ال"
+  },
+  {
+   "id": "t0473-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_holiday_rentals\", \"arguments\": {\"city\": \"أبها\", \"check_in_date\": \"2026-02-01\", \"check_out_date\": \"2026-02-05\", \"guests\": 6, \"property_type\": \"villa\"}}</tool_call>"
+  },
+  {
+   "id": "t0473-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت فيلتين في أبها تناسبان طلبك: فيلا السودة المطلة بسعر ٩٥٠ ريالًا لليلة، وفيلا الضباب بسعر ٧٨٠ ريالًا لليلة، وكلاهما يتسع لستة أشخاص."
+  },
+  {
+   "id": "t0473-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_holiday_rentals\", \"arguments\": {\"city\": \"الدمام\", \"check_in_date\": \"2026-03-15\", \"check_out_date\": \"2026-03-18\", \"guests\": 1, \"property_type\": \"studio\"}}</tool_call>"
+  },
+  {
+   "id": "t0473-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت استوديوهين في الدمام لشخص واحد خلال الفترة المطلوبة: استوديو الشاطئ بسعر 290 ريالًا لليلة، واستوديو وسط المدينة بسعر 240 ريالًا لليلة، وكلاهما بتقييم 4.5 و4.2 على التوالي."
+  },
+  {
+   "id": "t0501-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"find_pharmacy\", \"arguments\": {\"city\": \"الرياض\", \"is_24_hours\": true}}</tool_call>"
+  },
+  {
+   "id": "t0501-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "نعم، توجد صيدليتان في الرياض تعملان على مدار الساعة: صيدلية النهدي في حي العليا، وصيدلية الدواء في حي الملقا."
+  },
+  {
+   "id": "t0501-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"find_pharmacy\", \"arguments\": {\"city\": \"جدة\", \"district\": \"الزهراء\"}}</tool_call>"
+  },
+  {
+   "id": "t0501-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت صيدليتين في حي الزهراء بجدة: صيدلية السلام في شارع الأمير سلطان، وصيدلية الشفاء في طريق المدينة، وهي مفتوحة 24 ساعة."
+  },
+  {
+   "id": "t0501-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_lab_results\", \"arguments\": {\"patient_id\": \"4521\", \"test_type\": \"blood\", \"date_from\": \"2024-01-15\"}}</tool_call>"
+  },
+  {
+   "id": "t0501-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "نتائج تحليل الدم للمريض رقم 4521 بتاريخ 2024-01-20: الهيموغلوبين 14.2 غ/دل، خلايا الدم البيضاء 7.5 ألف/ميكرولتر، الصفائح الدموية 250 ألف/ميكرولتر، والحالة طبيعية."
+  },
+  {
+   "id": "t0501-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"estimate_property_price\", \"arguments\": {\"city\": \"الدمام\", \"area_sqm\": 120, \"bedrooms\": 3, \"property_age_years\": 5}}</tool_call>"
+  },
+  {
+   "id": "t0501-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بناءً على بيانات السوق في مدينة الدمام، يُقدّر سعر الشقة بمساحة 120 متراً مربعاً، وبها 3 غرف نوم، وعمرها 5 سنوات، بحوالي 580,000 ريال سعودي، والإيجار العادل السنوي حوالي 35,000 ريال سعودي."
+  },
+  {
+   "id": "t0505-1",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_consumption_history\", \"arguments\": {\"service_type\": \"electricity\", \"start_date\": \"2024-03-01\", \"end_date\": \"2024-03-31\"}}</tool_call>"
+  },
+  {
+   "id": "t0505-1",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أتمكن من عرض سجل استهلاك الكهرباء للفترة المطلوبة بسبب صيغة التاريخ غير المقبولة. يجب أن تكون بصيغة سنة-شهر-يوم باستخدام الأرقام اللاتينية."
+  },
+  {
+   "id": "t0505-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"schedule_payment\", \"arguments\": {\"account_id\": \"١٢٣٤٥٦\", \"beneficiary_id\": \"٥٥٤٤\", \"amount\": 300, \"start_date\": \"2024-05-01\", \"frequency\": \"monthly\"}}</tool_call>"
+  },
+  {
+   "id": "t0505-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "عذراً، خدمة جدولة الدفعات غير متاحة مؤقتاً. سأحاول مجدداً بعد فترة قصيرة."
+  },
+  {
+   "id": "t0505-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بكل سرور. ما هو نوع الخدمة الذي تريد معرفة سجل استهلاكه؟"
+  },
+  {
+   "id": "t0505-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_consumption_history\", \"arguments\": {\"service_type\": \"internet\", \"start_date\": \"2024-04-08\", \"end_date\": \"2024-04-14\", \"unit\": \"gb\"}}</tool_call>"
+  },
+  {
+   "id": "t0505-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أجد بيانات استهلاك مسجّلة للفترة المطلوبة."
+  },
+  {
+   "id": "t0518-0",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"list_available_appointments\", \"arguments\": {\"branch_id\": \"123\", \"service_type\": \"residency_renewal\", \"from_date\": \"2024-01-01\", \"to_date\": \"2024-01-31\"}}</tool_call>"
+  },
+  {
+   "id": "t0518-0",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"list_available_appointments\", \"arguments\": {\"branch_id\": \"42\", \"from_date\": \"2025-01-01\", \"to_date\": \"2025-01-31\"}}</tool_call>"
+  },
+  {
+   "id": "t0518-0",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "المواعيد المتاحة لتجديد الإقامة في الفرع رقم ٤٢ هي: ٢٠٢٥-٠٦-١٠ الساعة ٠٩:٠٠، و٢٠٢٥-٠٦-١١ الساعة ١١:٣٠، و٢٠٢٥-٠٦-١٥ الساعة ١٤:٠٠."
+  },
+  {
+   "id": "t0518-1",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_utility_bill\", \"arguments\": {\"service_type\": \"electricity\", \"bill_month\": \"2025-03\"}}</tool_call>"
+  },
+  {
+   "id": "t0518-1",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_utility_bill\", \"arguments\": {\"service_type\": \"electricity\", \"bill_month\": \"2025-03\", \"account_number\": \"34567\"}}</tool_call>"
+  },
+  {
+   "id": "t0518-1",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "فاتورة الكهرباء لشهر مارس 2025 بمبلغ ٢٧٥.٥ ريال، وتاريخ الاستحقاق ١٥ أبريل ٢٠٢٥، والحالة غير مدفوعة."
+  },
+  {
+   "id": "t0518-2",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"report_service_issue\", \"arguments\": {\"service_type\": \"electricity\", \"issue_type\": \"outage\", \"description\": \"انقطاع التيار الكهربائي في المنزل\"}}</tool_call>"
+  },
+  {
+   "id": "t0518-2",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"report_service_issue\", \"arguments\": {\"service_type\": \"electricity\", \"issue_type\": \"outage\", \"description\": \"انقطاع التيار منذ ساعتين في الحي بأكمله، والسبب غير معروف.\"}}</tool_call>"
+  },
+  {
+   "id": "t0518-2",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تقديم البلاغ بنجاح، ورقم البلاغ هو REP-2025-0678، والمدة التقديرية للحل هي 2025-05-02 18:00."
+  },
+  {
+   "id": "t0518-3",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بكل سرور. ما هو نوع الخدمة الذي تريد تصفية الحسابات المرتبطة به؟"
+  },
+  {
+   "id": "t0518-3",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"list_linked_accounts\", \"arguments\": {\"service_type\": \"internet\", \"active_only\": true}}</tool_call>"
+  },
+  {
+   "id": "t0518-3",
+   "source": "general",
+   "scenario": "clarify",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "إليك الحسابات النشطة المرتبطة بخدمة الإنترنت: رقم الحساب 78901 ورقم الحساب 78902."
+  },
+  {
+   "id": "t0530-0",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"estimate_trip_fare\", \"arguments\": {\"origin\": \"وسط المدينة\", \"destination\": \"المطار\", \"transport_mode\": \"taxi\", \"passenger_count\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0530-0",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تكلفة الرحلة بالسيارة الأجرة من وسط المدينة إلى المطار مع ثلاثة ركاب تُقدّر بـ 45.5 ريالاً."
+  },
+  {
+   "id": "t0530-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_utility_bill\", \"arguments\": {\"service_type\": \"internet\", \"bill_month\": \"2025-04\"}}</tool_call>"
+  },
+  {
+   "id": "t0530-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "قيمة فاتورة الإنترنت لشهر 2025-04 هي 199 ريالاً."
+  },
+  {
+   "id": "t0530-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تقديم بلاغك بنجاح، ورقم التذكرة هو TKT-2025-01-998. سيتم التواصل معك خلال 24 ساعة."
+  },
+  {
+   "id": "t0530-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"estimate_trip_fare\", \"arguments\": {\"origin\": \"الرياض\", \"destination\": \"الدمام\", \"transport_mode\": \"train\", \"passenger_count\": 2}}</tool_call>"
+  },
+  {
+   "id": "t0530-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"estimate_trip_fare\", \"arguments\": {\"origin\": \"الرياض\", \"destination\": \"الدمام\", \"transport_mode\": \"bus\", \"passenger_count\": 2}}</tool_call>"
+  },
+  {
+   "id": "t0530-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"estimate_trip_fare\", \"arguments\": {\"origin\": \"الرياض\", \"destination\": \"الدمام\", \"transport_mode\": \"metro\", \"passenger_count\": 2}}</tool_call>"
+  },
+  {
+   "id": "t0530-3",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"report_service_issue\", \"arguments\": {\"service_type\": \"electricity\", \"issue_type\": \"outage\", \"description\": \"انقطاع في الكهرباء في منزلي\", \"preferred_contact_time\": \"2025-05-12 15:30\"}}</tool_call>"
+  },
+  {
+   "id": "t0530-3",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تسجيل بلاغك عن انقطاع الكهرباء، ورقم التذكرة هو TKT-2025-05-123. سيتم التواصل معك في الوقت المحدد."
+  },
+  {
+   "id": "t0558-0",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"457\", \"transport_mode\": \"bus\", \"include_eta\": true}}</tool_call>\n<tool_call>{\"name\": \"get_prayer_times\", \"arguments\": {\"city\": \"الرياض\", \"date\": \"2025-01-01\"}}</tool_call>"
+  },
+  {
+   "id": "t0558-0",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"٤٥٧\", \"transport_mode\": \"bus\", \"include_eta\": true}}</tool_call>\n<tool_call>{\"name\": \"get_prayer_times\", \"arguments\": {\"city\": \"الرياض\"}}</tool_call>"
+  },
+  {
+   "id": "t0558-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"123\", \"transport_mode\": \"train\"}}</tool_call>\n<tool_call>{\"name\": \"get_islamic_date\", \"arguments\": {\"gregorian_date\": \"2025-03-20\", \"include_occasions\": true}}</tool_call>"
+  },
+  {
+   "id": "t0558-1",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "موقع القطار رقم ١٢٣ حالياً خارج محطة الدمام المركزية، والمحطة التالية هي محطة الأحساء. أما التاريخ الهجري الموافق لتاريخ ٢٠٢٥-٠٣-٢٠ فهو ٢٠ رمضان ١٤٤٦، وفيه مناسبة العشر الأواخر من رمضان."
+  },
+  {
+   "id": "t0558-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"س ب-٩٨\", \"transport_mode\": \"school_bus\"}}</tool_call>\n<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"٧٧٦\", \"transport_mode\": \"taxi\"}}</tool_call>"
+  },
+  {
+   "id": "t0558-2",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"س ب-٩٨\", \"include_eta\": true}}</tool_call>\n<tool_call>{\"name\": \"track_vehicle_location\", \"arguments\": {\"vehicle_id\": \"٧٧٦\", \"include_eta\": true}}</tool_call>"
+  },
+  {
+   "id": "t0558-3",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_quran_surah\", \"arguments\": {\"surah_number\": 1, \"from_ayah\": 1, \"to_ayah\": 5, \"include_tafsir\": true}}</tool_call>\n<tool_call>{\"name\": \"get_prayer_times\", \"arguments\": {\"city\": \"مكة المكرمة\", \"date\": \"2025-01-01\"}}</tool_call>"
+  },
+  {
+   "id": "t0558-3",
+   "source": "general",
+   "scenario": "parallel",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_quran_surah\", \"arguments\": {\"surah_number\": 1, \"from_ayah\": 1, \"to_ayah\": 5, \"include_tafsir\": true}}</tool_call>\n<tool_call>{\"name\": \"get_prayer_times\", \"arguments\": {\"city\": \"مكة المكرمة\", \"date\": \"2025-07-16\"}}</tool_call>"
+  },
+  {
+   "id": "t0588-0",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"estimate_trip_fare\", \"arguments\": {\"origin\": \"حي النرجس\", \"destination\": \"جامعة الملك سعود\", \"transport_mode\": \"bus\", \"passenger_count\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0588-0",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "التكلفة المقدرة لثلاثة ركاب بالباص من حي النرجس إلى جامعة الملك سعود هي 18.5 ريال سعودي."
+  },
+  {
+   "id": "t0588-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_transport_schedule\", \"arguments\": {\"station_name\": \"الرياض\", \"transport_mode\": \"train\", \"service_date\": \"2026-05-15\"}}</tool_call>"
+  },
+  {
+   "id": "t0588-1",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "إليك مواعيد القطارات من محطة الرياض يوم 2026-05-15:\n\n- رقم الرحلة TR-101، وقت المغادرة 07:00، الوجهة الدمام.\n- رقم الرحلة TR-102، وقت المغادرة 09:30، الوجهة الدمام.\n- رقم الرحلة TR-103، وقت المغادرة 12:00، الوجهة الدمام.\n- رقم الرحلة TR-104، وقت المغادرة 15:00، الوجهة الدمام.\n- رقم الرحلة TR-105، وقت المغادرة 18:30، الوجهة الدمام."
+  },
+  {
+   "id": "t0588-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_transport_routes\", \"arguments\": {\"origin\": \"حي العليا\", \"destination\": \"مطار الملك خالد\", \"transport_mode\": \"bus\", \"max_transfers\": 2}}</tool_call>"
+  },
+  {
+   "id": "t0588-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت مسارين عامين من حي العليا إلى مطار الملك خالد: مسار مختلط يستغرق 75 دقيقة مع تبديل واحد، ومسار حافلة يستغرق 90 دقيقة مع تبديل صفر. أيهما تفضل؟"
+  },
+  {
+   "id": "t0588-3",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"request_taxi_booking\", \"arguments\": {\"pickup_location\": \"حي الملقا\", \"dropoff_location\": \"مستشفى الملك فهد\", \"pickup_time\": \"2026-05-09 08:00\", \"passenger_count\": 4}}</tool_call>"
+  },
+  {
+   "id": "t0588-3",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تأكيد حجز سيارة الأجرة رقم BK-2026-9876 من حي الملقا إلى مستشفى الملك فهد غداً الساعة 8:00 صباحاً لأربعة ركاب."
+  },
+  {
+   "id": "t0593-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "بكل سرور. <tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"قرطاج\", \"max_sentences\": 3, \"language\": \"ar\"}}</tool_call>"
+  },
+  {
+   "id": "t0593-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"lookup_encyclopedia\", \"arguments\": {\"topic\": \"قرطاج\", \"language\": \"en\", \"summary_only\": true}}</tool_call>"
+  },
+  {
+   "id": "t0593-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"convert_units\", \"arguments\": {\"value\": 12, \"from_unit\": \"km\", \"to_unit\": \"mi\"}}</tool_call>"
+  },
+  {
+   "id": "t0593-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"convert_units\", \"arguments\": {\"value\": 12, \"from_unit\": \"km\", \"to_unit\": \"mi\"}}</tool_call>"
+  },
+  {
+   "id": "t0593-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"cancel_order\", \"arguments\": {\"order_id\": \"45872\", \"reason\": \"طلبت المنتج بالخطأ\", \"confirm_cancellation\": true}}</tool_call>"
+  },
+  {
+   "id": "t0593-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم إلغاء طلبك رقم 45872 بنجاح."
+  },
+  {
+   "id": "t0593-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"ابن خلدون\", \"max_sentences\": 3, \"language\": \"ar\"}}</tool_call>"
+  },
+  {
+   "id": "t0593-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_encyclopedia_summary\", \"arguments\": {\"title\": \"ابن خلدون\", \"max_sentences\": 3, \"language\": \"en\"}}</tool_call>"
+  },
+  {
+   "id": "t0599-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_gpa\", \"arguments\": {\"grades\": \"أ:3,ب+:4,ج:2\", \"scale\": \"4.0\"}}</tool_call>"
+  },
+  {
+   "id": "t0599-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_gpa\", \"arguments\": {\"grades\": \"أ:3,ب+:4,ج:2\", \"scale\": \"4.0\", \"include_previous\": true}}</tool_call>"
+  },
+  {
+   "id": "t0599-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_university_programs\", \"arguments\": {\"major_keyword\": \"إدارة الأعمال\", \"degree_level\": \"master\", \"city\": \"الدمام\"}}</tool_call>"
+  },
+  {
+   "id": "t0599-2",
+   "source": "general",
+   "scenario": "chain",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت برنامج ماجستير إدارة الأعمال في جامعة الإمام عبد الرحمن بن فيصل في الدمام. هل ترغب في معرفة المزيد عنه؟"
+  },
+  {
+   "id": "t0613-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"calculate_calories_burned\", \"arguments\": {\"activity_type\": \"walking\", \"duration_minutes\": 45, \"weight_kg\": 78}}</tool_call>"
+  },
+  {
+   "id": "t0613-0",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بناءً على المشي لمدة ٤٥ دقيقة ووزن ٧٨ كيلوغرامًا، حرقت حوالي ٢١٠ سعرة حرارية."
+  },
+  {
+   "id": "t0613-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_match_schedule\", \"arguments\": {\"team_or_league\": \"الهلال\", \"start_date\": \"2026-04-20\", \"end_date\": \"2026-05-05\"}}</tool_call>"
+  },
+  {
+   "id": "t0613-1",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_match_schedule\", \"arguments\": {\"team_or_league\": \"الهلال\", \"start_date\": \"2026-05-05\", \"end_date\": \"2026-05-15\"}}</tool_call>"
+  },
+  {
+   "id": "t0613-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"book_fitness_class\", \"arguments\": {\"facility_id\": \"مركز النخبة\", \"class_name\": \"يوغا\", \"class_date\": \"2026-04-22\", \"participants_count\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0613-2",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم حجز حصة يوغا في مركز النخبة يوم ٢٠٢٦-٠٤-٢٢ لثلاثة أشخاص بنجاح."
+  },
+  {
+   "id": "t0613-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"check_card_status\", \"arguments\": {\"card_id\": \"٤٥٦٧\"}}</tool_call>"
+  },
+  {
+   "id": "t0613-3",
+   "source": "general",
+   "scenario": "single",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بطاقتك ٤٥٦٧ نشطة."
+  },
+  {
+   "id": "t0660-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"جدة\", \"date\": \"2025-07-15\"}}</tool_call>"
+  },
+  {
+   "id": "t0660-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "في مدينة جدة بتاريخ ٢٠٢٥-٠٧-١٥، يكون شروق الشمس عند الساعة ٠٥:٤٥ وغروبها عند الساعة ١٩:١٠."
+  },
+  {
+   "id": "t0660-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_hotel_details\", \"arguments\": {\"hotel_id\": \"98765\", \"include_reviews\": false}}</tool_call>"
+  },
+  {
+   "id": "t0660-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"check_weather_alerts\", \"arguments\": {\"region\": \"جدة\", \"severity\": \"low\"}}</tool_call>"
+  },
+  {
+   "id": "t0660-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_hotel_details\", \"arguments\": {\"hotel_id\": \"55555\", \"include_reviews\": true}}</tool_call>"
+  },
+  {
+   "id": "t0660-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_hotel_details\", \"arguments\": {\"hotel_id\": \"55555\", \"include_reviews\": true}}</tool_call>"
+  },
+  {
+   "id": "t0660-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"check_weather_alerts\", \"arguments\": {\"region\": \"دبي\", \"severity\": \"moderate\"}}</tool_call>"
+  },
+  {
+   "id": "t0660-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "في دبي، هناك تنبيه جوي بمستوى خطورة متوسط بسبب ضباب خفيف يقلل من الرؤية الأفقية."
+  },
+  {
+   "id": "t0709-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"check_application_status\", \"arguments\": {\"application_id\": \"2024-555\"}}</tool_call>"
+  },
+  {
+   "id": "t0709-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "طلبك رقم 2024-555 قيد المراجعة، وقد تم تقديمه بتاريخ 2024-05-01."
+  },
+  {
+   "id": "t0709-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_account_balance\", \"arguments\": {\"account_id\": \"123456789\"}}</tool_call>"
+  },
+  {
+   "id": "t0709-1",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "رصيد حسابك رقم 123456789 هو 15000 ريال سعودي."
+  },
+  {
+   "id": "t0709-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_salary_benefits\", \"arguments\": {\"basic_salary\": 10000, \"housing_allowance\": 3000, \"transport_allowance\": 1000, \"include_gosi\": true}}</tool_call>"
+  },
+  {
+   "id": "t0709-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"calculate_salary_benefits\", \"arguments\": {\"basic_salary\": 10000, \"housing_allowance\": 3000, \"transport_allowance\": 1000, \"include_gosi\": true}}</tool_call>"
+  },
+  {
+   "id": "t0709-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_job_openings\", \"arguments\": {\"job_title\": \"مهندس\", \"city\": \"جدة\", \"employment_type\": \"part_time\"}}</tool_call>"
+  },
+  {
+   "id": "t0709-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت وظيفة مهندس مدني بنظام الدوام الجزئي في جدة، والراتب 5000 ريال."
+  },
+  {
+   "id": "t0709-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_account_balance\", \"arguments\": {\"account_id\": \"987654321\", \"include_pending\": true}}</tool_call>"
+  },
+  {
+   "id": "t0709-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "رصيد حسابك رقم 987654321 هو 20000 ريال سعودي، مع وجود 500 ريال كمعاملات معلقة."
+  },
+  {
+   "id": "t0709-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_job_openings\", \"arguments\": {\"job_title\": \"مدير مشروع\", \"city\": \"الدمام\"}}</tool_call>"
+  },
+  {
+   "id": "t0709-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت وظيفة مدير مشروع في الدمام برقم 301، دوام كامل، والراتب 15000 ريال."
+  },
+  {
+   "id": "t0739-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "عاصمة أستراليا هي مدينة كانبرا."
+  },
+  {
+   "id": "t0739-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لا أستطيع إرسال رسائل نصية نيابة عنك. يمكنني مساعدتك في كتابة نص الرسالة إذا أردت."
+  },
+  {
+   "id": "t0739-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أنا بخير، شكراً لسؤالك اللطيف. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0739-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أعتذر، لا أستطيع تقديم وصفات طبخ. يمكنني مساعدتك في البحث عن مستشفيات أو حجز حصص لياقة أو الاستعلام عن ترتيب فرق رياضية."
+  },
+  {
+   "id": "t0753-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أهلاً وسهلاً، بخير والحمد لله. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0753-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أعتذر، لا أستطيع تقديم وصفات طبخ أو نصائح غذائية. يمكنني مساعدتك في معرفة اضطرابات النقل أو مواعيد شروق وغروب الشمس أو حالة الطقس أو توقعات الطقس."
+  },
+  {
+   "id": "t0753-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "السماء تبدو زرقاء لأن جزيئات الهواء تشتت الضوء الأزرق أكثر من غيره عند مروره عبر الغلاف الجوي."
+  },
+  {
+   "id": "t0753-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الجمل هو الذكر من الإبل، والناقة هي الأنثى منها."
+  },
+  {
+   "id": "t0753-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "يبلغ عدد سكان الرياض نحو أربعة ملايين نسمة، وفقاً لتعداد السعودية لعام 2022."
+  },
+  {
+   "id": "t0753-2",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لا أستطيع تقديم نصائح شخصية في هذا الشأن، لكن أنصحك بارتداء ما يناسبك ويجعلك تشعر بالراحة والثقة."
+  },
+  {
+   "id": "t0753-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الذكاء الاصطناعي هو مجال من علوم الحاسوب يهدف إلى تطوير أنظمة قادرة على أداء مهام تتطلب ذكاءً بشريًا، مثل التعلم والتفكير وحل المشكلات."
+  },
+  {
+   "id": "t0753-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_sunrise_sunset\", \"arguments\": {\"city\": \"الرياض\", \"date\": \"2025-03-20\"}}</tool_call>"
+  },
+  {
+   "id": "t0757-0",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أهلاً بك. أطول جبل في العالم هو قمة إفرست، ويبلغ ارتفاعه نحو ٨٨٤٩ متراً فوق سطح البحر."
+  },
+  {
+   "id": "t0757-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "صباح النور، بخير والحمد لله. كيف يمكنني مساعدتك اليوم؟"
+  },
+  {
+   "id": "t0757-1",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "يسعدني ذلك، أنا هنا متى احتجت شيئًا."
+  },
+  {
+   "id": "t0757-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أفضل طريقة لتخزين التمر هي حفظه في مكان جاف وبارد، بعيدًا عن الرطوبة، مثل الثلاجة أو الفريزر. يمكنك أيضًا لفه في ورق شفاف أو كيس نايلون لحمايته من الرطوبة."
+  },
+  {
+   "id": "t0757-3",
+   "source": "general",
+   "scenario": "no_tool",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "إذا كان التمر رطبًا، يُفضل حفظه في الثلاجة في وعاء محكم الإغلاق، مع التأكد من إزالة أي نوى قبل التخزين."
+  },
+  {
+   "id": "t0758-0",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بكل سرور. ما هو المعرف الفريد لموعدك؟"
+  },
+  {
+   "id": "t0758-0",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"cancel_appointment\", \"arguments\": {\"appointment_id\": \"88452\", \"cancellation_reason\": \"طلب المستخدم\"}}</tool_call>"
+  },
+  {
+   "id": "t0758-0",
+   "source": "general",
+   "scenario": "error",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أتمكن من العثور على موعد بهذا المعرف. هل يمكنك التحقق من المعرف مرة أخرى؟"
+  },
+  {
+   "id": "t0758-1",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"find_pharmacy\", \"arguments\": {\"city\": \"الرياض\", \"district\": \"النرجس\"}}</tool_call>"
+  },
+  {
+   "id": "t0758-1",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أتمكن من العثور على الصيدليات في حي النرجس بالرياض، ربما الخدمة غير متاحة حالياً. يمكنك المحاولة لاحقاً."
+  },
+  {
+   "id": "t0758-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"estimate_property_price\", \"arguments\": {\"city\": \"جدة\", \"district\": \"الشاطئ\", \"area_sqm\": 150}}</tool_call>"
+  },
+  {
+   "id": "t0758-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"estimate_property_price\", \"arguments\": {\"city\": \"جدة\", \"district\": \"الشاطئ\", \"area_sqm\": 150, \"bedrooms\": 3}}</tool_call>"
+  },
+  {
+   "id": "t0758-2",
+   "source": "general",
+   "scenario": "error",
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أتمكن من تقدير السعر لعدم توفر بيانات كافية. قد تكون المنطقة غير مغطاة أو البيانات غير مكتملة."
+  },
+  {
+   "id": "t0758-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"find_pharmacy\", \"arguments\": {\"city\": \"الدمام\", \"is_24_hours\": true}}</tool_call>"
+  },
+  {
+   "id": "t0758-3",
+   "source": "general",
+   "scenario": "error",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "لم أجد أي صيدليات مفتوحة ٢٤ ساعة في الدمام. جرّب تغيير الحي أو إلغاء خيار ٢٤ ساعة."
+  },
+  {
+   "id": "t0791-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"list_neighborhood_amenities\", \"arguments\": {\"city\": \"الرياض\", \"district\": \"العليا\", \"amenity_type\": \"hospitals\"}}</tool_call>"
+  },
+  {
+   "id": "t0791-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "نعم، توجد مستشفيات قريبة من حي العليا في الرياض، منها مستشفى الملك فيصل التخصصي على بعد 2.8 كيلومتر، ومستشفى السلام على بعد 4.1 كيلومتر."
+  },
+  {
+   "id": "t0791-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_rental_properties\", \"arguments\": {\"city\": \"الرياض\", \"max_monthly_rent\": 3000, \"min_bedrooms\": 2, \"property_type\": \"apartment\", \"furnished\": false}}</tool_call>"
+  },
+  {
+   "id": "t0791-2",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وجدت شقتين غير مفروشتين للإيجار في الرياض: الأولى في حي العليا، الإيجار الشهري 2800 ريال، غرفتي نوم، والثانية في حي المروج، الإيجار الشهري 2950 ريال، ثلاث غرف نوم. هل تريد تفاصيل أي منهما؟"
+  },
+  {
+   "id": "t0791-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"list_neighborhood_amenities\", \"arguments\": {\"city\": \"جدة\", \"district\": \"الشاطئ\", \"amenity_type\": \"malls\"}}</tool_call>"
+  },
+  {
+   "id": "t0791-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"list_neighborhood_amenities\", \"arguments\": {\"city\": \"جدة\", \"district\": \"الشاطئ\", \"amenity_type\": \"parks\"}}</tool_call>"
+  },
+  {
+   "id": "t0791-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"list_neighborhood_amenities\", \"arguments\": {\"city\": \"جدة\", \"district\": \"الشاطئ\", \"amenity_type\": \"transport\", \"max_distance_km\": 2.0}}</tool_call>"
+  },
+  {
+   "id": "t0791-3",
+   "source": "general",
+   "scenario": "multi_turn",
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "ضمن مسافة 2 كم من حي الشاطئ في جدة، توجد محطة حافلات الشاطئ على مسافة 1.0 كم، وموقف سيارات الأجرة المركزي على مسافة 1.8 كم."
+  },
+  {
+   "id": "rec-pilot_v3/gen-00041",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. ما عندنا غرفة صلاة، بس حنا بالخدمة بأي وقت."
+  },
+  {
+   "id": "rec-pilot_v3/gen-00041",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم إذا كان فيه غرفة للصلاة، بحول سؤالك للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-pilot_v3/gen-00041",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يحفظك، حنا بالخدمة."
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تفصيل ثوب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) 370 ريال، ومدته 30 دقيقة. أي يوم الخميس بالليل يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) 370 ريال، ومدته 30 دقيقة.\n\nالمتاح الخميس بالليل:\n\n19:52\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) بـ 370 ريال، ومدته 30 دقيقة.\n\nالمتاح الخميس 18 مارس:\n8 الصبح\n9 الصبح\n11 الصبح\n3 ونص المساء\n5 ونص المساء\n6 ونص المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"thobe\", \"date\": \"2027-03-20\", \"time\": \"17:30\", \"customer_name\": \"فيصل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"thobe\", \"date\": \"2027-03-20\", \"time\": \"17:30\", \"customer_name\": \"ناصر\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00021",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا ناصر، تفصيل ثوب (موعد مقاسات) السبت 20 مارس، 5 ونص المسا.\n\nنشوفك على خير، وعطني خبر إذا احتجت شي ثاني."
+  },
+  {
+   "id": "rec-train_v1/gen-00031",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"اختبار تحديد مستوى\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00031",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. اختبار تحديد المستوى مجاني، ومدته 30 دقيقة.\n\nأي يوم الأحد؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00031",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. اختبار تحديد المستوى مدته 30 دقيقة، ومجانًا.\n\nالمتاح يوم الأحد 7 فبراير:\n14:30\n16:00\n17:30\n19:30\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00031",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"level\", \"date\": \"2027-02-07\", \"time\": \"17:30\", \"customer_name\": \"العنود\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00031",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا العنود، اختبار تحديد المستوى الأحد 7 فبراير 5 ونص المساء. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00034",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. نعم، نقدر نلغي أو نعدل الموعد قبل الموعد بـ 12 ساعة."
+  },
+  {
+   "id": "rec-train_v1/gen-00034",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-00075",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00075",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا."
+  },
+  {
+   "id": "rec-train_v1/gen-00107",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_my_bookings\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00107",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. عندك موعدين:\n\n29 ديسمبر، 2 ونص المساء\n30 ديسمبر، 8 الصباح\n\nأي واحد تبيني ألغيه لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00107",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"cancel_booking\", \"arguments\": {\"booking_id\": \"B-4984\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00107",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم إلغاء حجزك حق الثلاثاء 29 ديسمبر، 2 ونص المسا، تفصيل ثوب (موعد مقاسات). نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00126",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_my_bookings\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00126",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. عندك موعد تنظيف كنب يوم الثلاثاء 26 يناير، 4 ونص المسا. تبيني ألغيه لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00126",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"cancel_booking\", \"arguments\": {\"booking_id\": \"B-7251\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00126",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم إلغاء الحجز ✅\n\nالله يعافيك، نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00126",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "العفو، هذا واجبنا 🌹\n\nحنا بالخدمة بأي وقت."
+  },
+  {
+   "id": "rec-train_v1/gen-00168",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. حنا في حي الصفراء، بريدة. هذا الرابط: https://maps.example.com/train-escape-1"
+  },
+  {
+   "id": "rec-train_v1/gen-00168",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-00171",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تصوير عائلي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00171",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. تصوير عائلي 770 ريال، ومدته 90 دقيقة."
+  },
+  {
+   "id": "rec-train_v1/gen-00171",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن تفاصيل التصوير، ما عندي تفاصيل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00171",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "هذا ما عندي علم فيه، بحول سؤالك للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00171",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا."
+  },
+  {
+   "id": "rec-train_v1/gen-00214",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم بغرفة الصلاة، بحول سؤالك للفريق وبيتواصلون معك خلال 24 ساعة."
+  },
+  {
+   "id": "rec-train_v1/gen-00214",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم أكيد عن غرفة الصلاة، بحولها للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00214",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل إذا كان في غرفة صلاة بالمحل، وما عندي معلومة مؤكدة عنها. وبيوضحها الفريق له.\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00214",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أبشر، هذي المعلومة ما عندي عنها شي مؤكد، والفريق بيتواصلون معك خلال 10 دقايق بإذن الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00214",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا."
+  },
+  {
+   "id": "rec-train_v1/gen-00229",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. دوامنا من 8 الصبح إلى 8 المسا، من الأحد للخميس والسبت. الجمعة إجازة."
+  },
+  {
+   "id": "rec-train_v1/gen-00229",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، دوامنا من السبت للخميس من 8 الصباح لين 8 المساء، والجمعة إجازة."
+  },
+  {
+   "id": "rec-train_v1/gen-00229",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-00238",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"استفسار عن سياسة الإلغاء في النادي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00238",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "بعد 12 ساعة، ما نقدر نلغيه مجاناً، لازم تدفع رسوم الإلغاء."
+  },
+  {
+   "id": "rec-train_v1/gen-00238",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "هذا ما عندي علم فيه، بحوله للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00238",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "العفو، هذا واجبنا."
+  },
+  {
+   "id": "rec-train_v1/gen-00255",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يشتكي من تهيج بعد الجلسة، ويحتاج حل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00255",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. هذا شي ما عندي علم فيه، بحوله للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00255",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يبي حل مو بس اعتذار\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00255",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، ما سوينا شي. الفريق بيتواصلون معك خلال 10 دقايق بإذن الله، وبيتفاهمون معك على الحل."
+  },
+  {
+   "id": "rec-train_v1/gen-00255",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل (تهيج بوجهه بعد جلسة قبل أسبوع) يبي حل فعلي مو تسويف، والفريق بيتواصل معه خلال 10 دقايق\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00255",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يحفظك، والفريق بيتواصلون معك خلال 10 دقايق بإذن الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00262",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. ما نقدر نجيب العيال معنا، حنا نخدم الكبار فقط."
+  },
+  {
+   "id": "rec-train_v1/gen-00262",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم أكيد عن الموضوع، بحول استفسارك للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00262",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"مساج علاجي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nالموعد الأربعاء، المساج العلاجي 190 ريال، ومدته 45 دقيقة.\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nالموعد المتاح الأربعاء 28 أبريل:\n\n10 الصباح\n11 الصباح\n11 ونص الصباح\n1 المساء\n2 ونص المساء\n3 ونص المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"massage\", \"date\": \"2027-04-28\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم وأحجزه لك."
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"massage\", \"date\": \"2027-04-28\", \"time\": \"13:00\", \"customer_name\": \"ابو خالد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00306",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا أبو خالد، مساج علاجي الأربعاء 28 أبريل، 1 المسا. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00315",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"الكشف البيطري\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00315",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nكشف البيطرة عندنا 180 ريال، ومدته 30 دقيقة."
+  },
+  {
+   "id": "rec-train_v1/gen-00315",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"vet_checkup\", \"date\": \"2026-12-15\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00336",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_my_bookings\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00336",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. عندك موعد الخميس 28 أبريل، تغيير زيت، 5 ونص المسا. تبيني أجله لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00336",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"oil\", \"date\": \"2027-04-29\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00336",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الخميس 29 أبريل ما عندنا وقت 5 ونص المسا، المتاح:\n8 ونص الصبح\n10 ونص الصبح\n12 ونص المسا\n1 المسا\n1 ونص المسا\n4 المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00336",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00424",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن سياسة الإلغاء قبل الحجز\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00424",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "ما نقدر نلغيه قبل 12 ساعة، بس إذا تأخرت أقل من 12 ساعة، ما نقدر نلغيه مجاناً، لازم تدفع رسوم.\n\nتبغى تحجز موعد؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00424",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "هذا ما عندي علم فيه، بحوله للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00424",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "العفو، حياك الله بأي وقت."
+  },
+  {
+   "id": "rec-train_v1/gen-00439",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تفصيل ثوب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00439",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. تفصيل ثوب (موعد مقاسات) 370 ريال، ومدته 30 دقيقة. الأحد يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00439",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. تفصيل ثوب (موعد مقاسات) بـ 370 ريال، ومدته 30 دقيقة. المتاح الأحد 17 يناير:\n9 الصبح\n9 ونص الصبح\n1 ونص المساء\n7 ونص المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00439",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00439",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"thobe\", \"date\": \"2027-01-17\", \"time\": \"09:30\", \"customer_name\": \"سعد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00439",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا سعد، تفصيل ثوب (موعد مقاسات) يوم الأحد 17 يناير، 9 ونص الصبح. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"القزاز الأمامي فيه خطوط غريبة بعد الغسيل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. الفريق بيتواصل معك خلال 10 دقايق إن شاء الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن سبب الخطوط الغريبة على القزاز الأمامي بعد غسيل السيارة، وهل تضر السيارة.\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن سبب الخطوط على القزاز الأمامي بعد الغسيل وهل تضر السيارة، ويحتاج توضيح من الفريق.\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، ما نتأخر إن شاء الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يشتكي من ريحة الصابون القوية داخل السيارة بعد الغسيل، يحتاج متابعة من الفريق.\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00444",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، رفعناها للفريق مع باقي التفاصيل، وبيتواصلون معك خلال 10 دقايق بإذن الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00462",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تقييم أولي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00462",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، مرحبا.\n\nتقييم أولي 190 ريال، مدته 45 دقيقة.\n\nأي يوم الاثنين؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00462",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. التقييم الأولي 190 ريال، ومدته 45 دقيقة.\n\nالاثنين 18 يناير، المتاح:\n10 الصباح\n12 ونص المساء\n3 المساء\n3 ونص المساء\n4 المساء\n5 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00462",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00462",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"assessment\", \"date\": \"2027-01-18\", \"time\": \"10:00\", \"customer_name\": \"بشاير\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00462",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا بشاير، تقييم أولي الاثنين 18 يناير، 10 الصبح. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"جلسة تصوير عائلية\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nجلسة تصوير عائلية 735 ريال، ومدتها 90 دقيقة.\n\nأي يوم الأحد يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nجلسة تصوير عائلية 735 ريال، مدتها 90 دقيقة.\n\nالاثنين 8 نوفمبر المتاح:\n9 ونص الصبح\n10 ونص الصبح\n1 ونص المسا\n2 ونص المسا\n6 المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"family_shoot\", \"date\": \"2026-11-11\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"cancel_booking\", \"arguments\": {\"booking_id\": \"1\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00524",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا نورة، تصوير عائلي يوم الأربعاء 11 نوفمبر، 10:30 الصباح.\n\nنشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يبي يكلم المديرة بخصوص مشكلة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. ما هي المشكلة اللي عندك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تبي تكلم المديرة الحين، الموضوع ما ينتظر\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أبشر، وصلناها للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يبي وقت محدد للتواصل مع المديرة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "ما عندي وقت محدد، الفريق بيتواصل معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يطلب المديرة بنفسها، وهذا رقمه ٠٥٥٥٥٥٥٥٥٥\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00548",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 16,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أبشر، سجلت طلبك والفريق بيتواصل معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00551",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن خبرة الفريق في إدارة غرف الهروب، والمعلومة غير متوفرة في الأدوات\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00551",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم بعدد سنوات الخبرة، بحولها للفريق والفريق بيتواصل معك خلال 10 دقايق إن شاء الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00551",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، الفريق بيتواصل معك خلال 10 دقايق بإذن الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00551",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "أبشر، الفريق بيتواصل معك خلال 10 دقايق بإذن الله."
+  },
+  {
+   "id": "rec-train_v1/gen-00551",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_my_bookings\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00579",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_my_bookings\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00579",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، هلا والله. عندك حجز واحد:\n\nقاعة صغيرة (حتى 50)\n2027-04-20\n2:30\n\nتبيني ألغيه لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00579",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"cancel_booking\", \"arguments\": {\"booking_id\": \"B-5931\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00579",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم إلغاء الحجز ✅"
+  },
+  {
+   "id": "rec-train_v1/gen-00579",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "العفو، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يشتكي من ألم بعد حشوة سابقة، ويطلب استشارة طبية\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. هذا موضوع ما عندي علم فيه، بحوله للفريق الطبي وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"المريض ما نام من أمس من الضرس، يبي موعد قريب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"حشوة\", \"date\": \"2026-11-17\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"checkup\", \"date\": \"2026-11-17\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"checkup\", \"date\": \"2026-11-17\", \"time\": \"12:00\", \"customer_name\": \"راكان\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"checkup\", \"date\": \"2026-11-17\", \"time\": \"11:00\", \"customer_name\": \"عبدالله\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00589",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 16,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا عبدالله، موعدك اليوم الثلاثاء 17 نوفمبر، 11 الصباح، كشف واستشارة.\n\nنشوفك على خير، وعطني اسمك الكريم إذا احتجت موعد ثاني."
+  },
+  {
+   "id": "rec-train_v1/gen-00636",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تفصيل ثوب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00636",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) 365 ريال، ومدته 30 دقيقة. أي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00636",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) 365 ريال، ومدته 30 دقيقة.\n\nالمتاح الخميس 24 ديسمبر:\n9 الصبح\n9 ونص الصبح\n11 ونص الصبح\n1 المساء\n4 ونص المساء\n4 ونص المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00636",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00636",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"thobe\", \"date\": \"2026-12-24\", \"time\": \"16:00\", \"customer_name\": \"عبدالله العتيبي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00636",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا عبدالله، موعدك الخميس 24 ديسمبر 4 المساء. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"طاولة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nطاولة 4 أشخاص، كم العدد؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nطاولة 4 أشخاص، الثلاثاء الصبح، ما عندنا مواعيد صباحية. المتاح الثلاثاء 23 مارس:\n\n1 ونص المساء\n2 المساء\n5 ونص المساء\n7 المساء\n7 ونص المساء\n9 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"طاولة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"t4\", \"date\": \"2027-03-23\", \"time\": \"13:30\", \"customer_name\": \"فيصل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"t4\", \"date\": \"2027-03-23\", \"time\": \"13:30\", \"customer_name\": \"بشاير\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00641",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا بشاير، طاولة 4 أشخاص الثلاثاء 23 مارس 1 ونص المساء، رقم الحجز B-6442. نشوفك على خير 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-00673",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"إنجليزي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00673",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. حصة إنجليزي 170 ريال، ومدتها 60 دقيقة. تبغى موعد؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00673",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن سعر حصة إنجليزي، وسمع أنها 120 ريال، بينما السعر الفعلي 170 ريال\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00673",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تقول إن حصة الإنجليزي بـ120 ريال، والمعلومة المسجلة عندنا 170 ريال. الفريق بيتأكد من السعر الصحيح.\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00673",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم تحويل استفسارك للفريق، والفريق بيتواصل معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-00673",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تطلب التأكد من سعر حصة الإنجليزي بـ120 ريال، والفريق بيتواصل معك خلال 10 دقايق\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"قص اظافر\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. قص أظافر وتنظيف 120 ريال، ومدته 30 دقيقة. تبيني أحجز لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"grooming\", \"date\": \"2027-01-04\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الاثنين بعد العصر، المتاح 4 المسا و4 ونص المسا.\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"grooming\", \"date\": \"2027-01-04\", \"time\": \"16:30\", \"customer_name\": \"العنود\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00727",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا العنود، الاثنين 4 يناير، 4 ونص المسا، قص أظافر وتنظيف. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00760",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تنظيف البشرة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00760",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، أهلين\n\nتنظيف البشرة 235 ريال، ومدته 60 دقيقة. تبيني أحجز لك موعد؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00760",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تطلب نفس السعر لتنظيف البشرة، والمعلومة السابقة كانت 235 ريال\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00760",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تقول إنها اتصلت قبل وذكروا لها سعر تنظيف البشرة 150 ريال، وتطلب نفس السعر، والسعر عندنا 235 ريال\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00760",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تقول إن السعر المسجل لتنظيف البشرة 235 ريال، وهي تبغى السعر 150 ريال مثل ما قالوا لها قبل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00760",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تقول إنها اتصلت قبل وذكروا لها سعر تنظيف البشرة 150 ريال، وتطلب نفس السعر، والسعر عندنا 235 ريال، وتبغى تتأكد قبل ما تحجز\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00803",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"خلع ضرس\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00803",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nالأربعاء بعد العصر، المتاح:\n\n- خلع ضرس، 340 ريال، 30 دقيقة\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00803",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nما لقيت مواعيد متاحة يوم الأربعاء بعد 3:17 المساء. تبغى أحجز لك اليوم السبت؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00803",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nالأربعاء 16 ديسمبر، المتاح بعد 3:17 المساء:\n\n9 الصباح\n10 الصباح\n2 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00803",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nما لقيت لك موعد بعد 15:17، المتاح الأربعاء 16 ديسمبر:\n\n12 المساء\n1 المساء\n2 المساء\n\nوالأربعاء 17 ديسمبر:\n\n3 ونص المساء\n\nأي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00803",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"date\": \"2026-12-16\", \"service_id\": \"extraction\", \"after\": \"17:32\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00879",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"مكياج سهره\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00879",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nمكياج السهرة مدته 90 دقيقة، وسعره 565 ريال.\n\nأي يوم تبغى؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00879",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nمكياج السهرة 565 ريال، ومدته 90 دقيقة.\n\nالمتاح يوم الجمعة 4 ديسمبر:\n6 ونص المساء\n8 المساء\n9 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00879",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم وأحجزه لك."
+  },
+  {
+   "id": "rec-train_v1/gen-00879",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"evening_makeup\", \"date\": \"2026-12-04\", \"time\": \"20:00\", \"customer_name\": \"مها\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00879",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا مها، مكياج سهرة يوم الجمعة 4 ديسمبر، 8 المساء.\nالله يحفظك، نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00917",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"انجليزي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00917",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"english\", \"date\": \"2026-12-28\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00917",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. حصة الإنجليزي 170 ريال، مدتها 60 دقيقة.\n\nالمتاح بكرة بالليل:\n\n8 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00917",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00917",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"english\", \"date\": \"2026-12-28\", \"time\": \"18:00\", \"customer_name\": \"زياد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00917",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا زياد، حصة الإنجليزي بكرة الاثنين 28 ديسمبر الساعة 6 المساء، رقم الحجز B-4902. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00943",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"غرفة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00943",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nغرفة 6 أشخاص بـ 370 ريال، ومدة اللعب 60 دقيقة.\n\nأي يوم الخميس؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00943",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nغرفة 6 أشخاص بـ 370 ريال، ومدتها 60 دقيقة.\n\nالمتاح الخميس 21 يناير:\n14:30\n15:00\n16:00\n19:30\n20:00\n20:30\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00943",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-00943",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"room6\", \"date\": \"2027-01-21\", \"time\": \"19:30\", \"customer_name\": \"ام فهد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00943",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا أم فهد، غرفة لـ 6 أشخاص الخميس 21 يناير 7 ونص المساء. رقم الحجز: B-8853. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"حلاقة شعر\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nحلاقة شعر 70 ريال، ومدتها 30 دقيقة.\n\nأي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"haircut\", \"date\": \"2026-11-30\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "بكرة الصباح بدري ما عندنا مواعيد، دوامنا يبدأ 10 الصبح.\n\nالمتاح بكرة:\n10 ونص الصبح\n11 الصبح\n12 ونص\n1 ونص\n2 ونص\n3 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"haircut\", \"date\": \"2026-11-30\", \"time\": \"10:30\", \"customer_name\": \"يزيد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"haircut\", \"date\": \"2026-11-30\", \"time\": \"10:30\", \"customer_name\": \"سعود العتيبي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00946",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا سعود، 10 ونص الصباح بكرة الاثنين 30 نوفمبر. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-00969",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تعديل الثوب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00969",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. تعديل الثوب 60 ريال، ومدته 20 دقيقة. تبغى موعد؟"
+  },
+  {
+   "id": "rec-train_v1/gen-00969",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل إذا كان سعر تعديل الثوب 60 ريال شامل كل شي، وما عندي علم بهذا.\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-00969",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "هذا ما عندي علم فيه، بحول سؤالك للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-01047",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا."
+  },
+  {
+   "id": "rec-train_v1/gen-01047",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تنظيف شقة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01047",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"apartment\", \"date\": \"2027-04-15\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01047",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، أهلين. تنظيف الشقة 255 ريال، ومدته 4 ساعات. الخميس 15 أبريل، المتاح:\n9 الصبح\n9 ونص الصبح\n10 الصبح\n11 ونص الصبح\n12 ونص الصبح\n1 المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01047",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"apartment\", \"date\": \"2027-04-15\", \"time\": \"09:00\", \"customer_name\": \"فيصل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"قص شعر\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nقص الشعر 105 ريال، ومدته 45 دقيقة.\n\nأي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"cut\", \"date\": \"2026-12-09\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "ما ينفع بكرة بدري، دوامنا يبدأ 12. المتاح بكرة: 2 المسا، 4 المسا، 5 المسا، 6 المسا، 7 المسا، 9 المسا. أي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"cut\", \"date\": \"2026-12-09\", \"after\": \"16:00\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"cut\", \"date\": \"2026-12-09\", \"time\": \"16:00\", \"customer_name\": \"نورة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01048",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا نورة، بكرة الأربعاء 4 المساء، قص شعر. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-01092",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تفصيل ثوب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01092",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) 365 ريال، ومدته 30 دقيقة. الأحد الليل ما فيه موعد، أقرب شي السبت الليل. تبيني أحجز لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01092",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. تفصيل الثوب (موعد مقاسات) 365 ريال، ومدته 30 دقيقة.\n\nالمتاح الأحد 24 يناير:\n8 الصبح\n8 ونص الصبح\n9 الصبح\n10 ونص الصبح\n1 ونص المسا\n4 المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01092",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-01092",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"thobe\", \"date\": \"2027-01-24\", \"time\": \"16:00\", \"customer_name\": \"فهد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01092",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا فهد، تفصيل ثوب الأحد 24 يناير 4 المسا. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-01114",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"بدكير\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01114",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، هلا والله.\n\nبدكير 45 دقيقة بـ 115 ريال.\n\nأي وقت يناسبك السبت؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01114",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، هلا والله.\n\nبدكير 115 ريال، مدته 45 دقيقة.\n\nالسبت 14 نوفمبر، المتاح:\n12 المسا\n1 المسا\n2 ونص المسا\n5 ونص المسا\n6 ونص المسا\n7 المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01114",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-01114",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"pedi\", \"date\": \"2026-11-14\", \"time\": \"18:30\", \"customer_name\": \"ام فهد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01114",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا ام فهد، بدكير السبت 14 نوفمبر 6 ونص المسا. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-01115",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_my_bookings\", \"arguments\": {}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01115",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. عندك موعد الطاولة يوم السبت 6 نوفمبر، 12 ونص. تبيني ألغيه لك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01115",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"cancel_booking\", \"arguments\": {\"booking_id\": \"B-1911\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01115",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم إلغاء موعدك ✅\n\nالله يعافيك، نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-01115",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "العفو، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-01121",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"جلسة خارجية\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01121",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nجلسة خارجية مدتها 90 دقيقة، 0 ريال.\n\nأي وقت يناسبك اليوم الصباح؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01121",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nجلسة خارجية مدتها 90 دقيقة، وسعرها 0 ريال.\n\nالمتاح اليوم الأربعاء 13 يناير:\n8 ونص الصباح\n9 ونص الصباح\n10 الصباح\n11 الصباح\n1 ونص المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01121",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-01121",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"outdoor\", \"date\": \"2027-01-13\", \"time\": \"10:00\", \"customer_name\": \"مها\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01121",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا مها، 10 الصباح جلسة خارجية.\n\nنشوفك على خير، حنا بالخدمة."
+  },
+  {
+   "id": "rec-train_v1/gen-01147",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"عروض\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01147",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم بالعروض، بحولها للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-train_v1/gen-01147",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا 🌹"
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تعديل ثوب\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله.\n\nتعديل الثوب 60 ريال، ومدته 20 دقيقة.\n\nأي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nتعديل الثوب 60 ريال، مدته 20 دقيقة.\n\nالمتاح اليوم:\n8 ونص\n9 ونص\n10 ونص\n3 المساء\n4 المساء\n5 ونص المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"alter\", \"date\": \"2027-03-15\", \"time\": \"16:00\", \"customer_name\": \"زياد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا زياد، تعديل الثوب اليوم 4 المسا. نشوفك على خير."
+  },
+  {
+   "id": "rec-train_v1/gen-01178",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "العفو، هذا واجبنا. نشوفك على خير."
+  },
+  {
+   "id": "rec-focus_v1/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"فحص عيون شامل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nفحص عيون شامل 255 ريال، ومدته 45 دقيقة.\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "الله يعافيك، حياك الله.\n\nاليوم الخميس والسبت إجازة، دوامنا من السبت للخميس من 4 المساء إلى 11 المساء.\n\nفحص العيون الشامل الخميس والسبت 4 المساء إلى 11 المساء، وعشان ما يصير شي غلط، عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-focus_v1/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، حياك الله.\n\nاليوم الثلاثاء 1 ديسمبر، المتاح:\n5 ونص المساء\n6 المساء\n6 ونص المساء\n7 المساء\n8 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2026-12-01\", \"time\": \"20:30\", \"customer_name\": \"شهد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2026-12-01\", \"time\": \"20:30\", \"customer_name\": \"فلان بن محمد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"مدرب شخصي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"pt\", \"date\": \"2027-04-17\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"pt\", \"date\": \"2027-04-16\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"pt\", \"date\": \"2027-04-22\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل ما يناسبه مواعيد الصباح، يبغى حصة مدرب شخصي بالليل، والمتاح بالليل ما فيه مواعيد متاحة يوم الأربعا 21 أبريل، والمتاح بالليل ما فيه مواعيد متاحة يوم الخميس 22 أبريل، والمتاح بالليل ما فيه مواعيد متاحة يوم الجمعة 23 أبريل، والمتاح بالليل ما فيه مواعيد متاحة يوم السبت 24 أبريل، والمتاح بالليل ما فيه مواعيد متاحة يوم الأحد 25 أبري"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": false,
+   "reply": "الخميس 22 أبريل، المتاح:\n\n6 الصباح\n7 الصباح\n7 ونص الصباح\n9 ونص الصباح\n13 ونص المساء\n14 المساء\n\nما فيه بالليل للأسف.\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"pt\", \"date\": \"2027-04-25\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00028",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 16,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"pt\", \"date\": \"2027-04-23\", \"time\": \"21:00\", \"customer_name\": \"راكان\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00032",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، مرحبا. ما رقم الحجز؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00032",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. موعد قطك عندنا، والفريق بيتواصل معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-focus_v1/gen-00032",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يسأل عن وقت التواصل المتوقع بعد تحويل شكواه عن طول الانتظار في زيارة سابقة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00032",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الفريق بيتواصل معك خلال 10 دقايق، وعساه ما يتأخر."
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. السبت والسبت إجازة عندنا، دوامنا من الأحد للخميس من 4 المساء إلى 11 المساء. تبغى موعد على أي يوم؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"1\", \"date\": \"2027-01-30\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"vision\", \"date\": \"2027-02-01\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"vision\", \"date\": \"2028-01-01\"}}</tool_call>\n<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2028-01-01\"}}</tool_call>\n<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"lenses\", \"date\": \"2028-01-01\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2027-01-31\", \"time\": \"16:30\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2027-01-31\", \"time\": \"16:30\", \"customer_name\": \"نوره العتيبي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00043",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا نوره\n\nفحص العيون الشامل الأحد 31 يناير الساعة 4 ونص المساء، رقم الحجز B-4246. نشوفك على خير 🌸"
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"تنظيف أسنان\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. تنظيف الأسنان 275 ريال، ومدته 45 دقيقة. أي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"cleaning\", \"date\": \"2027-01-15\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "السبت 16 يناير، المتاح:\n9 الصباح\n10 الصباح\n2 المسا\n2 ونص المسا\n3 المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، السبت 16 يناير، 10 الصبح. عطني اسمك الكريم."
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"cleaning\", \"date\": \"2027-01-16\", \"time\": \"10:00\", \"customer_name\": \"خالد العتيبي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00100",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا خالد، السبت 16 يناير، تنظيف أسنان، 10 الصبح. نشوفك على خير."
+  },
+  {
+   "id": "rec-focus_v1/gen-00212",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله. الدفع عندنا: مدى، Apple Pay، وTabby."
+  },
+  {
+   "id": "rec-focus_v1/gen-00212",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تسأل إذا الدفع بالفيزا مقبول عندكم، وما عندي علم بهذا\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00212",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تسأل إذا كان الدفع بالفيزا مقبول، والمعلومة المتوفرة عندنا تذكر مدى وآبل باي وتابي فقط\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00212",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميلة تسأل إذا كان الدفع بالفيزا مقبول، والمعلومة المتوفرة عندنا تذكر مدى وآبل باي وتابي فقط\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00280",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"فحص نظر\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00280",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، هلا والله. فحص النظر 85 ريال، ومدته 20 دقيقة. تبيني أحجزه لك بكرة؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00280",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nفحص النظر 85 ريال، ومدته 20 دقيقة.\n\nالمتاح بكرة الخميس 8 أبريل:\n6 ونص المساء\n7 ونص المساء\n10 المساء\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v1/gen-00280",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"vision\", \"date\": \"2027-04-08\", \"time\": \"17:30\", \"customer_name\": \"نورة\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v1/gen-00280",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا نورة\nفحص نظر بكرة الخميس 5 ونص المسا، رقم الحجز B-8576.\nنشوفك على خير 🌸"
+  },
+  {
+   "id": "rec-focus_v1/gen-00280",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا 🌸"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"حلاقه شعر ولحيه\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، حياك الله.\n\nحلاقة شعر 80 ريال، وحلاقة شعر ولحية 105 ريال، والمدة 30 دقيقة و45 دقيقة على التوالي.\n\nأي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"full\", \"date\": \"2026-12-07\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"full\", \"date\": \"2026-12-07\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"full\", \"date\": \"2026-12-07\", \"time\": \"10:00\", \"customer_name\": \"تركي\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"full\", \"date\": \"2026-12-07\", \"time\": \"10:00\", \"customer_name\": \"سعود الدوسري\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00006",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 14,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تم الحجز يا سعود، حلاقة شعر ولحية بكرة الأحد 7 ديسمبر، 10 الصبح. نشوفك على خير."
+  },
+  {
+   "id": "rec-focus_v2/gen-00012",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"handoff_to_human\", \"arguments\": {\"reason\": \"العميل يطلب فاتورة ضريبية باسم شركته\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00012",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، ما عندي علم بالفواتير الضريبية، بحولها للفريق والفريق بيتواصل معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-focus_v2/gen-00012",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا."
+  },
+  {
+   "id": "rec-focus_v2/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "وعليكم السلام، حياك الله. ما عندي علم بهذي الأمور، بحول سؤالك للفريق وبيتواصلون معك خلال 24 ساعة."
+  },
+  {
+   "id": "rec-focus_v2/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. ما عندي علم بهذي النقطة، بحولها للفريق وبيتواصلون معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-focus_v2/gen-00024",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا."
+  },
+  {
+   "id": "rec-focus_v2/gen-00038",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"زيوت وقطع غيار\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00038",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، مرحبا. ما نوع السيارة؟"
+  },
+  {
+   "id": "rec-focus_v2/gen-00038",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، نشوف لك موعد.\n\nبسألك، أي يوم يناسبك؟ وعطني اسمك الكريم."
+  },
+  {
+   "id": "rec-focus_v2/gen-00038",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا.\n\nما عليك إلا الانتظار والفريق بيتواصل معك خلال 10 دقايق."
+  },
+  {
+   "id": "rec-focus_v2/gen-00038",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الله يعافيك، هذا واجبنا.\n\nنتشرف بخدمتك بأي وقت."
+  },
+  {
+   "id": "rec-focus_v2/gen-00058",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"اختبار تحديد مستوى\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00058",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": false,
+   "right": true,
+   "reply": "وعليكم السلام، هلا والله. اختبار تحديد المستوى مجاني، ومدته 30 دقيقة. أي يوم يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v2/gen-00058",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"level\", \"date\": \"2026-12-31\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00058",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": true,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"level\", \"date\": \"2027-01-07\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00058",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "الأحد 3 يناير، المتاح:\n\n3 ونص المسا\n5 المسا\n5 ونص المسا\n6 المسا\n8 ونص المسا\n\nأي وقت يناسبك؟"
+  },
+  {
+   "id": "rec-focus_v2/gen-00058",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 12,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"create_booking\", \"arguments\": {\"service_id\": \"level\", \"date\": \"2027-01-03\", \"time\": \"20:30\", \"customer_name\": \"شهد\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00207",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 2,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"فحص عيون شامل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00207",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 4,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"search_services\", \"arguments\": {\"query\": \"فحص عيون شامل\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00207",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 6,
+   "ref_calls": true,
+   "right": true,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2026-11-29\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00207",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 8,
+   "ref_calls": false,
+   "right": false,
+   "reply": "<tool_call>{\"name\": \"get_available_slots\", \"arguments\": {\"service_id\": \"full_exam\", \"date\": \"2026-11-30\"}}</tool_call>"
+  },
+  {
+   "id": "rec-focus_v2/gen-00207",
+   "source": "receptionist",
+   "scenario": null,
+   "turn": 10,
+   "ref_calls": false,
+   "right": true,
+   "reply": "تمام، عطني اسمك الكريم."
+  }
+ ]
+}

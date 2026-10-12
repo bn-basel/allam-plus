@@ -28,6 +28,19 @@ Controls answered: 0/10. Peak GPU memory 13.99 GB. Seconds per case by length: {
 
 Controls answered: 0/10. Peak GPU memory 13.5 GB. Seconds per case by length: {'2048': 0.7, '4096': 1.0, '8192': 3.2, '16384': 7.9}.
 
+## rope = tools_v1
+
+| depth \ length | 2K | 4K | 8K | 16K |
+|---|---|---|---|---|
+| 10% | 100% | 100% | 100% | 100% |
+| 30% | 100% | 100% | 100% | 100% |
+| 50% | 100% | 100% | 100% | 100% |
+| 70% | 100% | 100% | 100% | 100% |
+| 90% | 100% | 100% | 100% | 100% |
+| **all** | **100%** (50/50) | **100%** (50/50) | **100%** (50/50) | **100%** (50/50) |
+
+Controls answered: 0/10. Peak GPU memory 13.99 GB. Seconds per case by length: {'2048': 1.1, '4096': 1.7, '8192': 3.2, '16384': 50.1}.
+
 ## rope = yarn4
 
 | depth \ length | 2K | 4K | 8K | 16K |

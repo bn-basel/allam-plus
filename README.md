@@ -9,21 +9,24 @@ change measured against the untouched model:
 4. **Fast quantised releases**: GGUF 4/8-bit with a speed and memory table.
 5. **No loss of Arabic quality**: ArabicMMLU and Arabic IFEval before and after.
 
-**Status:** Phase 1 (baselines) and Phase 2 (long context) done. **ALLaM-7B now reads 16K tokens (4× its original
-4K) with no loss on short Arabic tasks**, trained in 2 h 19 min on one RTX 5080.
+**Status:** Phases 1–3 done; Phase 4 (serving and release) next. **ALLaM-7B now reads 16K tokens (4× its original
+4K) and calls tools in Arabic, with no loss on general Arabic tasks**, all trained on one RTX 5080.
 
-| | As released | + YaRN only | **allam-plus (Phase 2)** |
-|---|---|---|---|
-| Needle at 16K tokens | 0% | 90% | **100%** |
-| LC-Eval (HUMAIN), multiple choice on 8–16K-token books | 18.3% | 47.8% | **63.8%** |
-| ArabicMMLU | 68.6% | 67.2% | **68.8%** |
-| Arabic IFEval | 40.8% | 42.1% | **40.3%** (no significant change) |
+| | As released | **allam-plus** |
+|---|---|---|
+| Needle at 16K tokens | 0% | **100%** |
+| LC-Eval (HUMAIN), multiple choice on 8–16K-token books | 18.3% | **64.7%** |
+| ArabFuncBench, right tool / every argument right | 65.9% / 19.0% | **96.8% / 48.5%** |
+| AISA-ArabicFC (five dialects), right tool / every argument right | 68.8% / 10.8% | **93.4% / 36.2%** |
+| Saudi receptionist test (earlier project) | 36.3% | **83.1%** |
+| ArabicMMLU | 68.6% | **69.2%** |
+| Arabic IFEval | 40.8% | **42.3%** |
 
-![Phase 2](docs/charts/phase2_long_context.svg)
+![Tool calling](docs/charts/phase3_tools.svg)
 
-![Needle test](docs/charts/needle_phase2.svg)
+![Long context](docs/charts/phase2_long_context.svg)
 
-Details: [baselines](docs/BASELINES.md) · [long-context stage](docs/PHASE2.md)
+Details: [baselines](docs/BASELINES.md) · [long context](docs/PHASE2.md) · [tool calling](docs/PHASE3.md)
 
 Decisions and reasons: [docs/DECISIONS.md](docs/DECISIONS.md) · Learning log: [LEARNING.md](LEARNING.md) ·
 Terms: [GLOSSARY.md](GLOSSARY.md)

@@ -128,3 +128,12 @@ is not needed. Phase 3 continues training this adapter.
   logged in `data/tools/spend.jsonl`. The pilot cost $0.0002 per conversation.
 - *Before/after:* the base model and the Phase 2 model are also run in the new format (`--protocol native`), so the
   comparison uses the same prompt.
+
+**D17. Activation offloading without pinned memory** (12 Oct). Pinned host memory is kept by PyTorch's cache and
+grew to 27.7 GB of system RAM during tools_v1, slowing steps from ~6 s to 75–94 s. Unpinned memory: steps back to
+5–7 s (and 18–50 s for 16K examples). The run was paused cleanly at step 32 and resumed.
+
+**D18. Phase 3 result: checkpoint 400 of tools_v1 is the release model.** Chosen by D16 (dev 80.9%). Met: ArabFuncBench
+and AISA far above base, needle 100%, LC-Eval 64.7%, ArabicMMLU 69.2%, IFEval 42.3%. Missed: receptionist test v2
+83.1% against the 85% target (the receptionist-only model: 87.5%; paired p = 0.21). Reported as the cost of a general
+model; options for a tuning round are left to Basel.

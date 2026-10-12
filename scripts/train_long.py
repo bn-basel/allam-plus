@@ -173,9 +173,13 @@ def main() -> None:
         ids = torch.tensor([enc["input_ids"]], device=model.device)
         labels = torch.tensor([enc["labels"]], device=model.device)
         offload = len(enc["input_ids"]) > OFFLOAD_ABOVE
-        with torch.autograd.graph.save_on_cpu(pin_memory=True) if offload else contextlib.nullcontext():
+        # Not pinned: pinned (page-locked) host memory is cached by PyTorch and never given back, and with examples of
+        # different lengths it grew to 27.7 GB of system RAM in tools_v1 and slowed training 15x (12 Oct).
+        with torch.autograd.graph.save_on_cpu(pin_memory=False) if offload else contextlib.nullcontext():
             loss = chunked_loss(model, ids, labels)
         (loss / args.accum).backward()
+        if offload:  # long examples leave large freed blocks in the GPU pool; hand them back
+            torch.cuda.empty_cache()
         acc_loss.append(float(loss))
         acc_kinds.append(ex["kind"])
         del ids, labels, loss

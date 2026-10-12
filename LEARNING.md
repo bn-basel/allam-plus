@@ -114,3 +114,38 @@ inside 6–16K tokens of other articles and asked the question at the end. No pa
   scored, so the checkpoint choice stayed fair.
 - The dev score moved little after checkpoint 40 (0.72 → 0.70 → 0.67 → 0.71 → 0.73), while the replay loss kept
   falling (0.45 → 0.36): the long-reading skill came early, the "behave like the original" part took the whole run.
+
+---
+
+## Step 3 — Arabic tool calling
+
+**Concept.** A tool call is the model writing a structured request instead of prose, e.g.
+`<tool_call>{"name": "check_traffic_fines", "arguments": {"id_number": "1057834921"}}</tool_call>`; the app runs it
+and sends the result back. Two things have to be learned: *when* to call (and when not: a general question needs no
+tool), and *what* to put in the arguments (the user's values, in the schema's shape, never invented). The training
+data has to cover the hard cases on purpose: two tools at once, one tool's result feeding the next, a missing detail
+the model must ask for, a tool that returns an error, and requests no tool can handle.
+
+**What we did.**
+- Our DeepSeek pipeline wrote a library of 102 tools in 18 everyday domains and 3,184 conversations across seven
+  scenarios (MSA and Saudi users), 4 per API call: $0.65 in total. Rules kept 2,733: tool names and arguments match
+  the schemas, no English or Arabizi, numbers in replies come from the tool results, and nothing overlaps the
+  benchmarks. Tools named like any benchmark tool were dropped.
+- Wrote the format once (`toolformat.py`), with the instructions in Arabic, and used it for training and every test.
+- Trained the Phase 2 adapter further on the general conversations, the 1,095 receptionist conversations and Phase 2
+  replay: 537 steps, 2 h 22 min. The dev rule chose checkpoint 400.
+- Results: ArabFuncBench right tool 65.9% → **96.8%**; AISA (five dialects) 68.8% → **93.4%**; receptionist test
+  36.3% → **83.1%** (target 85%: missed, close to the 87.5% of the receptionist-only model, p = 0.21). Long context
+  kept (needle 100%, LC-Eval 64.7%) and general Arabic slightly better (ArabicMMLU 69.2%, IFEval 42.3%).
+
+**What I learned.** _(after the check question)_
+
+**Notes.**
+- With the Arabic instructions, the untrained model called tools far less than with the earlier English ones (50% vs
+  76% on ArabFuncBench), so "before" numbers depend on the prompt; we report the same format before and after.
+- The dev curve shows the trade-off training has to balance: at checkpoint 100 the model called tools much more (57% of
+  call turns right) but also called when it should just reply (78% of reply turns right); later checkpoints found the
+  balance (63% / 93%).
+- Overnight lesson: activation offloading with *pinned* memory made PyTorch hold 27.7 GB of system RAM and slowed
+  training 15×. Unpinned memory can be paged out by Windows, so training stayed fast. A slow GPU job can be a RAM
+  problem, not only a GPU-memory problem.

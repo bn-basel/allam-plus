@@ -273,8 +273,63 @@ def phase2() -> None:
     save("phase2_long_context", "Phase 2: long context before and after", w, y + 20, body)
 
 
+PHASE3_ROWS = [  # label, note, {series: (file, key)}
+    ("ArabFuncBench: right tool", "1,000 MSA requests, 50 unseen tools",
+     {"shipped": ("tools/arabfuncbench/base__native/summary.json", "all.fn_acc"),
+      "long": ("tools/arabfuncbench/long_v1__native__yarn4/summary.json", "all.fn_acc"),
+      "tools": ("tools/arabfuncbench/tools_v1__native__yarn4/summary.json", "all.fn_acc")}),
+    ("ArabFuncBench: exact arguments", "right tool and every argument right",
+     {"shipped": ("tools/arabfuncbench/base__native/summary.json", "all.arg_em"),
+      "long": ("tools/arabfuncbench/long_v1__native__yarn4/summary.json", "all.arg_em"),
+      "tools": ("tools/arabfuncbench/tools_v1__native__yarn4/summary.json", "all.arg_em")}),
+    ("AISA: right tool", "545 requests in five dialects",
+     {"shipped": ("tools/aisa_dev/base__native/summary.json", "all.fn_acc"),
+      "long": ("tools/aisa_dev/long_v1__native__yarn4/summary.json", "all.fn_acc"),
+      "tools": ("tools/aisa_dev/tools_v1__native__yarn4/summary.json", "all.fn_acc")}),
+    ("AISA: exact arguments", "right tool and every argument right",
+     {"shipped": ("tools/aisa_dev/base__native/summary.json", "all.arg_em"),
+      "long": ("tools/aisa_dev/long_v1__native__yarn4/summary.json", "all.arg_em"),
+      "tools": ("tools/aisa_dev/tools_v1__native__yarn4/summary.json", "all.arg_em")}),
+    ("Receptionist test v2", "160 Saudi-dialect booking chats",
+     {"shipped": ("receptionist/base_native__test_v2/summary.json", "pass_rate"),
+      "long": ("receptionist/long_v1_native__test_v2/summary.json", "pass_rate"),
+      "tools": ("receptionist/tools_v1_native__test_v2/summary.json", "pass_rate")}),
+]
+PHASE3_SERIES = [("shipped", "As released", "base"), ("long", "After Phase 2 (16K)", "yarn"),
+                 ("tools", "After Phase 3 (16K + tools): allam-plus", "ours")]
+
+
+def phase3() -> None:
+    """Tool calling before and after, every row in the same Arabic tool format."""
+    left, top, bar_w, bar_h, w = 300, 120, 420, 14, 860
+    title = "ALLaM-7B learns Arabic tool calling"
+    body = header(title, "Phase 3: QLoRA on our Arabic tool conversations + the receptionist data. "
+                         "Same Arabic tool format in every row.")
+    x = 24
+    for _, name, colour in PHASE3_SERIES:
+        body += [rect(x, 76, 12, 12, colour, 3), text(x + 18, 86, name, 12)]
+        x += 18 + len(name) * 6.4 + 24
+    y = top
+    for label, note, src in PHASE3_ROWS:
+        vals = [(c, value(*src[k])) for k, _, c in PHASE3_SERIES if k in src]
+        vals = [(c, v) for c, v in vals if v is not None]
+        gh = len(vals) * (bar_h + 4)
+        body += [text(left - 14, y + gh / 2, label, 13.5, "end", weight="bold"),
+                 text(left - 14, y + gh / 2 + 15, note, 11, "end", "muted")]
+        for colour, v in vals:
+            body += [rect(left, y, bar_w, bar_h, "grid", 3), rect(left, y, max(bar_w * v, 2), bar_h, colour, 3),
+                     text(left + bar_w * v + 6, y + bar_h - 2, f"{v:.1%}", 11.5,
+                          weight="bold" if colour == "ours" else "normal")]
+            y += bar_h + 4
+        y += 22
+    for p in range(0, 101, 25):
+        body.append(text(left + bar_w * p / 100, y + 4, f"{p}%", 10.5, "middle", "muted"))
+    save("phase3_tools", "Phase 3: tool calling before and after", w, y + 20, body)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    phase3()
     needle()
     needle("needle_phase2", ("shipped", "yarn4", "long_v1"), 60,
            "ALLaM-7B finds the needle anywhere in 16K tokens after training")

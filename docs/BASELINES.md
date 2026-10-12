@@ -87,7 +87,7 @@ With the chunked loss and activation offloading, **16K-token examples train on t
 
 ## Tool-calling starting points for Phase 3 (measured 2026-10-11)
 
-ArabFuncBench (1,000 native-MSA cases; published for comparison: best 92.4% (a commercial API model), Fanar-9B 87.1%, AceGPT-7B 22.4% right
+ArabFuncBench (1,000 native-MSA cases; published by its authors with their own JSON prompt: Llama-3.x 99.7% (the file does not say 8B or 70B), Qwen2.5-7B-Instruct 99.2%, a commercial API model 92.4%, Fanar-9B 87.1%, AceGPT-7B 22.4% right
 tool, no ALLaM row) and our formats. "Right tool" = their TSA; "argument match" = their AEF1.
 
 | Model and prompt | Right tool | Argument match | Rightly no call | Calls a tool |

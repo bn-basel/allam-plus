@@ -134,3 +134,20 @@ section, so the model is not trained on invented answers.
 
 **Dev set / checkpoint rule.** Held-out examples used to pick which saved checkpoint to keep, with the rule written
 down before training; the real tests are run only on the chosen checkpoint, so they stay an honest exam.
+
+## Tool calling (added in Phase 3)
+
+**Parallel calls.** Two or more tool calls in one turn, for independent needs («what's the weather in Jeddah and my
+flight status?»).
+
+**Chained calls.** A second call that uses a value from the first call's result (find the order, then track it).
+
+**Clarifying question.** When a required argument is missing, the right move is to ask for it, not to guess it.
+
+**Schema copying.** The untrained model's typical mistake: pasting the tool's description into the arguments.
+
+**AEF1 / LCR (ArabFuncBench).** Argument match: share of expected arguments whose predicted value is at least 65%
+similar; Arabic values: share of predicted argument values written in Arabic (or numbers).
+
+**Pinned memory.** System RAM locked in place so the GPU can copy it faster. It cannot be paged out, so if a program
+keeps a lot of it, everything else on the computer slows down.
