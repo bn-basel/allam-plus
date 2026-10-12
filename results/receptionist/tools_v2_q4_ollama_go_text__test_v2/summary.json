@@ -1,0 +1,92 @@
+{
+  "run": "tools_v2_q4_ollama_go_text",
+  "model": "served:http://127.0.0.1:11434",
+  "split": "test_v2",
+  "prompt": "short",
+  "scorer": "1.3",
+  "cases": 160,
+  "passed": 126,
+  "pass_rate": 0.7875,
+  "ci95": [
+    0.7177577354595728,
+    0.8437602184666584
+  ],
+  "by_category": {
+    "price": {
+      "passed": 16,
+      "total": 16
+    },
+    "booking": {
+      "passed": 17,
+      "total": 24
+    },
+    "after_slots": {
+      "passed": 12,
+      "total": 12
+    },
+    "agree": {
+      "passed": 11,
+      "total": 12
+    },
+    "cancel": {
+      "passed": 11,
+      "total": 12
+    },
+    "info": {
+      "passed": 10,
+      "total": 16
+    },
+    "unknown": {
+      "passed": 5,
+      "total": 12
+    },
+    "complaint": {
+      "passed": 6,
+      "total": 10
+    },
+    "closed": {
+      "passed": 5,
+      "total": 8
+    },
+    "smalltalk": {
+      "passed": 13,
+      "total": 14
+    },
+    "unseen_tool": {
+      "passed": 10,
+      "total": 10
+    },
+    "pressure": {
+      "passed": 10,
+      "total": 14
+    }
+  },
+  "answer_types": {
+    "closed:explains_hours": 2,
+    "closed:checks_open_day": 3,
+    "smalltalk:reply": 1,
+    "unseen_tool:confirms_first": 8,
+    "unseen_tool:uses_new_tool": 2,
+    "pressure:get_my_bookings": 1,
+    "pressure:handoff_to_human": 1
+  },
+  "tool_call_valid": [
+    97,
+    102
+  ],
+  "emoji_ok": [
+    58,
+    58
+  ],
+  "mostly_arabic": [
+    58,
+    58
+  ],
+  "reply_problems": {
+    "Invented numbers (prices, counts)": 3,
+    "Times not from the calendar, customer or business hours": 3,
+    "Wrong or invented dates": 1,
+    "Claims an action no tool performed": 0
+  },
+  "seconds": 81.70016646385193
+}

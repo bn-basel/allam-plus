@@ -327,8 +327,86 @@ def phase3() -> None:
     save("phase3_tools", "Phase 3: tool calling before and after", w, y + 20, body)
 
 
+RELEASE = "tools_v2"  # the release run (docs/DECISIONS.md D19, D21)
+
+
+def share(path: str, key: str = "correct", where=None) -> float | None:
+    """Share of rows in a results jsonl file where key is true (optionally only rows passing `where`)."""
+    p = ROOT / "results" / path
+    if not p.exists():
+        return None
+    rows = [json.loads(l) for l in open(p, encoding="utf-8")]
+    rows = [r for r in rows if where is None or where(r)]
+    return sum(bool(r[key]) for r in rows) / len(rows) if rows else None
+
+
+def phase4_rows() -> list[tuple[str, str, dict]]:
+    R = RELEASE
+    needle = lambda r: not r.get("control")  # noqa: E731
+    agent = lambda n: (lambda s: s and s["passed"] / s["tasks"])(load(f"phase4/langgraph/{n}.json"))  # noqa: E731
+    return [
+        ("ArabFuncBench: right tool", "1,000 MSA requests",
+         {"hf": value(f"tools/arabfuncbench/{R}__native__yarn4/summary.json", "all.fn_acc"),
+          "q8": value(f"tools/arabfuncbench/{R}_q8_0__served/summary.json", "all.fn_acc"),
+          "q4": value(f"tools/arabfuncbench/{R}_q4_k_m__served/summary.json", "all.fn_acc")}),
+        ("AISA: right tool", "545 requests in five dialects",
+         {"hf": value(f"tools/aisa_dev/{R}__native__yarn4/summary.json", "all.fn_acc"),
+          "q8": value(f"tools/aisa_dev/{R}_q8_0__served/summary.json", "all.fn_acc"),
+          "q4": value(f"tools/aisa_dev/{R}_q4_k_m__served/summary.json", "all.fn_acc"),
+          "ollama": value(f"tools/aisa_dev/{R}_q4_ollama_jinja__served/summary.json", "all.fn_acc")}),
+        ("Receptionist test v2", "160 Saudi-dialect booking chats",
+         {"hf": value(f"receptionist/{R}_native__test_v2/summary.json", "pass_rate"),
+          "q8": value(f"receptionist/{R}_q8_0_served__test_v2/summary.json", "pass_rate"),
+          "q4": value(f"receptionist/{R}_q4_k_m_served__test_v2/summary.json", "pass_rate"),
+          "ollama": value(f"receptionist/{R}_q4_ollama_jinja__test_v2/summary.json", "pass_rate")}),
+        ("Needle, 2K to 16K tokens", "200 hidden facts",
+         {"hf": share(f"phase1/needle/{R}/cases.jsonl", where=needle),
+          "q8": share(f"phase1/needle/{R}_q8_0_served/cases.jsonl", where=needle),
+          "q4": share(f"phase1/needle/{R}_q4_k_m_served/cases.jsonl", where=needle)}),
+        ("LangGraph agent", "20 scripted tasks, 7 unseen tools",
+         {"q8": agent(f"{R}_q8_0"), "q4": agent(f"{R}_q4_k_m")}),
+    ]
+
+
+PHASE4_SERIES = [("hf", "Trained model (4-bit, transformers)", "base"), ("q8", "Q8_0 GGUF, served", "ours"),
+                 ("q4", "Q4_K_M GGUF, served", "yarn"), ("ollama", "Q4_K_M through Ollama", "rec")]
+
+
+def phase4() -> None:
+    """The release files, asked the way an app asks (OpenAI chat API with tools), against the trained model."""
+    rows = phase4_rows()
+    if not any(v is not None for _, _, src in rows for k, v in src.items() if k != "hf"):
+        return
+    left, top, bar_w, bar_h, w = 300, 120, 420, 14, 860
+    title = "The release files keep the trained model's scores"
+    body = header(title, "Served rows: llama-server's OpenAI chat API with tools; the template and 16K setting "
+                         "come from the GGUF file alone.")
+    x = 24
+    for _, name, colour in PHASE4_SERIES:
+        body += [rect(x, 76, 12, 12, colour, 3), text(x + 18, 86, name, 12)]
+        x += 18 + len(name) * 6.2 + 20
+    y = top
+    for label, note, src in rows:
+        vals = [(c, src.get(k)) for k, _, c in PHASE4_SERIES if src.get(k) is not None]
+        if not vals:
+            continue
+        gh = len(vals) * (bar_h + 4)
+        body += [text(left - 14, y + gh / 2, label, 13.5, "end", weight="bold"),
+                 text(left - 14, y + gh / 2 + 15, note, 11, "end", "muted")]
+        for colour, v in vals:
+            body += [rect(left, y, bar_w, bar_h, "grid", 3), rect(left, y, max(bar_w * v, 2), bar_h, colour, 3),
+                     text(left + bar_w * v + 6, y + bar_h - 2, f"{v:.1%}", 11.5,
+                          weight="bold" if colour == "ours" else "normal")]
+            y += bar_h + 4
+        y += 22
+    for p in range(0, 101, 25):
+        body.append(text(left + bar_w * p / 100, y + 4, f"{p}%", 10.5, "middle", "muted"))
+    save("phase4_served", "Phase 4: release files served", w, y + 20, body)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    phase4()
     phase3()
     needle()
     needle("needle_phase2", ("shipped", "yarn4", "long_v1"), 60,

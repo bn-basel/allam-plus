@@ -103,6 +103,8 @@ def main() -> None:
 
     out = ROOT / "runs" / args.run
     out.mkdir(parents=True, exist_ok=True)
+    if (out / "PAUSE").exists():  # an old pause request: starting again means continue (kept as PAUSE.seen)
+        (out / "PAUSE").replace(out / "PAUSE.seen")
     tok = AutoTokenizer.from_pretrained(MODEL_ID)
     examples = [json.loads(l) for l in open(args.data, encoding="utf-8")]
     rng = random.Random(args.seed)

@@ -1,0 +1,43 @@
+{
+ "name": "tools_v2",
+ "rope": "yarn4",
+ "adapter": "runs/tools_v2/checkpoint-180",
+ "n": 14455,
+ "correct": 10007,
+ "acc": 0.6923,
+ "ci95": [
+  0.6847,
+  0.6998
+ ],
+ "macro_subject_acc": 0.6882,
+ "by_group": {
+  "Humanities": 0.7426,
+  "Language": 0.7296,
+  "Other": 0.7335,
+  "STEM": 0.6292,
+  "Social Science": 0.651
+ },
+ "by_subject": {
+  "Accounting": 0.6486,
+  "Arabic Language": 0.6308,
+  "Arabic Language (General)": 0.8137,
+  "Arabic Language (Grammar)": 0.7699,
+  "Biology": 0.5089,
+  "Civics": 0.5944,
+  "Computer Science": 0.7177,
+  "Driving Test": 0.725,
+  "Economics": 0.6781,
+  "General Knowledge": 0.7437,
+  "Geography": 0.6138,
+  "History": 0.616,
+  "Islamic Studies": 0.8032,
+  "Law": 0.742,
+  "Management": 0.7067,
+  "Math": 0.6773,
+  "Natural Science": 0.8495,
+  "Philosophy": 0.7692,
+  "Physics": 0.5294,
+  "Political Science": 0.5952,
+  "Social Science": 0.7199
+ }
+}

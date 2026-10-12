@@ -1,7 +1,9 @@
 #!/bin/sh
 # Phase 4: the Q4_K_M release through Ollama (portable, C:\WIP\tools\ollama), with the Modelfile in release/.
 # Ollama 0.40 serves through llama-server with the GGUF's own chat template, so the scores should match the
-# llama-server ones. Then the same with the Go-template Modelfile (OLLAMA_GO_TEMPLATE=1), for older Ollama versions.
+# llama-server ones. Then the same with the Go-template Modelfile (OLLAMA_GO_TEMPLATE=1), for older Ollama versions:
+# there Ollama 0.40 leaves the model's <tool_call> lines in the reply text instead of returning tool_calls (tested
+# 13 Oct), so that run reads them from the text (--parse-text): it measures the prompt, not Ollama's parser.
 #   sh scripts/phase4_ollama_tests.sh [release folder]
 # The two test models stay in Ollama's store (C:/WIP/tools/ollama/models, about 4.3 GB as one shared blob); remove
 # them yourself with: ollama rm allam-plus-jinja allam-plus-go
@@ -14,7 +16,8 @@ export OLLAMA_MODELS='C:\WIP\tools\ollama\models' OLLAMA_HOST=127.0.0.1:11434 OL
 URL=http://127.0.0.1:11434
 for mode in jinja go; do
   [ -f notes/STOP ] && break
-  if [ $mode = go ]; then export OLLAMA_GO_TEMPLATE=1; MF=Modelfile.go-template; else unset OLLAMA_GO_TEMPLATE; MF=Modelfile; fi
+  if [ $mode = go ]; then export OLLAMA_GO_TEMPLATE=1; MF=Modelfile.go-template; X="--parse-text"; S=go_text
+  else unset OLLAMA_GO_TEMPLATE; MF=Modelfile; X=""; S=jinja; fi
   "$OLLAMA" serve > notes/logs/ollama_$mode.log 2>&1 &
   OPID=$!
   until curl -sf $URL/api/version > /dev/null; do sleep 2; done
@@ -22,8 +25,8 @@ for mode in jinja go; do
   (cd "$DIR" && "$OLLAMA" create allam-plus-$mode -f $MF)
   echo "--- $(date +%H:%M) ollama $mode"
   for cmd in \
-    "scripts/receptionist_eval.py --server $URL --server-model allam-plus-$mode --name ${NAME}_q4_ollama_$mode" \
-    "scripts/tools_bench.py --bench aisa_dev --protocol served --server $URL --server-model allam-plus-$mode --name ${NAME}_q4_ollama_$mode"; do
+    "scripts/receptionist_eval.py --server $URL --server-model allam-plus-$mode $X --name ${NAME}_q4_ollama_$S" \
+    "scripts/tools_bench.py --bench aisa_dev --protocol served --server $URL --server-model allam-plus-$mode $X --name ${NAME}_q4_ollama_$S"; do
     [ -f notes/STOP ] && break
     echo "--- $(date +%H:%M) $cmd"; uv run python $cmd 2>&1 | tail -20
   done

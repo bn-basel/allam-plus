@@ -170,7 +170,13 @@ was trained on, with the Arabic tool guide in the system turn, and come back as
   but the tokens were not (0 of 300 matched). One flag in the GGUF fixed it (300 of 300).
 - Put the 16K setting into the GGUF too, so a user needs no special flags.
 - Added a "served" mode to every benchmark, a LangGraph agent with 20 scripted Arabic tasks on tools the model never
-  saw, and Ollama files. The GPU tests wait for Basel's block (`scripts/steps_phase4.txt`).
+  saw, and Ollama files.
+- First, a short receptionist tuning round (tools_v2): 83.1% → 85.0% on the receptionist test, with the other tests
+  level; by the rule written before training it became the release model, though the gain is within noise.
+- Served results (the GGUF alone, through the chat API): right tool 99.3% on ArabFuncBench and 97.6% on AISA (Q4_K_M),
+  receptionist 86.9%, needle 100% up to 16K, LangGraph agent 17 of 20. Through Ollama: 88.8% on the receptionist test.
+- The 3 agent failures show the next things to teach: wait for one tool's result before the next call, ask for a
+  missing date instead of making one up, and do arithmetic in the reply rather than with a tool.
 
 **What I learned.** _(after the check question)_
 
@@ -178,3 +184,7 @@ was trained on, with the Arabic tool guide in the system turn, and come back as
 - "The text matches" is not "the tokens match". Always compare token ids too.
 - The earlier tests sent token ids straight to the server, which is why they never hit the space problem: a good
   reason to also test the exact path users take.
+- Serving can make a model *better* at one thing: the server's grammar only lets it write tool names that exist, so
+  "right tool" went up from 96% to 97.8–99.3%. It cannot fix wrong values, so exact arguments stayed the same.
+- Memory planning: the KV cache, not the weights, decides what fits at 16K. Q8_0 with a 16-bit cache needed 14.9 GB and
+  spilled into system RAM (prompt reading fell from ~4,500 to 848 tokens/s); an 8-bit cache brought it to 11.5 GB.

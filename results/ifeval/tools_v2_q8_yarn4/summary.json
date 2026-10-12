@@ -1,0 +1,13 @@
+{
+ "name": "tools_v2_q8_yarn4",
+ "rope": null,
+ "adapter": null,
+ "backend": "llama-server http://127.0.0.1:8095",
+ "n": 404,
+ "language_check": 0.9208,
+ "prompt_strict_no_lang": 0.4381,
+ "instruction_strict_no_lang": 0.5459,
+ "prompt_strict": 0.4134,
+ "instruction_strict": 0.5079,
+ "hit_max_new_tokens": 45
+}

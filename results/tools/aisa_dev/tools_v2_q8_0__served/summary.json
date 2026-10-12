@@ -1,0 +1,93 @@
+{
+ "bench": "aisa_dev",
+ "protocol": "served",
+ "rope": "shipped",
+ "adapter": null,
+ "server": "http://127.0.0.1:8095",
+ "all": {
+  "n": 545,
+  "fn_acc": 0.9725,
+  "fn_acc_ci95": [
+   0.9551,
+   0.9833
+  ],
+  "arg_em": 0.298,
+  "no_call_acc": 1.0,
+  "aef1": 0.7134,
+  "lcr": 0.918,
+  "call_rate": 0.9046,
+  "wellformed": "491/493"
+ },
+ "by_group": {
+  "egyptian": {
+   "n": 66,
+   "fn_acc": 0.9394,
+   "fn_acc_ci95": [
+    0.8543,
+    0.9762
+   ],
+   "arg_em": 0.303,
+   "no_call_acc": null,
+   "aef1": 0.7298,
+   "lcr": 0.9113,
+   "call_rate": 0.9697,
+   "wellformed": "64/64"
+  },
+  "gulf": {
+   "n": 75,
+   "fn_acc": 0.9867,
+   "fn_acc_ci95": [
+    0.9283,
+    0.9976
+   ],
+   "arg_em": 0.3056,
+   "no_call_acc": 1.0,
+   "aef1": 0.7465,
+   "lcr": 0.939,
+   "call_rate": 0.96,
+   "wellformed": "72/72"
+  },
+  "levantine": {
+   "n": 75,
+   "fn_acc": 1.0,
+   "fn_acc_ci95": [
+    0.9513,
+    1.0
+   ],
+   "arg_em": 0.2388,
+   "no_call_acc": 1.0,
+   "aef1": 0.6157,
+   "lcr": 0.9391,
+   "call_rate": 0.8933,
+   "wellformed": "67/67"
+  },
+  "maghrebi": {
+   "n": 6,
+   "fn_acc": 0.8333,
+   "fn_acc_ci95": [
+    0.4365,
+    0.9699
+   ],
+   "arg_em": 0.0,
+   "no_call_acc": null,
+   "aef1": 0.4667,
+   "lcr": 0.6667,
+   "call_rate": 1.0,
+   "wellformed": "6/6"
+  },
+  "msa": {
+   "n": 323,
+   "fn_acc": 0.9721,
+   "fn_acc_ci95": [
+    0.9479,
+    0.9853
+   ],
+   "arg_em": 0.3149,
+   "no_call_acc": 1.0,
+   "aef1": 0.7292,
+   "lcr": 0.9137,
+   "call_rate": 0.8793,
+   "wellformed": "282/284"
+  }
+ }
+}

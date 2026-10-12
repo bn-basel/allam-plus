@@ -220,12 +220,13 @@ def summarize(rows: list[dict]) -> dict:
     return {"all": block(rows), "by_group": {g: block(v) for g, v in sorted(groups.items())}}
 
 
-def run_served(cases: list[dict], url: str, out: Path, model: str | None = None) -> None:
+def run_served(cases: list[dict], url: str, out: Path, model: str | None = None,
+               parse_text: bool = False) -> None:
     from served import chat
     with open(out, "a", encoding="utf-8", newline="\n") as f:
         for i, c in enumerate(cases, 1):
             r = chat(url, c["system"].removeprefix(SYSTEM).strip() or None, [{"role": "user", "content": c["user"]}],
-                     c["tools"], model=model)
+                     c["tools"], model=model, parse_text=parse_text)
             if r["tool_calls"]:
                 tc = r["tool_calls"][0]
                 ok = tc["name"] is not None and isinstance(tc["arguments"], dict)
@@ -252,6 +253,7 @@ def main() -> None:
     ap.add_argument("--batch", type=int, default=8)
     ap.add_argument("--server", help="OpenAI-compatible server URL, for --protocol served")
     ap.add_argument("--server-model", help="model name to send (Ollama needs it)")
+    ap.add_argument("--parse-text", action="store_true", help="also read <tool_call> lines left in the reply text")
     args = ap.parse_args()
     if (args.protocol == "served") != bool(args.server):
         sys.exit("--protocol served goes with --server URL")
@@ -267,7 +269,7 @@ def main() -> None:
     done = {json.loads(l)["id"] for l in open(out, encoding="utf-8")} if out.exists() else set()
     todo = [c for c in cases if c["id"] not in done]
     if todo and args.server:
-        run_served(todo, args.server, out, args.server_model)
+        run_served(todo, args.server, out, args.server_model, args.parse_text)
     elif todo:
         import torch
         from common import load_model

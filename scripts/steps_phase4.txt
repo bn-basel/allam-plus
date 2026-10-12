@@ -1,12 +1,13 @@
-# Phase 4 test block (about 1.5 to 2 hours; GPU). Safe to stop and re-run: finished steps are skipped.
-#   & "C:\Program Files\Git\bin\bash.exe" scripts/gpu_block.sh 2 scripts/steps_phase4.txt
+# Phase 4 test block (about 2 hours; GPU). Safe to stop and re-run: finished steps are skipped.
+# REL = the release run (tools_v1 unless the tuning round won, docs/DECISIONS.md D19).
+#   & "C:\Program Files\Git\bin\bash.exe" -c "REL=tools_v1 sh scripts/gpu_block.sh 3 scripts/steps_phase4.txt"
 # 1. release GGUFs: template + 16K inside (disk only, about 12 GB written, a few minutes)
-[ -f C:/WIP/release-work/allam-plus-tools_v1/release/manifest.json ] || uv run python scripts/finalize_gguf.py --src C:/WIP/release-work/allam-plus-tools_v1/gguf --name allam-plus-7b
+W=C:/WIP/release-work/allam-plus-${REL:-tools_v1}; [ -f $W/release/manifest.json ] || uv run python scripts/finalize_gguf.py --src $W/gguf --name allam-plus-7b
 # 2. each file through llama-server's chat API: template check, ArabFuncBench, AISA, receptionist, needle, LangGraph tasks
-sh scripts/phase4_serve_tests.sh Q8_0
-sh scripts/phase4_serve_tests.sh Q4_K_M
+sh scripts/phase4_serve_tests.sh Q8_0 C:/WIP/release-work/allam-plus-${REL:-tools_v1}/release
+sh scripts/phase4_serve_tests.sh Q4_K_M C:/WIP/release-work/allam-plus-${REL:-tools_v1}/release
 # 3. speed and memory at 4K and 16K (16-bit and 8-bit KV cache)
-uv run python scripts/speed_memory.py --gguf C:/WIP/release-work/allam-plus-tools_v1/release/allam-plus-7b-Q4_K_M.gguf --ctx 4096 16384 --kv f16 q8_0
-uv run python scripts/speed_memory.py --gguf C:/WIP/release-work/allam-plus-tools_v1/release/allam-plus-7b-Q8_0.gguf --ctx 4096 16384 --kv f16 q8_0
+W=C:/WIP/release-work/allam-plus-${REL:-tools_v1}/release; uv run python scripts/speed_memory.py --gguf $W/allam-plus-7b-Q4_K_M.gguf --ctx 4096 16384 --kv f16 q8_0 --name ${REL:-tools_v1}_release_q4
+W=C:/WIP/release-work/allam-plus-${REL:-tools_v1}/release; uv run python scripts/speed_memory.py --gguf $W/allam-plus-7b-Q8_0.gguf --ctx 4096 16384 --kv f16 q8_0 --name ${REL:-tools_v1}_release_q8
 # 4. Ollama (Q4_K_M), with the GGUF's own template and with the Go-template Modelfile
-sh scripts/phase4_ollama_tests.sh
+sh scripts/phase4_ollama_tests.sh C:/WIP/release-work/allam-plus-${REL:-tools_v1}/release

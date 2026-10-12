@@ -140,28 +140,25 @@ TEMPLATE """{{- $sys := "" }}
 {{- range .Messages }}
 {{- if eq .Role "system" }}{{ continue }}{{ end }}
 {{- $role := .Role }}
-{{- $text := .Content }}
-{{- if eq .Role "tool" }}{{ $role = "user" }}{{ $text = printf "<tool_result>%s</tool_result>" .Content }}{{ end }}
-{{- if .ToolCalls }}
-{{- $role = "assistant" }}
-{{- if .Content }}{{ $text = printf "%s\n" .Content }}{{ else }}{{ $text = "" }}{{ end }}
-{{- range $j, $c := .ToolCalls }}
-{{- if $j }}{{ $text = printf "%s\n" $text }}{{ end }}
-{{- $text = printf "%s<tool_call>{\"name\": %s, \"arguments\": %s}</tool_call>" $text (json $c.Function.Name) (json $c.Function.Arguments) }}
-{{- end }}
-{{- end }}
+{{- if eq .Role "tool" }}{{ $role = "user" }}{{ end }}
+{{- if .ToolCalls }}{{ $role = "assistant" }}{{ end }}
 {{- if eq $role $prev }}
-{{- "\n" }}{{ $text }}
+{{- "\n" }}
 {{- else }}
 {{- if eq $prev "user" }} [/INST]{{ else if eq $prev "assistant" }} </s>{{ end }}
 {{- if eq $role "user" }}{{ if not $first }}<s>{{ end }} [INST] {{ if and $first $sys }}<<SYS>>
 {{ $sys }}
 <</SYS>>
 
-{{ end }}{{ $text }}
-{{- else }} {{ $text }}
-{{- end }}
+{{ end }}
+{{- else }} {{ end }}
 {{- $first = false }}
+{{- end }}
+{{- if eq .Role "tool" }}<tool_result>{{ .Content }}</tool_result>
+{{- else if .ToolCalls }}{{ if .Content }}{{ .Content }}
+{{ end }}{{ range $j, $c := .ToolCalls }}{{ if $j }}
+{{ end }}<tool_call>{"name": "{{ .Function.Name }}", "arguments": {{ .Function.Arguments }}}</tool_call>{{ end }}
+{{- else }}{{ .Content }}
 {{- end }}
 {{- $prev = $role }}
 {{- end }}

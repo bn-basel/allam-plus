@@ -1,0 +1,367 @@
+{
+ "name": "tools_v2_q8_0",
+ "server": "http://127.0.0.1:8095",
+ "passed": 17,
+ "tasks": 20,
+ "rows": [
+  {
+   "id": "gold_21",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     }
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ٢١ اليوم هو ٤١٠ ريالًا سعوديًا. "
+  },
+  {
+   "id": "usd_to_sar",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 500,
+      "from_currency": "USD",
+      "to_currency": "SAR"
+     }
+    }
+   ],
+   "reply": "٥٠٠ دولار تساوي ١٨٧٥ ريالًا سعوديًا. "
+  },
+  {
+   "id": "ship_riyadh_jeddah",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 4
+     }
+    }
+   ],
+   "reply": "تكلفة الشحن ٤٩ ريالاً، والمدة ٢ أيام. "
+  },
+  {
+   "id": "brakes_price",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل فرامل",
+      "car_model": "كامري 2020"
+     }
+    }
+   ],
+   "reply": "سعر تبديل الفرامل لسيارة كامري 2020 هو ٦٢٠ ريالاً، ويستغرق العمل ساعتين. "
+  },
+  {
+   "id": "hyundai_jeddah",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "جدة",
+      "brand": "هيونداي"
+     }
+    }
+   ],
+   "reply": "وجدت لك مركزًا واحدًا في جدة لماركة هيونداي: مركز البحر للصيانة في الروضة، وتقييمه 4.4. "
+  },
+  {
+   "id": "track_ok",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "track_shipment",
+     "args": {
+      "tracking_number": "٧٧٨٨١٢"
+     }
+    }
+   ],
+   "reply": "شحنتك رقم ٧٧٨٨١٢ في الطريق، وهي حالياً في مركز الفرز في الرياض، ومن المتوقع وصولها يوم 2026-10-17. "
+  },
+  {
+   "id": "sar_to_egp",
+   "kind": "one call",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 2000,
+      "from_currency": "SAR",
+      "to_currency": "EGP"
+     }
+    }
+   ],
+   "reply": "٢٠٠٠ ريال سعودي تساوي ٢٦٠٠٠ جنيه مصري. "
+  },
+  {
+   "id": "gold_18_24",
+   "kind": "parallel calls",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 18
+     }
+    },
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 24
+     }
+    }
+   ],
+   "reply": "سعر الذهب عيار ١٨ هو ٣٥٢ ريالًا للغرام، وسعر الذهب عيار ٢٤ هو ٤٦٩ ريالًا للغرام. "
+  },
+  {
+   "id": "gold_and_euro",
+   "kind": "parallel calls",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 22
+     }
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 100,
+      "from_currency": "EUR",
+      "to_currency": "SAR"
+     }
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ٢٢ هو ٤٣٠ ريالاً. و١٠٠ يورو تساوي ٤١٠ ريال. "
+  },
+  {
+   "id": "find_then_book",
+   "kind": "chained calls",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الرياض",
+      "brand": "تويوتا"
+     }
+    },
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "101",
+      "service": "تغيير زيت",
+      "date": "2026-10-16",
+      "time": "16:00"
+     }
+    }
+   ],
+   "reply": "تم حجز موعدك في مركز النخبة لصيانة السيارات، رقم الحجز 881011600، يوم 2026-10-16 الساعة 16:00، لتغيير الزيت. "
+  },
+  {
+   "id": "ship_then_convert",
+   "kind": "chained calls",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 37, 'from_currency': 'SAR', 'to_currency': 'USD'}",
+    "reply lacks any of ['9.87']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "الدمام",
+      "weight_kg": 2
+     }
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 2,
+      "from_currency": "ريال سعودي",
+      "to_currency": "دولار أمريكي"
+     }
+    }
+   ],
+   "reply": "تكلفة الشحن ٣٧ ريالاً سعودياً، والمدة يوم واحد. لكن لا يمكنني تحويل المبلغ إلى الدولار الأمريكي لأن العملة غير مدعومة. "
+  },
+  {
+   "id": "book_missing_time",
+   "kind": "missing detail",
+   "pass": false,
+   "problems": [
+    "called book_car_service"
+   ],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الرياض"
+     }
+    },
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "101",
+      "service": "فحص شامل",
+      "date": "2026-10-20",
+      "time": "10:00"
+     }
+    }
+   ],
+   "reply": "تم حجز موعدك بنجاح في مركز النخبة لصيانة السيارات، يوم 2026-10-20 الساعة 10:00، لفحص شامل. رقم الحجز هو 881011000. "
+  },
+  {
+   "id": "convert_missing_amount",
+   "kind": "missing detail",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "كم المبلغ الذي تريد تحويله؟ "
+  },
+  {
+   "id": "no_tool_author",
+   "kind": "no tool fits",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "طه حسين، عميد الأدب العربي. "
+  },
+  {
+   "id": "no_tool_poem",
+   "kind": "no tool fits",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "أعتذر، لا أستطيع كتابة الشعر. يمكنني مساعدتك في أمور أخرى مثل البحث عن مراكز الصيانة أو تحويل العملات أو تتبع الشحنات. "
+  },
+  {
+   "id": "no_tool_weather",
+   "kind": "no tool fits",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "لا أستطيع معرفة حالة الطقس أو درجة الحرارة في أبها الآن. يمكنك الرجوع إلى تطبيق الطقس للحصول على ذلك. "
+  },
+  {
+   "id": "track_unknown",
+   "kind": "tool error",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "track_shipment",
+     "args": {
+      "tracking_number": "١١١١١١"
+     }
+    }
+   ],
+   "reply": "لم أتمكن من تتبع الشحنة لأن رقم التتبع غير موجود. يرجى التأكد من الرقم وإرساله مرة أخرى. "
+  },
+  {
+   "id": "slot_taken",
+   "kind": "tool error",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "١٠١",
+      "service": "تغيير زيت",
+      "date": "2026-10-18",
+      "time": "10:00"
+     }
+    }
+   ],
+   "reply": "الموعد محجوز بالفعل في المركز رقم ١٠١ يوم ٢٠٢٦-١٠-١٨ الساعة ١٠:٠٠. هل ترغب في حجز موعد آخر؟ "
+  },
+  {
+   "id": "followup_weight",
+   "kind": "follow-up",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "جدة",
+      "to_city": "الدمام",
+      "weight_kg": 10
+     }
+    },
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "جدة",
+      "to_city": "الدمام",
+      "weight_kg": 20
+     }
+    },
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "جدة",
+      "to_city": "الدمام",
+      "weight_kg": 20
+     }
+    }
+   ],
+   "reply": "إذا كان الوزن ٢٠ كيلوغراماً، فالتكلفة هي ١٤٥ ريالاً، وتستغرق ٣ أيام. "
+  },
+  {
+   "id": "followup_grams",
+   "kind": "follow-up",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['2345']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 24
+     }
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 5,
+      "from_currency": "sar",
+      "to_currency": "sar"
+     }
+    }
+   ],
+   "reply": "سعر ٥ غرامات من الذهب عيار ٢٤ هو ٥.٠ ريال سعودي. "
+  }
+ ]
+}

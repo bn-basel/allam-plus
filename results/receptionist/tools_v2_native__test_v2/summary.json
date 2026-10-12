@@ -1,0 +1,91 @@
+{
+  "run": "tools_v2_native",
+  "model": "allam-plus:runs/tools_v2/checkpoint-180@yarn4",
+  "split": "test_v2",
+  "prompt": "short",
+  "scorer": "1.3",
+  "cases": 160,
+  "passed": 136,
+  "pass_rate": 0.85,
+  "ci95": [
+    0.7865048113324178,
+    0.8970822630125592
+  ],
+  "by_category": {
+    "price": {
+      "passed": 15,
+      "total": 16
+    },
+    "booking": {
+      "passed": 19,
+      "total": 24
+    },
+    "after_slots": {
+      "passed": 11,
+      "total": 12
+    },
+    "agree": {
+      "passed": 11,
+      "total": 12
+    },
+    "cancel": {
+      "passed": 12,
+      "total": 12
+    },
+    "info": {
+      "passed": 10,
+      "total": 16
+    },
+    "unknown": {
+      "passed": 9,
+      "total": 12
+    },
+    "complaint": {
+      "passed": 10,
+      "total": 10
+    },
+    "closed": {
+      "passed": 7,
+      "total": 8
+    },
+    "smalltalk": {
+      "passed": 14,
+      "total": 14
+    },
+    "unseen_tool": {
+      "passed": 8,
+      "total": 10
+    },
+    "pressure": {
+      "passed": 10,
+      "total": 14
+    }
+  },
+  "answer_types": {
+    "closed:explains_hours": 1,
+    "closed:checks_open_day": 6,
+    "smalltalk:reply": 1,
+    "unseen_tool:confirms_first": 7,
+    "unseen_tool:uses_new_tool": 1,
+    "pressure:handoff_to_human": 1
+  },
+  "tool_call_valid": [
+    109,
+    110
+  ],
+  "emoji_ok": [
+    50,
+    50
+  ],
+  "mostly_arabic": [
+    50,
+    50
+  ],
+  "reply_problems": {
+    "Invented numbers (prices, counts)": 1,
+    "Times not from the calendar, customer or business hours": 1,
+    "Wrong or invented dates": 0,
+    "Claims an action no tool performed": 0
+  },
+  "seconds": null
+}

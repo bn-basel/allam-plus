@@ -1,0 +1,78 @@
+{
+ "tests": {
+  "receptionist": {
+   "n": 160,
+   "a": 0.83125,
+   "b": 0.85,
+   "gained": 13,
+   "lost": 10,
+   "p": 0.6776394844055176,
+   "complete": true
+  },
+  "arabfuncbench": {
+   "n": 990,
+   "a": 0.9676767676767677,
+   "b": 0.9595959595959596,
+   "gained": 3,
+   "lost": 11,
+   "p": 0.057373046875,
+   "complete": true
+  },
+  "aisa_dev": {
+   "n": 545,
+   "a": 0.9339449541284404,
+   "b": 0.926605504587156,
+   "gained": 7,
+   "lost": 11,
+   "p": 0.480682373046875,
+   "complete": true
+  },
+  "needle_16k": {
+   "n": 50,
+   "a": 1.0,
+   "b": 1.0,
+   "gained": 0,
+   "lost": 0,
+   "p": 1.0,
+   "complete": true
+  },
+  "lceval_mcq": {
+   "n": 224,
+   "a": 0.6473214285714286,
+   "b": 0.6607142857142857,
+   "gained": 5,
+   "lost": 2,
+   "p": 0.453125,
+   "complete": true
+  },
+  "arabicmmlu": {
+   "n": 14455,
+   "a": 0.6916637841577309,
+   "b": 0.6922864060878589,
+   "gained": 148,
+   "lost": 139,
+   "p": 0.6368426841662184,
+   "complete": true
+  },
+  "ifeval": {
+   "n": 404,
+   "a": 0.42326732673267325,
+   "b": 0.41336633663366334,
+   "gained": 17,
+   "lost": 21,
+   "p": 0.6271025701571489,
+   "complete": true
+  }
+ },
+ "checks": {
+  "receptionist v2 >= 85%": true,
+  "ArabFuncBench not significantly lower": true,
+  "AISA not significantly lower": true,
+  "needle 16K >= 98%": true,
+  "LC-Eval MCQ >= 60%": true,
+  "ArabicMMLU >= 67.6%": true,
+  "IFEval not significantly lower": true
+ },
+ "missing": [],
+ "release": "tools_v2"
+}

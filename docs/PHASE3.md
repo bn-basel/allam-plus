@@ -73,3 +73,23 @@ Dev set (167 held-out conversations, 530 assistant turns):
 `C:\WIP\release-work\allam-plus-tools_v1\gguf\`: Q8_0 (7.4 GB) and Q4_K_M (4.3 GB), adapter merged into all 224
 linear weights. IFEval above ran on the Q8_0 file with YaRN set on the llama-server command line. Phase 4 adds the
 chat template that makes llama-server return standard `tool_calls`.
+
+## The receptionist tuning round (tools_v2): the release model
+
+To close the gap, a short second run continued checkpoint 400 on a second pass over the receptionist conversations
+plus enough general tool and Phase 2 examples not to forget the rest (1,915 examples, half the learning rate, 239
+steps, 58 min). The rules for choosing a checkpoint and for replacing tools_v1 were written before training
+([DECISIONS.md](DECISIONS.md) D19); checkpoint 180 met all of them (D21).
+
+| Test (same cases) | tools_v1 | **tools_v2** | gained / lost |
+|---|---|---|---|
+| Receptionist test v2 | 83.1% | **85.0%** | 13 / 10 |
+| ArabFuncBench, right tool | 96.8% | 96.0% | 3 / 11 |
+| AISA, right tool | 93.4% | 92.7% | 7 / 11 |
+| Needle at 16K | 100% | 100% | 0 / 0 |
+| LC-Eval multiple choice | 64.7% | 66.1% | 5 / 2 |
+| ArabicMMLU | 69.2% | 69.2% | 148 / 139 |
+| Arabic IFEval | 42.3% | 41.3% | 17 / 21 |
+
+None of the differences is statistically clear (the closest: ArabFuncBench, p = 0.06). tools_v2 reaches the 85%
+target by the smallest margin and is the release model by the rule; in practice the two are at the same level.

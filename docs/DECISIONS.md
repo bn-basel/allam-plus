@@ -171,3 +171,27 @@ PC is free (`scripts/steps_tools_v2.txt`).
   not word for word, and its cost is measured.
 - *Served scores:* every benchmark gained a `--server` mode (`scripts/served.py`) that sends the real OpenAI request,
   so the release numbers measure what an app gets: weights, template, tokenizer, parser and grammar together.
+
+**D21. Tuning round result: tools_v2 checkpoint 180 is the release model, by rule D19** (13 Oct). Dev turns:
+receptionist 77.1% → 79.3%, general 86.4% → 85.5% (within the 1-point limit). Tests against tools_v1 on the same
+cases: receptionist test v2 83.1% → **85.0%** (136/160, the target; 13 gained, 10 lost, p = 0.68), ArabFuncBench right
+tool 96.8% → 96.0% (3 gained, 11 lost, p = 0.06), AISA 93.4% → 92.7% (p = 0.48), needle 16K 100%, LC-Eval 64.7% →
+66.1%, ArabicMMLU 69.2% both, IFEval 42.3% → 41.3% (p = 0.63). Every condition of D19 holds, so tools_v2 replaces
+tools_v1. Honest reading: the receptionist gain is within noise and ArabFuncBench lost a little (nearly significant);
+it is a trade at the same overall level, not a clear improvement. tools_v1 stays available as `runs/tools_v1/checkpoint-400`.
+
+**D22. Phase 4 results and fixes** (13 Oct).
+- *Served release files score like the trained model or better on choosing the tool* (ArabFuncBench 97.8% Q8 /
+  99.3% Q4 against 96.0%; AISA 97.2% / 97.6% against 92.7%). The likely reason is llama-server's grammar: once the model
+  starts a call, it can only write a tool name that exists. Arguments did not gain (exact-argument rate about the same
+  or a little lower). Receptionist v2: 83.1% Q8, 86.9% Q4, 88.8% Q4 through Ollama (all within noise of 85.0%).
+- *Ollama:* its OpenAI endpoint rejects past tool calls whose arguments are JSON objects (HTTP 400); the OpenAI format
+  is a JSON string, which `scripts/served.py` now always sends (llama-server takes both, and the prompt is the same).
+  With `OLLAMA_GO_TEMPLATE=1`, Ollama 0.40 does not turn the model's `<tool_call>` lines into `tool_calls` even with the
+  marker written literally inside `{{ range .ToolCalls }}` (the model's text is right); the Go-template Modelfile is
+  therefore documented as "parse the reply text", and its prompt (compact tool JSON) costs about 10 points on the
+  receptionist test (78.8% against 88.8%), none on AISA.
+- *Memory:* Q8_0 at 16K with a 16-bit KV cache needs 14.9 GB and spills (prompt reading drops to 848 tokens/s);
+  with an 8-bit KV cache it needs 11.5 GB at full speed. Q4_K_M at 16K: 12.2 GB (16-bit cache) or 8.6 GB (8-bit).
+- *LangGraph demo checker:* currency codes are now compared without regard to letter case (the tool accepts "sar"),
+  changed after the first run: one Q4 task moved from fail to pass (the reply was right). Both files: 17 of 20.

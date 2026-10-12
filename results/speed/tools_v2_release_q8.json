@@ -1,0 +1,34 @@
+[
+ {
+  "gguf": "allam-plus-7b-Q8_0.gguf",
+  "ctx": 4096,
+  "kv": "f16",
+  "gpu_mib": 9241,
+  "prefill_tok_s": 7946.6,
+  "gen_tok_s": 87.4
+ },
+ {
+  "gguf": "allam-plus-7b-Q8_0.gguf",
+  "ctx": 16384,
+  "kv": "f16",
+  "gpu_mib": 15269,
+  "prefill_tok_s": 848.2,
+  "gen_tok_s": 37.8
+ },
+ {
+  "gguf": "allam-plus-7b-Q8_0.gguf",
+  "ctx": 4096,
+  "kv": "q8_0",
+  "gpu_mib": 8289,
+  "prefill_tok_s": 7509.1,
+  "gen_tok_s": 94.6
+ },
+ {
+  "gguf": "allam-plus-7b-Q8_0.gguf",
+  "ctx": 16384,
+  "kv": "q8_0",
+  "gpu_mib": 11757,
+  "prefill_tok_s": 4488.5,
+  "gen_tok_s": 69.1
+ }
+]

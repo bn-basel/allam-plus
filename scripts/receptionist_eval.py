@@ -41,6 +41,7 @@ def main() -> None:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--server", help="OpenAI-compatible server URL: test a served GGUF through its chat API")
     ap.add_argument("--server-model", help="model name to send (Ollama needs it)")
+    ap.add_argument("--parse-text", action="store_true", help="also read <tool_call> lines left in the reply text")
     args = ap.parse_args()
 
     businesses, styles, tools = load_spec()
@@ -67,7 +68,8 @@ def main() -> None:
             for i, case in enumerate(todo, 1):
                 system, case_tools = run_eval.case_inputs(case, *spec, "short")
                 if args.server:
-                    g = chat(args.server, system, case["messages"], case_tools, 256, model=args.server_model)
+                    g = chat(args.server, system, case["messages"], case_tools, 256, model=args.server_model,
+                             parse_text=args.parse_text)
                     text, calls, raw = g["text"], g["tool_calls"], g["raw"]
                 else:
                     prompt = tok.apply_chat_template(render(system, case["messages"], case_tools), tokenize=False,

@@ -218,7 +218,7 @@ def _arg_ok(want, got) -> bool:
             return abs(float(_digits(got)) - want) < 1e-6
         except (TypeError, ValueError):
             return False
-    w, g = _norm(want), _norm(got)
+    w, g = _norm(want).lower(), _norm(got).lower()  # currency codes: the tool takes "sar" as well as "SAR"
     return w == g or (len(w) > 2 and w in g)
 
 
@@ -226,6 +226,10 @@ def check(task: dict, msgs: list) -> dict:
     """Pass/fail for one task, with the reasons."""
     calls = [c for m in msgs if getattr(m, "tool_calls", None) for c in m.tool_calls]
     reply = next((m.content for m in reversed(msgs) if m.type == "ai" and m.content), "") or ""
+    return check_parts(task, calls, reply)
+
+
+def check_parts(task: dict, calls: list[dict], reply: str) -> dict:
     problems = []
     for want in task.get("expect_calls", []):
         if not any(c["name"] == want["name"] and all(_arg_ok(v, c["args"].get(k)) for k, v in want.get("args", {}).items())
@@ -266,6 +270,18 @@ def run_tasks(server: str, name: str) -> None:
     print(f"\n{n} of {len(rows)} tasks passed -> results/phase4/langgraph/{name}.json")
 
 
+def rescore(name: str) -> None:
+    """Score a saved run again with the current checks (the calls and final reply are saved per task)."""
+    tasks = {t["id"]: t for t in json.loads((Path(__file__).parent / "tasks.json").read_text(encoding="utf-8"))}
+    path = ROOT / "results" / "phase4" / "langgraph" / f"{name}.json"
+    run = json.loads(path.read_text(encoding="utf-8"))
+    broke = lambda r: not r["calls"] and not r["reply"] and r["problems"]  # noqa: E731  (the loop itself failed)
+    rows = [r if broke(r) else check_parts(tasks[r["id"]], r["calls"], r["reply"]) for r in run["rows"]]
+    run.update(rows=rows, passed=sum(r["pass"] for r in rows))
+    path.write_text(json.dumps(run, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"{name}: {run['passed']} of {run['tasks']} tasks passed")
+
+
 def chat(server: str) -> None:
     agent = build_agent(server)
     msgs = [SystemMessage(SYSTEM)]
@@ -293,8 +309,11 @@ def main() -> None:
     ap.add_argument("--chat", action="store_true")
     ap.add_argument("--tasks", action="store_true")
     ap.add_argument("--name", default="run")
+    ap.add_argument("--rescore", action="store_true", help="score the saved run --name again with the current checks")
     args = ap.parse_args()
-    if args.tasks:
+    if args.rescore:
+        rescore(args.name)
+    elif args.tasks:
         run_tasks(args.server, args.name)
     else:
         chat(args.server)
