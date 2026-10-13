@@ -1,22 +1,18 @@
 # allam-plus
 
-Upgrading HUMAIN's open **ALLaM-7B-Instruct** for real Arabic applications, on one 16 GB gaming GPU, with every
-change measured against the untouched model:
+HUMAIN's open Arabic model **ALLaM-7B-Instruct**, upgraded on one gaming GPU (RTX 5080, 16 GB):
 
-1. **Long context**: 4K → 16K tokens (YaRN + a short long-text training stage).
-2. **Arabic tool calling**: general tools, Modern Standard Arabic and Saudi dialect.
-3. **Agent-ready serving**: an OpenAI-compatible server that returns standard `tool_calls` (LangGraph and others).
-4. **Fast quantised releases**: GGUF 4/8-bit with a speed and memory table.
-5. **No loss of Arabic quality**: ArabicMMLU and Arabic IFEval before and after.
+- **Reads 4× more:** 16K tokens instead of 4K.
+- **Uses tools in Arabic:** books, looks up and checks things, in Modern Standard Arabic and Saudi dialect.
+- **Plugs into standard apps:** one GGUF file gives an OpenAI-style server (llama.cpp, Ollama, LangGraph).
+- **Lost nothing:** general Arabic knowledge and instruction following stay the same.
 
-**Status:** Phases 1–4 done; nothing published yet. **ALLaM-7B now reads 16K tokens (4× its original 4K) and calls
-tools in Arabic, with no loss on general Arabic tasks, and serves standard `tool_calls` from a single GGUF file**, all
-trained on one RTX 5080.
+**Download:** [huggingface.co/bnbasel/allam-plus-7b](https://huggingface.co/bnbasel/allam-plus-7b)
 
-| | As released | **allam-plus** | allam-plus, Q4_K_M GGUF served |
+| | Before | **After** | After, 4-bit file through a server |
 |---|---|---|---|
-| Needle at 16K tokens | 0% | **100%** | 100% |
-| LC-Eval (HUMAIN), multiple choice on 8–16K-token books | 18.3% | **66.1%** | |
+| Finds a hidden fact in 16K tokens of text | 0% | **100%** | 100% |
+| Answers questions about long books (HUMAIN's LC-Eval) | 18.3% | **66.1%** | |
 | ArabFuncBench, right tool / every argument right | 65.9% / 19.0% | **96.0% / 47.6%** | 99.3% / 48.0% |
 | AISA-ArabicFC (five dialects), right tool / every argument right | 68.8% / 10.8% | **92.7% / 31.6%** | 97.6% / 34.2% |
 | Saudi receptionist test (earlier project) | 36.3% | **85.0%** | 86.9% |
@@ -24,8 +20,7 @@ trained on one RTX 5080.
 | Arabic IFEval | 40.8% | **41.3%** | |
 | LangGraph agent, 20 tasks on tools it never saw | | | 17 / 20 |
 
-"Served" means the way an app uses it: llama-server's OpenAI chat API with `tools`, the template and 16K setting read
-from the GGUF file alone.
+The last column is how an app uses it: the downloaded file in llama-server, asked through the standard chat API.
 
 ![Served release files](docs/charts/phase4_served.svg)
 
