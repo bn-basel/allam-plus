@@ -1,0 +1,1744 @@
+{
+ "name": "tools_v3_q4",
+ "server": "http://127.0.0.1:8095",
+ "passed": 59,
+ "tasks": 90,
+ "by_group": {
+  "arithmetic": "13/20",
+  "dependent": "8/20",
+  "missing": "9/20",
+  "regression": "29/30"
+ },
+ "skills": 30,
+ "regression": 29,
+ "rows": [
+  {
+   "id": "dep01_ship_usd",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "convert_currency called before estimate_shipping_cost's result came back",
+    "missing call convert_currency {'amount': 43, 'from_currency': 'SAR', 'to_currency': 'USD'}",
+    "reply lacks any of ['11.47']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "الدمام",
+      "weight_kg": 3
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 3,
+      "from_currency": "sar",
+      "to_currency": "usd"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٤٣ ريالاً، وعند تحويلها إلى الدولار تكون ٠.٨ دولار. "
+  },
+  {
+   "id": "dep02_ship_eur",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 55, 'from_currency': 'SAR', 'to_currency': 'EUR'}",
+    "reply lacks any of ['13.41']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "جدة",
+      "to_city": "الرياض",
+      "weight_kg": 5
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٥٥ ريالاً سعودياً، والمدة ٢ يوم. "
+  },
+  {
+   "id": "dep03_gold24_usd",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 469, 'from_currency': 'SAR', 'to_currency': 'USD'}",
+    "reply lacks any of ['125.07']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 24
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ٢٤ اليوم هو ٤٦٩.٠ ريالًا سعوديًا. "
+  },
+  {
+   "id": "dep04_gold21_aed",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call get_gold_price {'karat': 21}",
+    "missing call convert_currency {'amount': 410, 'from_currency': 'SAR', 'to_currency': 'AED'}",
+    "reply lacks any of ['401.96']"
+   ],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 21,
+      "from_currency": "sar",
+      "to_currency": "aed"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر ٢١ غرامًا من الذهب عيار ٢١ بالدرهم الإماراتي يساوي ٢٠.٥٩ ريالًا. "
+  },
+  {
+   "id": "dep05_fee_usd",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "تكييف"
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 150,
+      "from_currency": "sar",
+      "to_currency": "usd"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "رسوم الزيارة تساوي 40 دولاراً أمريكياً. "
+  },
+  {
+   "id": "dep06_brakes_eur",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 620, 'from_currency': 'SAR', 'to_currency': 'EUR'}",
+    "reply lacks any of ['151.22']"
+   ],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل فرامل",
+      "car_model": "سوناتا 2019"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر تبديل الفرامل لسيارة سوناتا ٢٠١٩ هو ٦٢٠ ريالًا سعوديًا، ويستغرق العمل ساعتين. "
+  },
+  {
+   "id": "dep07_book_center_dammam",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الدمام",
+      "brand": "نيسان"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "301",
+      "service": "تغيير زيت",
+      "date": "2026-10-17",
+      "time": "11:00"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز موعدك في مركز الخليج للسيارات، رقم الحجز 883011100، يوم السبت 17 أكتوبر الساعة 11:00، لتغيير الزيت. "
+  },
+  {
+   "id": "dep08_book_plumber_riyadh",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "الرياض",
+      "service": "سباكة"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "501",
+      "date": "2026-10-16",
+      "time": "16:00",
+      "district": "الملقا"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز زيارة فني السباكة أبو خالد في حي الملقا يوم 2026-10-16 الساعة 16:00. رقم الزيارة هو 775011600. "
+  },
+  {
+   "id": "dep09_book_painter_jeddah",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "جدة",
+      "service": "دهان"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "602",
+      "date": "2026-10-18",
+      "time": "10:00",
+      "district": "الصفا"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز موعد زيارة فني الدهانات الحديثة يوم الأحد ١٨ أكتوبر ٢٠٢٦ الساعة ١٠:٠٠ في حي الصفا. رقم الزيارة هو ٧٧٦٠٢١٠٠٠. "
+  },
+  {
+   "id": "dep10_book_kia_riyadh",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الرياض",
+      "brand": "كيا"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "102",
+      "service": "فحص شامل",
+      "date": "2026-10-18",
+      "time": "15:00"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز موعدك في ورشة الريان لفحص شامل يوم الأحد 2026-10-18 الساعة 3:00 مساءً، ورقم الحجز 881021500. "
+  },
+  {
+   "id": "dep11_fee_eur",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call get_visit_fee {'service': 'كهرباء'}",
+    "missing call convert_currency {'amount': 100, 'from_currency': 'SAR', 'to_currency': 'EUR'}",
+    "reply lacks any of ['24.39']"
+   ],
+   "calls": [],
+   "reply": "لا تتوفر لدي بيانات عن أسعار العملات الأجنبية، لذا لا أستطيع تحويل الرسوم إلى اليورو. يمكنك استخدام أداة تحويل العملات لتحويل المبلغ إلى اليورو. "
+  },
+  {
+   "id": "dep12_tires_usd",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 1400, 'from_currency': 'SAR', 'to_currency': 'USD'}",
+    "reply lacks any of ['373.33']"
+   ],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل إطارات",
+      "car_model": "لاندكروزر 2022"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تبديل الإطارات لسيارة لاندكروزر ٢٠٢٢ يكلف ١٤٠٠ ريال سعودي، أي ما يعادل ٣٧٥ دولارًا أمريكيًا تقريبًا. "
+  },
+  {
+   "id": "dep13_oil_kwd",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 180, 'from_currency': 'SAR', 'to_currency': 'KWD'}",
+    "reply lacks any of ['14.75']"
+   ],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تغيير زيت",
+      "car_model": "كامري 2020"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر تغيير الزيت لسيارة كامري 2020 هو 180 ريالاً سعودياً، ومدة الخدمة ساعتان. "
+  },
+  {
+   "id": "dep14_gold22_egp",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 430, 'from_currency': 'SAR', 'to_currency': 'EGP'}",
+    "reply lacks any of ['5590']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 22
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ٢٢ هو ٤٣٠ ريالًا سعوديًا. "
+  },
+  {
+   "id": "dep15_ship_aed",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 85, 'from_currency': 'SAR', 'to_currency': 'AED'}",
+    "reply lacks any of ['83.33']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 10
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٨٥ ريالاً سعودياً، والمدة ٢ أيام. لتحويل المبلغ إلى الدرهم الإماراتي:\n٨٥ × ٣.٧٥ = ٣٢٦.٢٥ درهم إماراتي. "
+  },
+  {
+   "id": "dep16_book_ac_jeddah",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "جدة",
+      "service": "تكييف"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "601",
+      "date": "2026-10-17",
+      "time": "20:00",
+      "district": "النعيم"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز زيارة فني التكييف رقم 776012000 يوم السبت 17 أكتوبر 2026 الساعة ٢٠:٠٠ في حي النعيم. "
+  },
+  {
+   "id": "dep17_book_electric_riyadh",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "الرياض",
+      "service": "كهرباء"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "502",
+      "date": "2026-10-18",
+      "time": "09:00",
+      "district": "الياسمين"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز زيارة فني الكهرباء رقم 775020900 يوم الأحد 2026-10-18 الساعة 09:00 في حي الياسمين. "
+  },
+  {
+   "id": "dep18_gold18_usd",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call convert_currency {'amount': 352, 'from_currency': 'SAR', 'to_currency': 'USD'}",
+    "reply lacks any of ['93.87']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 18
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ١٨ اليوم هو ٣٥٢ ريالاً سعودياً. "
+  },
+  {
+   "id": "dep19_ship_kwd",
+   "kind": "dependent",
+   "pass": false,
+   "problems": [
+    "missing call estimate_shipping_cost {'from_city': 'جدة', 'to_city': 'الدمام', 'weight_kg': 4}",
+    "missing call convert_currency {'amount': 49, 'from_currency': 'SAR', 'to_currency': 'KWD'}",
+    "reply lacks any of ['4.02']"
+   ],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 4,
+      "from_currency": "sar",
+      "to_currency": "kwd"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٤ كيلو من جدة للدمام بالدينار الكويتي تساوي ٠.٣٣ دينار كويتي. "
+  },
+  {
+   "id": "dep20_book_toyota_jeddah",
+   "kind": "dependent",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "جدة",
+      "brand": "تويوتا"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "201",
+      "service": "تبديل فرامل",
+      "date": "2026-10-16",
+      "time": "18:00"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز موعدك في مركز البحر للصيانة بجدة، تبديل فرامل، يوم 2026-10-16 الساعة 18:00، ورقم الحجز 882011800. "
+  },
+  {
+   "id": "mis01_oil_no_time",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_car_service",
+    "reply lacks any of ['؟', '?']",
+    "reply has 'تم تاكيد'"
+   ],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الرياض",
+      "brand": "تويوتا"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "101",
+      "service": "تغيير زيت",
+      "date": "2026-10-16",
+      "time": "09:00"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم تأكيد حجزك لتغيير الزيت في مركز النخبة لصيانة السيارات، رقم الحجز 881010900، بتاريخ 2026-10-16 الساعة 09:00. "
+  },
+  {
+   "id": "mis02_service_saturday",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما هي ماركة السيارة وطرازها وسنة الصنع؟ "
+  },
+  {
+   "id": "mis03_plumber_riyadh",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما الخدمة التي تحتاجها؟ "
+  },
+  {
+   "id": "mis04_ac_tomorrow",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_technician_visit"
+   ],
+   "calls": [
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "فني تكييف",
+      "date": "2026-10-16",
+      "time": "09:00",
+      "district": "النسيم"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "لم أجد فني تكييف برقم 123456789. هل يمكنك تزويدي برقم الفني الصحيح؟ "
+  },
+  {
+   "id": "mis05_electric_5pm",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_technician_visit",
+    "reply lacks any of ['؟', '?']"
+   ],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "الرياض",
+      "service": "كهرباء"
+     },
+     "step": 1
+    },
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "502",
+      "date": "2026-10-15",
+      "time": "17:00",
+      "district": "الدرعية"
+     },
+     "step": 2
+    }
+   ],
+   "reply": "تم حجز زيارة فني الكهرباء رقم 775021700، الساعة ٥:٠٠ عصرًا، في حي الدرعية. "
+  },
+  {
+   "id": "mis06_tires_center101",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_car_service",
+    "reply lacks any of ['؟', '?']",
+    "reply has 'تم تاكيد'"
+   ],
+   "calls": [
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "101",
+      "service": "تبديل إطارات",
+      "date": "2026-10-16",
+      "time": "10:00"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تم تأكيد حجزك في المركز رقم ١٠١، رقم الحجز ٨٨١٠١١٠٠٠، يوم ٢٠٢٦-١٠-١٦ الساعة ١٠:٠٠، لخدمة تبديل الإطارات. "
+  },
+  {
+   "id": "mis07_khaleej_tomorrow",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما الخدمة التي تحتاجها؟ "
+  },
+  {
+   "id": "mis08_convert_no_amount",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما هو المبلغ الذي تريد تحويله؟ "
+  },
+  {
+   "id": "mis09_ship_no_weight",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما هو الوزن بالكيلوغرام؟ "
+  },
+  {
+   "id": "mis10_ship_no_cities",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called estimate_shipping_cost",
+    "reply lacks any of ['؟', '?']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 3
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٤٣ ريالاً، والمدة ٢ يوم. "
+  },
+  {
+   "id": "mis11_track_no_number",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما رقم الشحنة؟ "
+  },
+  {
+   "id": "mis12_checkup_no_center",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_car_service"
+   ],
+   "calls": [
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "مركز 1",
+      "service": "فحص شامل",
+      "date": "2026-10-18",
+      "time": "10:00"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "لم أجد مركزًا بهذا الرقم. هل يمكنك تزويدي برقم المركز الصحيح؟ "
+  },
+  {
+   "id": "mis13_tech501_no_time",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_technician_visit",
+    "reply lacks any of ['؟', '?']",
+    "reply has 'تم تاكيد'"
+   ],
+   "calls": [
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "501",
+      "date": "2026-10-16",
+      "time": "10:00",
+      "district": "حي النخيل"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تم تأكيد حجز زيارة الفني رقم 501 في حي النخيل يوم 2026-10-16 الساعة 10:00، ورقم الزيارة هو 775011000. "
+  },
+  {
+   "id": "mis14_painter_no_city",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_technician_visit"
+   ],
+   "calls": [
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "فني دهان",
+      "date": "2026-10-17",
+      "time": "09:00",
+      "district": "الرياض"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "لم أجد فني دهان في الرياض. هل يمكنك تزويدي برقم الفني لأتحقق من ذلك؟ "
+  },
+  {
+   "id": "mis15_brakes_no_car",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called get_service_price",
+    "reply lacks any of ['؟', '?']"
+   ],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل فرامل",
+      "car_model": "كامري 2020"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر تبديل الفرامل لكامري 2020 هو 620 ريالاً، ويستغرق العمل ساعتين. "
+  },
+  {
+   "id": "mis16_convert_no_currency",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما العملة المحوَّل منها، وما العملة المحوَّل إليها؟ "
+  },
+  {
+   "id": "mis17_jeddah_4pm",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما نوع الصيانة التي تحتاجها؟ "
+  },
+  {
+   "id": "mis18_ac_olaya",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called book_technician_visit"
+   ],
+   "calls": [
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "فني تكييف 1",
+      "date": "2026-10-16",
+      "time": "10:00",
+      "district": "العليا"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "لم أجد فني تكييف برقم 1 في الرياض. هل يمكنك تزويدي برقم فني آخر أو اسم الفني لأبحث عنه؟ "
+  },
+  {
+   "id": "mis19_oil_nothing",
+   "kind": "missing",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "ما ماركة سيارتك وطرازها وسنة الصنع؟ "
+  },
+  {
+   "id": "mis20_ship_7kg",
+   "kind": "missing",
+   "pass": false,
+   "problems": [
+    "called estimate_shipping_cost",
+    "reply lacks any of ['؟', '?']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 7
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٦٧ ريالاً سعودياً، والمدة ٢ أيام. "
+  },
+  {
+   "id": "ari01_gold24_x5",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['2345']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 24
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر ٥ غرامات ذهب عيار ٢٤ هو ٤٦٩.٠ ريالًا سعوديًا. "
+  },
+  {
+   "id": "ari02_gold21_x3",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر الغرام الواحد عيار ٢١ هو ٤١٠ ريالات سعودية، لذا ٣ غرامات تساوي ٣ × ٤١٠ = ١٢٣٠ ريالاً سعودياً. "
+  },
+  {
+   "id": "ari03_gold18_x10",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 18
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر ١٠ غرامات عيار ١٨ هو ٣٥٢٠ ريالاً سعودياً. "
+  },
+  {
+   "id": "ari04_gold_diff_24_21",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 24
+     },
+     "step": 1
+    },
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 1,
+      "from_currency": "sar",
+      "to_currency": "usd"
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 1,
+      "from_currency": "sar",
+      "to_currency": "eur"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرام عيار ٢٤ هو ٤٦٩.٠ ريالًا، وسعر غرام عيار ٢١ هو ٤١٠.٠ ريالًا. الفرق بينهما هو ٤٦٩.٠ - ٤١٠.٠ = ٥٩.٠ ريالًا. "
+  },
+  {
+   "id": "ari05_gold_diff_22_18",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "missing call get_gold_price {'karat': 22}",
+    "missing call get_gold_price {'karat': 18}",
+    "reply lacks any of ['78']"
+   ],
+   "calls": [],
+   "reply": "سعر الغرام لعيار ٢٢ هو ١٨٧.٥ ريالًا، وسعر الغرام لعيار ١٨ هو ١٦٠ ريالًا. الفرق بينهما هو ١٨٧.٥ - ١٦٠ = ٢٧.٥ ريالًا. "
+  },
+  {
+   "id": "ari06_two_parcels",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 3
+     },
+     "step": 1
+    },
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 5
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن من الرياض إلى جدة للطرد الأول ٤٣ ريالاً، وللمرصد الثاني ٥٥ ريالاً، أي المجموع ٩٨ ريالاً. "
+  },
+  {
+   "id": "ari07_oil_plus_brakes",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تغيير زيت",
+      "car_model": "أكورد 2020"
+     },
+     "step": 1
+    },
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل فرامل",
+      "car_model": "أكورد 2020"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة تغيير الزيت 180 ريالاً، وتبديل الفرامل 620 ريالاً، أي أن المجموع 800 ريال. "
+  },
+  {
+   "id": "ari08_two_fees",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "سباكة"
+     },
+     "step": 1
+    },
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "كهرباء"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "رسوم زيارة فني السباكة 120 ريالًا، ورسوم زيارة فني الكهرباء 100 ريال. المجموع 220 ريالًا. "
+  },
+  {
+   "id": "ari09_half_kilo_gold",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['205000', '205 الف']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ٢١ اليوم هو ٤١٠ ريالات سعودية. "
+  },
+  {
+   "id": "ari10_followup_gold_x4",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر ٤ غرامات من الذهب عيار ٢١ هو ٤١٠ × ٤ = ١٦٤٠ ريالاً سعودياً. "
+  },
+  {
+   "id": "ari11_followup_three_parcels",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['183']"
+   ],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الدمام",
+      "to_city": "الرياض",
+      "weight_kg": 6
+     },
+     "step": 1
+    },
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الدمام",
+      "to_city": "الرياض",
+      "weight_kg": 6.0
+     },
+     "step": 3
+    },
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الدمام",
+      "to_city": "الرياض",
+      "weight_kg": 6.0
+     },
+     "step": 4
+    }
+   ],
+   "reply": "ثلاث طرود بوزن ٦ كيلو تساوي ١٨ كيلو، وبالتالي التكلفة ١٨ × ٦١ = ١١٣٨ ريالًا. "
+  },
+  {
+   "id": "ari12_followup_three_visits",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "تكييف"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "ثلاث زيارات تعني ثلاث رسوم، أي 150 × 3 = 450 ريالًا سعوديًا. "
+  },
+  {
+   "id": "ari13_gold22_x2",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['860']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 22
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرامين ذهب عيار ٢٢ هو ٤٣٠ ريالًا سعوديًا. "
+  },
+  {
+   "id": "ari14_tires_change",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل إطارات",
+      "car_model": "تاهو 2021"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر تبديل الإطارات لسيارة تاهو ٢٠٢١ هو ١٤٠٠ ريال، والمدة ساعتين. إذا دفعت ٢٠٠٠ ريال، يرجع لك ٦٠٠ ريال. "
+  },
+  {
+   "id": "ari15_checkup_two_cars",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['700']"
+   ],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "فحص شامل",
+      "car_model": "إلنترا 2020"
+     },
+     "step": 1
+    },
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "فحص شامل",
+      "car_model": "إلنترا 2021"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الفحص الشامل لكل من إلنترا 2020 وإلنترا 2021 هي 350 ريالاً، ومدة الفحص ساعتين. "
+  },
+  {
+   "id": "ari16_two_conversions_sum",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 100,
+      "from_currency": "USD",
+      "to_currency": "SAR"
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 200,
+      "from_currency": "EUR",
+      "to_currency": "SAR"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "١٠٠ دولار تساوي ٣٧٥ ريالًا، و٢٠٠ يورو تساوي ٨٢٠ ريالًا، والمجموع ١١٩٥ ريالًا. "
+  },
+  {
+   "id": "ari17_ship_diff",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "جدة",
+      "to_city": "الرياض",
+      "weight_kg": 2
+     },
+     "step": 1
+    },
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "جدة",
+      "to_city": "الرياض",
+      "weight_kg": 8
+     },
+     "step": 1
+    }
+   ],
+   "reply": "الفرق بين تكلفة شحن ٢ كيلو و٨ كيلو هو ٣٦.٠ ريالًا. "
+  },
+  {
+   "id": "ari18_fee_discount",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "دهان"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "رسوم زيارة فني الدهان 200 ريال. وعند الخصم 50 ريالًا تصبح 150 ريالًا. "
+  },
+  {
+   "id": "ari19_followup_oil_x4",
+   "kind": "arithmetic",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تغيير زيت",
+      "car_model": "يوكن"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "4 × 180 = 720 ريالاً. "
+  },
+  {
+   "id": "ari20_gold18_x20",
+   "kind": "arithmetic",
+   "pass": false,
+   "problems": [
+    "reply lacks any of ['7040']"
+   ],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 18
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر الغرام الواحد من عيار ١٨ هو ٣٥٢ ريالاً سعودياً. "
+  },
+  {
+   "id": "sgl01_gold18",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 18
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر غرام الذهب عيار ١٨ اليوم هو ٣٥٢ ريالاً سعودياً. "
+  },
+  {
+   "id": "sgl02_eur_to_sar",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 250,
+      "from_currency": "EUR",
+      "to_currency": "SAR"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "٢٥٠ يورو تساوي ١٠٢٥ ريالاً سعودياً. "
+  },
+  {
+   "id": "sgl03_toyota_riyadh",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الرياض",
+      "brand": "تويوتا"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "وجدت لك مركزًا واحدًا في الرياض: مركز النخبة لصيانة السيارات، في حي العليا، وتقييمه 4.6. "
+  },
+  {
+   "id": "sgl04_paint_fee",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "دهان"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "رسوم زيارة فني الدهان هي 200 ريال سعودي. "
+  },
+  {
+   "id": "sgl05_track_delivered",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "track_shipment",
+     "args": {
+      "tracking_number": "٥٥٤٤٣٣"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "الشحنة رقم ٥٥٤٤٣٣ تم تسليمها في جدة بتاريخ ٢٠٢٦-١٠-١٣. "
+  },
+  {
+   "id": "sgl06_ship_12kg",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الدمام",
+      "to_city": "جدة",
+      "weight_kg": 12
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٩٧ ريالاً، والمدة ٣ أيام. "
+  },
+  {
+   "id": "sgl07_ac_riyadh",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "الرياض",
+      "service": "تكييف"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "وجدت فني تكييف واحد في الرياض: فني التكييف السريع، تقييمه 4.3. هل ترغب في حجز موعد معه؟ "
+  },
+  {
+   "id": "sgl08_tires_patrol",
+   "kind": "single",
+   "pass": false,
+   "problems": [
+    "missing call get_service_price {'service': 'تبديل إطارات'}",
+    "reply lacks any of ['1400']"
+   ],
+   "calls": [
+    {
+     "name": "get_service_price",
+     "args": {
+      "service": "تبديل الإطارات",
+      "car_model": "باترول 2023"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر تبديل الإطارات لسيارة باترول ٢٠٢٣ غير متوفر في بياناتي. هل يمكنك تحديد الخدمة المطلوبة بدقة أكبر، مثل تبديل الإطارات الأمامية أو الخلفية؟ "
+  },
+  {
+   "id": "sgl09_book_center201",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "201",
+      "service": "تغيير زيت",
+      "date": "2026-10-18",
+      "time": "17:00"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تم تأكيد حجزك لتغيير الزيت في المركز رقم ٢٠١ يوم الأحد ٢٠٢٦-١٠-١٨ الساعة ٥:٠٠ مساءً، ورقم الحجز هو ٨٨٢٠١١٧٠٠. "
+  },
+  {
+   "id": "sgl10_book_tech701",
+   "kind": "single",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "٧٠١",
+      "date": "2026-10-17",
+      "time": "10:00",
+      "district": "الفيصلية"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تم تأكيد حجز زيارة الفني رقم ٧٠١ يوم السبت ٢٠٢٦-١٠-١٧ الساعة ١٠:٠٠ في حي الفيصلية. رقم الزيارة هو ٧٧٧٠١١٠٠٠. "
+  },
+  {
+   "id": "par01_gold_21_22",
+   "kind": "parallel",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     },
+     "step": 1
+    },
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 22
+     },
+     "step": 1
+    }
+   ],
+   "reply": "سعر عيار ٢١ هو ٤١٠ ريالات للغرام، وسعر عيار ٢٢ هو ٤٣٠ ريالاً للغرام. "
+  },
+  {
+   "id": "par02_two_fees",
+   "kind": "parallel",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "سباكة"
+     },
+     "step": 1
+    },
+    {
+     "name": "get_visit_fee",
+     "args": {
+      "service": "تكييف"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "رسوم زيارة فني السباكة 120 ريالًا، ورسوم زيارة فني التكييف 150 ريالًا. "
+  },
+  {
+   "id": "par03_two_conversions",
+   "kind": "parallel",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 1000,
+      "from_currency": "sar",
+      "to_currency": "usd"
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 1000,
+      "from_currency": "sar",
+      "to_currency": "eur"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "١٠٠٠ ريال سعودي تساوي ٢٦٦.٦٧ دولار أمريكي، و١٠٠٠ ريال سعودي تساوي ٢٤٣.٩٠ يورو. "
+  },
+  {
+   "id": "par04_ship_and_gold",
+   "kind": "parallel",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "جدة",
+      "weight_kg": 2
+     },
+     "step": 1
+    },
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 24
+     },
+     "step": 1
+    }
+   ],
+   "reply": "تكلفة الشحن ٣٧ ريالاً، وسعر غرام الذهب عيار ٢٤ ٤٦٩ ريالاً. "
+  },
+  {
+   "id": "par05_hyundai_two_cities",
+   "kind": "parallel",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "الرياض",
+      "brand": "هيونداي"
+     },
+     "step": 1
+    },
+    {
+     "name": "find_car_service_centers",
+     "args": {
+      "city": "جدة",
+      "brand": "هيونداي"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "وجدت لك مركزين لصيانة هيونداي في الرياض: مركز النخبة لصيانة السيارات في حي العليا، وورشة الريان في حي النرجس. وفي جدة وجدت مركز البحر للصيانة في حي الروضة. "
+  },
+  {
+   "id": "not01_founder",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "مؤسس المملكة العربية السعودية هو الملك عبدالعزيز آل سعود. "
+  },
+  {
+   "id": "not02_thanks_note",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "أعتذر، لا أستطيع كتابة رسائل شخصية. "
+  },
+  {
+   "id": "not03_leap_year",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "عدد أيام السنة الكبيسة 366 يومًا، أي تزيد عن السنة العادية بأربعة أيام. "
+  },
+  {
+   "id": "not04_tokyo",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "عاصمة اليابان هي طوكيو. "
+  },
+  {
+   "id": "not05_flight",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "أعتذر، لا أستطيع حجز رحلات الطيران. يمكنك الحجز عبر تطبيقات شركات الطيران أو مواقعها. "
+  },
+  {
+   "id": "not06_abha_season",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "أفضل وقت لزيارة أبها هو فصل الصيف، إذ يكون الطقس معتدلاً ومناسباً للتنزه. "
+  },
+  {
+   "id": "not07_london_time",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "لا أستطيع معرفة الوقت في لندن، ولا يمكنني الاستعلام عنه. "
+  },
+  {
+   "id": "not08_coffee_tip",
+   "kind": "no_tool",
+   "pass": true,
+   "problems": [],
+   "calls": [],
+   "reply": "أعتذر، لا أستطيع تقديم وصفات الطبخ. "
+  },
+  {
+   "id": "err01_track_unknown",
+   "kind": "error",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "track_shipment",
+     "args": {
+      "tracking_number": "٩٩٩٠٠٠"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "لم أجد أي شحنة برقم ٩٩٩٠٠٠. تأكد من الرقم الصحيح أو زوّدني به مرة أخرى. "
+  },
+  {
+   "id": "err02_tech_busy",
+   "kind": "error",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "book_technician_visit",
+     "args": {
+      "technician_id": "501",
+      "date": "2026-10-17",
+      "time": "09:00",
+      "district": "الملقا"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "أعتذر، الفني رقم ٥٠١ مشغول في الساعة ٩ الصبح. أقرب وقت متاح هو ١١:٠٠ أو ٤:٠٠. هل يناسبك أحد هذين الوقتين؟ "
+  },
+  {
+   "id": "err03_center_taken",
+   "kind": "error",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "book_car_service",
+     "args": {
+      "center_id": "101",
+      "service": "فحص شامل",
+      "date": "2026-10-18",
+      "time": "10:00"
+     },
+     "step": 1
+    }
+   ],
+   "reply": "موعدك محجوز بالفعل، لكن لا يوجد موعد متاح الساعة ١٠:٠٠، أقرب موعد متاح هو الساعة ٠٩:٠٠ أو ١١:٣٠. هل ترغب في تغيير الوقت إلى أحد هذين الخيارين؟ "
+  },
+  {
+   "id": "err04_route_unsupported",
+   "kind": "error",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "estimate_shipping_cost",
+     "args": {
+      "from_city": "الرياض",
+      "to_city": "أبها",
+      "weight_kg": 3
+     },
+     "step": 1
+    }
+   ],
+   "reply": "لا يمكنني حساب تكلفة الشحن لأن المسار غير مدعوم. هل يمكنك تحديد مدينة الإرسال ومدينة الاستلام بدقة؟ "
+  },
+  {
+   "id": "fol01_gold_then_18",
+   "kind": "follow_up",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 21
+     },
+     "step": 1
+    },
+    {
+     "name": "get_gold_price",
+     "args": {
+      "karat": 18
+     },
+     "step": 3
+    }
+   ],
+   "reply": "وسعر غرام الذهب عيار ١٨ هو ٣٥٢ ريالاً سعودياً. "
+  },
+  {
+   "id": "fol02_plumber_then_dammam",
+   "kind": "follow_up",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "الرياض",
+      "service": "سباكة"
+     },
+     "step": 1
+    },
+    {
+     "name": "find_technicians",
+     "args": {
+      "city": "الدمام",
+      "service": "سباكة"
+     },
+     "step": 3
+    }
+   ],
+   "reply": "في الدمام أيضًا: مؤسسة الشرقية للصيانة، تقييمها 4.2. "
+  },
+  {
+   "id": "fol03_usd_then_eur",
+   "kind": "follow_up",
+   "pass": true,
+   "problems": [],
+   "calls": [
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 100,
+      "from_currency": "USD",
+      "to_currency": "SAR"
+     },
+     "step": 1
+    },
+    {
+     "name": "convert_currency",
+     "args": {
+      "amount": 100,
+      "from_currency": "EUR",
+      "to_currency": "SAR"
+     },
+     "step": 3
+    }
+   ],
+   "reply": "١٠٠ يورو تساوي ٤١٠ ريالات سعودية. "
+  }
+ ]
+}

@@ -102,3 +102,23 @@ ALLaM-7B-Instruct, with the template and the 16K setting inside. Not published y
 ```
 llama-server -m allam-plus-7b-Q4_K_M.gguf -ngl 99 -c 16384 -ctk q8_0 -ctv q8_0 -fa on --jinja --port 8095
 ```
+
+## A larger agent test, and a fix round that was not adopted
+
+To measure the three weaknesses properly, a 90-task agent test was frozen (`data/agent_test/tasks_v1.json`, ten tools
+in four unseen areas, run through LangGraph on the served Q4_K_M file, `scripts/agent_bench.py`). The release model:
+
+| Tasks | tools_v2 (release) | tools_v3 (fix round, not adopted) |
+|---|---|---|
+| Arithmetic on tool results (20) | 5 | **13** |
+| Asking for a missing required detail (20) | 7 | 9 |
+| A second call that needs the first result (20) | 7 | 8 |
+| Regression: single, parallel, no tool, errors, follow-ups (30) | 30 | 29 |
+| All (90) | 49 | 59 |
+
+The fix round (tools_v3, [DECISIONS.md](DECISIONS.md) D23) trained on 527 new conversations for the three skills. It
+learned arithmetic and raised the receptionist test to 89.4%, but chose the right tool significantly less often on
+AISA (92.7% → 89.4%, p = 0.001), so by the rule fixed before training tools_v2 stays (D24). The cause: the new data
+taught "an action → ask for details" instead of "a required detail is missing → ask", so the model asked even when the
+user had given the date. The lesson for a next round: train the decision with contrast pairs, the same request with
+and without the missing detail.

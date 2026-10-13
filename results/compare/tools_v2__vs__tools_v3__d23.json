@@ -1,0 +1,128 @@
+{
+ "tests": {
+  "agent dependent": {
+   "n": 20,
+   "a": 0.35,
+   "b": 0.4,
+   "gained": 2,
+   "lost": 1,
+   "p": 1.0,
+   "complete": true
+  },
+  "agent missing": {
+   "n": 20,
+   "a": 0.35,
+   "b": 0.45,
+   "gained": 3,
+   "lost": 1,
+   "p": 0.625,
+   "complete": true
+  },
+  "agent arithmetic": {
+   "n": 20,
+   "a": 0.25,
+   "b": 0.65,
+   "gained": 9,
+   "lost": 1,
+   "p": 0.021484375,
+   "complete": true
+  },
+  "agent skills (all three)": {
+   "n": 60,
+   "a": 0.31666666666666665,
+   "b": 0.5,
+   "gained": 14,
+   "lost": 3,
+   "p": 0.012725830078125,
+   "complete": true
+  },
+  "agent regression": {
+   "n": 30,
+   "a": 1.0,
+   "b": 0.9666666666666667,
+   "gained": 0,
+   "lost": 1,
+   "p": 1.0,
+   "complete": true
+  },
+  "agent all": {
+   "n": 90,
+   "a": 0.5444444444444444,
+   "b": 0.6555555555555556,
+   "gained": 14,
+   "lost": 4,
+   "p": 0.0308837890625,
+   "complete": true
+  },
+  "receptionist": {
+   "n": 160,
+   "a": 0.85,
+   "b": 0.89375,
+   "gained": 10,
+   "lost": 3,
+   "p": 0.09228515625,
+   "complete": true
+  },
+  "arabfuncbench": {
+   "n": 990,
+   "a": 0.9595959595959596,
+   "b": 0.9636363636363636,
+   "gained": 11,
+   "lost": 7,
+   "p": 0.480682373046875,
+   "complete": true
+  },
+  "aisa_dev": {
+   "n": 545,
+   "a": 0.926605504587156,
+   "b": 0.8935779816513761,
+   "gained": 6,
+   "lost": 24,
+   "p": 0.001430906355381012,
+   "complete": true
+  },
+  "needle_16k": {
+   "n": 50,
+   "a": 1.0,
+   "b": 1.0,
+   "gained": 0,
+   "lost": 0,
+   "p": 1.0,
+   "complete": true
+  },
+  "lceval_mcq": {
+   "n": 82,
+   "a": 0.6707317073170732,
+   "b": 0.6463414634146342,
+   "gained": 2,
+   "lost": 4,
+   "p": 0.6875,
+   "complete": false
+  },
+  "arabicmmlu": {
+   "n": 14455,
+   "a": 0.6922864060878589,
+   "b": 0.6922172258734002,
+   "gained": 152,
+   "lost": 153,
+   "p": 1.0,
+   "complete": true
+  }
+ },
+ "checks": {
+  "agent skills clearly better (60 tasks, paired p < 0.05)": true,
+  "agent regression tasks not significantly worse": true,
+  "receptionist v2 not significantly lower": true,
+  "ArabFuncBench not significantly lower": true,
+  "AISA not significantly lower": false,
+  "needle 16K >= 98%": true,
+  "LC-Eval MCQ >= 60%": true,
+  "ArabicMMLU >= 67.6%": true,
+  "IFEval not significantly lower": false
+ },
+ "missing": [
+  "lceval_mcq",
+  "ifeval"
+ ],
+ "release": "tools_v2"
+}

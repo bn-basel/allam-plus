@@ -224,3 +224,18 @@ it is a trade at the same overall level, not a clear improvement. tools_v1 stays
 - *Release rule* (`scripts/compare_runs.py --rule d23`): tools_v3 replaces tools_v2 only if the 60 skill tasks are
   clearly better (paired p < 0.05), the 30 regression tasks and the receptionist test v2 are not significantly worse,
   and the D19 guards hold (ArabFuncBench, AISA, needle 16K ≥ 98%, LC-Eval ≥ 60%, ArabicMMLU ≥ 67.6%, IFEval).
+
+**D24. Fix round result: tools_v2 stays the release model, by rule D23** (13 Oct). The rule picked tools_v3
+checkpoint 120 (dev: new-skill turns 75.0% → 82.1%, general and receptionist within 1 point). Agent test (Q4_K_M
+served, 90 tasks, paired against tools_v2): arithmetic 5 → 13 of 20, missing details 7 → 9, dependent calls 7 → 8,
+regression 30 → 29; the 60 skill tasks clearly better (14 gained, 3 lost, p = 0.013). Guards: receptionist v2 85.0% →
+89.4%, ArabFuncBench 96.0% → 96.4%, needle and ArabicMMLU unchanged, but **AISA right tool 92.7% → 89.4% (6 gained,
+24 lost, p = 0.001)**, which fails D23, so tools_v2 stays (LC-Eval and IFEval were stopped unfinished; they cannot
+change the outcome). What went wrong, from the cases: 19 of the 24 AISA losses are the model asking a question where
+a call was expected, often for a detail the user had given ("tomorrow", "next week") and for tools with no required
+parameter at all; in the agent test it still booked with made-up times. The data taught "an action → ask", not "a
+required detail is missing → ask", because it had no matching cases where everything needed is given and the right
+move is to act at once. The dependent data was mostly "look up an id, then act", with few "use a value from the
+result" (price → convert), which is where the agent test fails. Arithmetic, where the data was right, improved
+clearly. A next round would need contrast pairs (the same action with and without its required details, relative
+dates included), a check that a clarifying question asks for a detail really missing, and value-dependent chains.

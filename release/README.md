@@ -119,10 +119,11 @@ into `tool_calls`.
 
 ## Limits
 
-- **Chained calls and missing details:** in a 20-task LangGraph test on tools it never saw, it passed 17. It failed when
-  one call needed the result of another (it called both at once), when a booking lacked a date and time (it made them
-  up instead of asking), and when asked to do arithmetic on an earlier result. Check required arguments in your app
-  before running a tool that changes something.
+- **Chained calls, missing details, arithmetic:** on a 90-task LangGraph test with tools it never saw, it passed all 30
+  ordinary tasks (one call, two calls at once, no tool fits, tool errors, follow-ups) but only 7 of 20 where a second
+  call needs the first one's result, 7 of 20 where a required detail is missing (it often makes one up instead of
+  asking), and 5 of 20 that need arithmetic on tool results. Check required arguments in your app before running a
+  tool that changes something, and do sums in code.
 - **Arguments:** it picks the right tool far more often than it fills every argument exactly right (about half on
   ArabFuncBench), mostly small differences in how a value is written.
 - Most tests are synthetic or translated; the receptionist test was written for the earlier project. Real users write

@@ -188,3 +188,23 @@ was trained on, with the Arabic tool guide in the system turn, and come back as
   "right tool" went up from 96% to 97.8–99.3%. It cannot fix wrong values, so exact arguments stayed the same.
 - Memory planning: the KV cache, not the weights, decides what fits at 16K. Q8_0 with a 16-bit cache needed 14.9 GB and
   spilled into system RAM (prompt reading fell from ~4,500 to 848 tokens/s); an 8-bit cache brought it to 11.5 GB.
+
+## Step 5 — A fix round that taught the wrong lesson
+
+**Concept.** A model learns the simplest pattern that explains its training data. If every example of a booking
+request in the new data ends with the assistant asking for the date, the simplest pattern is "booking → ask", not
+"date missing → ask". To teach a *decision*, the data needs both sides: the same kind of request where the detail is
+there (act) and where it is missing (ask). Example: «احجز لي دكتور قلب بكرة» → book now; «احجز لي دكتور قلب» → ask
+which day.
+
+**What we did.** Froze a 90-task agent test first, traced the three weaknesses to our own data rules (the checker
+had thrown out every computed number), generated 527 conversations for the three skills, trained tools_v3. Arithmetic
+went from 5 to 13 of 20, but the model started asking questions where it should act, and lost on AISA (92.7% →
+89.4%), so the rule fixed in advance kept tools_v2.
+
+**What I learned.** _(after the check question)_
+
+**Notes.**
+- A rule written before training protects you from your own hopes: tools_v3 looked better on the new test and on the
+  receptionist test, and only the guard showed the cost.
+- Reading the failed cases took ten minutes and named the cause exactly; the scores alone could not.
