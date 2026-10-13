@@ -2,6 +2,7 @@
 
     uv run python scripts/publish_hf.py --run tools_v2 --adapter runs/tools_v2/checkpoint-180 --dry-run
     uv run python scripts/publish_hf.py --run tools_v2 --adapter runs/tools_v2/checkpoint-180
+    uv run python scripts/publish_hf.py --run tools_v2 --adapter runs/tools_v2/checkpoint-180 --card-only   # card + images
 
 Builds a staging folder (C:\\WIP\\release-work\\hf-allam-plus-7b) with hard links to the release GGUFs (no 12 GB copy;
 same disk) and copies of the small files, prints what will be uploaded, then uploads it to bnbasel/allam-plus-7b with
@@ -31,11 +32,24 @@ def main() -> None:
     ap.add_argument("--adapter", required=True, help="its checkpoint folder")
     ap.add_argument("--repo", default=REPO)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--card-only", action="store_true", help="upload only the model card and its images")
     args = ap.parse_args()
+
+    if args.card_only:  # README.md + assets/*.png: a few hundred KB, the model files stay as they are
+        from huggingface_hub import CommitOperationAdd, HfApi
+        ops = [CommitOperationAdd("README.md", str(ROOT / "release" / "README.md"))]
+        ops += [CommitOperationAdd(f"assets/{p.name}", str(p)) for p in sorted((ROOT / "release" / "assets").glob("*.png"))]
+        for op in ops:
+            print(op.path_in_repo)
+        if not args.dry_run:
+            HfApi().create_commit(args.repo, operations=ops, commit_message="Model card: banner, charts, how it works")
+            print(f"updated: https://huggingface.co/{args.repo}")
+        return
 
     rel = Path(rf"C:\WIP\release-work\allam-plus-{args.run}\release")
     files = {
         "README.md": ROOT / "release" / "README.md",
+        **{f"assets/{p.name}": p for p in sorted((ROOT / "release" / "assets").glob("*.png"))},
         "chat_template.jinja": ROOT / "release" / "chat_template.jinja",
         "Modelfile": ROOT / "release" / "Modelfile",
         "Modelfile.go-template": ROOT / "release" / "Modelfile.go-template",

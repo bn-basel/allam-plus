@@ -404,8 +404,73 @@ def phase4() -> None:
     save("phase4_served", "Phase 4: release files served", w, y + 20, body)
 
 
+def card_summary() -> None:
+    """Model card: the release model against ALLaM-7B-Instruct as released, every row in the same setting."""
+    R = RELEASE
+    n16 = lambda r: r["length"] == 16384 and not r.get("control")  # noqa: E731
+    rows = [
+        ("Finds a fact in 16K tokens", "needle in Arabic text, 50 cases",
+         share("phase1/needle/shipped/cases.jsonl", where=n16), share(f"phase1/needle/{R}/cases.jsonl", where=n16)),
+        ("Questions on long books", "HUMAIN's LC-Eval, 8-16K tokens",
+         value("lceval/shipped/summary.json", "mcq|all.acc"), value(f"lceval/{R}/summary.json", "mcq|all.acc")),
+        ("Right tool, MSA", "ArabFuncBench, 1,000 requests",
+         value("tools/arabfuncbench/base__native/summary.json", "all.fn_acc"),
+         value(f"tools/arabfuncbench/{R}__native__yarn4/summary.json", "all.fn_acc")),
+        ("Right tool, five dialects", "AISA-ArabicFC, 545 requests",
+         value("tools/aisa_dev/base__native/summary.json", "all.fn_acc"),
+         value(f"tools/aisa_dev/{R}__native__yarn4/summary.json", "all.fn_acc")),
+        ("Saudi receptionist", "160 booking chats",
+         value("receptionist/base_native__test_v2/summary.json", "pass_rate"),
+         value(f"receptionist/{R}_native__test_v2/summary.json", "pass_rate")),
+        ("Arabic knowledge", "ArabicMMLU, 14,455 questions",
+         value("arabicmmlu/shipped/summary.json", "acc"), value(f"arabicmmlu/{R}/summary.json", "acc")),
+        ("Following instructions", "Arabic IFEval, 404 prompts",
+         value("ifeval/base_q8/summary.json", "prompt_strict"), value(f"ifeval/{R}_q8_yarn4/summary.json", "prompt_strict")),
+    ]
+    left, top, bar_w, bar_h, w = 270, 116, 450, 13, 860
+    body = header("ALLaM-7B before and after", "Same prompts, same scoring; the upgrade trained on one RTX 5080.")
+    x = 24
+    for name, colour in (("ALLaM-7B-Instruct, as released", "base"), ("allam-plus-7b", "ours")):
+        body += [rect(x, 72, 12, 12, colour, 3), text(x + 18, 82, name, 12)]
+        x += 18 + len(name) * 6.4 + 24
+    y = top
+    for label, note, before, after in rows:
+        if before is None or after is None:
+            continue
+        body += [text(left - 14, y + 13, label, 13.5, "end", weight="bold"), text(left - 14, y + 28, note, 11, "end", "muted")]
+        for colour, v, bold in (("base", before, "normal"), ("ours", after, "bold")):
+            body += [rect(left, y, bar_w, bar_h, "grid", 3), rect(left, y, max(bar_w * v, 2), bar_h, colour, 3),
+                     text(left + bar_w * v + 6, y + bar_h - 2, f"{v:.0%}" if v in (0, 1) else f"{v * 100 + 1e-9:.1f}%", 11.5,
+                          weight=bold)]
+            y += bar_h + 4
+        y += 18
+    save("card_summary", "allam-plus-7b before and after", w, y + 6, body)
+
+
+def card_how() -> None:
+    """Model card: how an app talks to the model (a request with tools in, standard tool_calls out)."""
+    w, h = 860, 250
+    body = header("How it works", "A standard OpenAI-style request in, standard tool calls out. Nothing ALLaM-specific in your code.")
+    boxes = [(24, "Your app", ["LangGraph, OpenAI SDK, Ollama", "sends messages + tools"]),
+             (318, "llama-server + the GGUF file", ["the built-in template writes the", "Arabic prompt; 16K context"]),
+             (612, "allam-plus-7b", ["answers in Arabic, or writes", "a tool call line"])]
+    for x, title, lines in boxes:
+        body += [rect(x, 86, 224, 92, "grid", 10), text(x + 16, 112, title, 14, weight="bold")]
+        body += [text(x + 16, 134 + 18 * i, s, 12, colour="muted") for i, s in enumerate(lines)]
+    for x in (248, 542):  # arrows between the boxes
+        body += [line(x + 8, 132, x + 62, 132, "ours", 2.5),
+                 f"<path d='M{x + 62},126 L{x + 70},132 L{x + 62},138 Z' class='f-ours'/>"]
+    body += [line(724, 186, 724, 214, "yarn", 2), line(724, 214, 136, 214, "yarn", 2), line(136, 214, 136, 186, "yarn", 2),
+             f"<path d='M130,190 L136,182 L142,190 Z' class='f-yarn'/>",
+             text(430, 234, "standard tool_calls back; your code runs the tool and sends the result; the model answers",
+                  12, "middle", "muted")]
+    save("card_how", "How allam-plus is served", w, h, body)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    card_summary()
+    card_how()
     phase4()
     phase3()
     needle()
