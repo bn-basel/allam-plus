@@ -2,110 +2,94 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- allam-plus model card banner, 1280 x 640 (rendered at 2x by scripts/render_card_images.mjs). The chat and the two
-     tool calls are copied unedited from the LangGraph demo run of the Q4_K_M release file through llama-server
-     (results/phase4/langgraph/tools_v2_q4_k_m.json, task find_then_book; the tool results come from demo/agent.py's
-     fake backend). Numbers: docs/BASELINES.md, docs/PHASE2.md, docs/PHASE3.md (tools_v2). -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- allam-plus model card banner, 1280 x 640 (rendered at 2x by scripts/render_card_images.mjs). Its own light look,
+     unlike the receptionist cards. The request and the tool call are unedited from the LangGraph demo run of the
+     Q4_K_M release file (results/phase4/langgraph/tools_v2_q4_k_m.json, find_then_book). Numbers: docs/PHASE2.md,
+     docs/PHASE3.md (tools_v2), docs/BASELINES.md. -->
 <style>
   * { box-sizing: border-box; margin: 0; }
-  body { width: 1280px; height: 640px; overflow: hidden; font-family: Inter, "Segoe UI", sans-serif; color: #e8f2ef;
-         background: radial-gradient(900px 600px at 90% 0%, #1b4a40 0%, transparent 60%),
-                     radial-gradient(700px 500px at 0% 100%, #143a33 0%, transparent 60%), #0a201c; }
-  .wrap { display: grid; grid-template-columns: 280px 410px 434px; gap: 38px; padding: 15px 40px; height: 100%; align-items: center; }
+  :root { --ink: #16213e; --muted: #5d6680; --line: #e3ddd0; --indigo: #3b4fc4; --sand: #c98a2b; --green: #1f8a5b; --card: #ffffff; }
+  body { width: 1280px; height: 640px; overflow: hidden; font-family: Inter, "Segoe UI", sans-serif; color: var(--ink);
+         background: #f6f2ea; position: relative; }
+  body::before { content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(22,33,62,.07) 1px, transparent 0); background-size: 22px 22px; }
   .ar { font-family: "IBM Plex Sans Arabic", "Segoe UI", sans-serif; direction: rtl; unicode-bidi: isolate; }
   .mono { font-family: "JetBrains Mono", Consolas, monospace; }
+  .wrap { position: relative; display: grid; grid-template-columns: 470px 1fr; gap: 44px; padding: 0 56px; height: 640px; align-items: center; }
 
-  .phone { width: 280px; height: 580px; border-radius: 44px; background: #040a09; padding: 10px; position: relative;
-           box-shadow: 0 0 0 2px #2c5249, 0 30px 70px rgba(0,0,0,.55); }
-  .screen { width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #ece5dd; display: flex; flex-direction: column; }
-  .island { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 80px; height: 23px; border-radius: 14px; background: #000; z-index: 2; }
-  .status { height: 42px; padding: 16px 24px 0; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #111; background: #f6f6f6; }
-  .head { background: #f6f6f6; padding: 6px 14px 9px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #ddd; }
-  .avatar { width: 30px; height: 30px; border-radius: 50%; background: #1f7a63; color: #fff; display: grid; place-items: center; font-size: 13px; }
-  .head .n { font-size: 12.5px; font-weight: 600; color: #111; }
-  .head .s { font-size: 10.5px; color: #4b8a3c; }
-  .chat { flex: 1; padding: 8px 9px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; overflow: hidden; }
-  .day { align-self: center; background: #fff; color: #666; font-size: 10px; padding: 3px 9px; border-radius: 8px; margin-bottom: 4px; }
-  .b { max-width: 90%; padding: 6px 9px 4px; border-radius: 10px; font-size: 11.6px; line-height: 1.55; color: #111; white-space: pre-line;
-       box-shadow: 0 1px 0 rgba(0,0,0,.08); }
-  .me { align-self: flex-end; background: #d9fdd3; border-top-right-radius: 3px; }
-  .bot { align-self: flex-start; background: #fff; border-top-left-radius: 3px; }
-  .tool { align-self: center; font-size: 9.5px; color: #4f6f67; background: #dfeee9; border-radius: 8px; padding: 3px 9px; font-family: Inter, sans-serif; }
-  .t { display: inline-block; direction: ltr; font-size: 9px; color: #8a8a8a; margin-right: 9px; vertical-align: -2px; font-family: Inter, sans-serif; }
-  .bar { background: #f6f6f6; padding: 7px 12px 14px; }
-  .bar div { background: #fff; border-radius: 16px; height: 28px; border: 1px solid #ddd; }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--sand); }
+  h1 { font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -.03em; margin: 16px 0 6px; }
+  h1 span { color: var(--indigo); }
+  .ar-title { font-size: 30px; font-weight: 600; color: var(--muted); margin-bottom: 22px; text-align: left; }
+  .lead { font-size: 18px; line-height: 1.5; color: var(--muted); max-width: 440px; }
+  .lead b { color: var(--ink); }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .pill { font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 999px; background: var(--card);
+          border: 1px solid var(--line); color: var(--ink); }
 
-  .panel { background: #06110f; border: 1px solid #24463e; border-radius: 14px; overflow: hidden; position: relative; }
-  .panel::before { content: ""; position: absolute; left: -39px; top: 50%; width: 38px; border-top: 2px dashed #3f7a6b; }
-  .ptop { background: #12302a; padding: 9px 14px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #8fd6c2;
-          display: flex; justify-content: space-between; }
-  .ptop span { letter-spacing: 0; text-transform: none; font-weight: 500; color: #7fa59b; }
-  .code { padding: 14px 16px 16px; font-size: 11.6px; line-height: 1.6; color: #cfe3dd; }
-  .who { font-family: Inter, sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 10px 0 3px; }
-  .who:first-child { margin-top: 0; }
-  .k { color: #9ad0ff; } .s { color: #f2d27a; } .n { color: #b8e986; } .dim { color: #7fa59b; }
-  .line { background: rgba(143,214,194,.06); border-left: 2px solid var(--c); padding: 6px 9px; border-radius: 0 6px 6px 0; word-break: break-word; }
-  .okk { font-family: Inter, sans-serif; font-size: 12px; color: #7fd8a4; margin-top: 10px; line-height: 1.55; }
+  .cards { display: grid; gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 22px;
+          box-shadow: 0 10px 30px rgba(22,33,62,.06); }
+  .ctitle { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .ctitle b { font-size: 15px; }
+  .ctitle span { font-size: 13px; color: var(--muted); }
+  .num { font-size: 15px; font-weight: 800; color: var(--indigo); }
 
-  .kicker { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #8fd6c2; text-transform: uppercase; }
-  h1 { font-size: 40px; line-height: 1.08; font-weight: 800; margin: 12px 0 18px; color: #fff; letter-spacing: -.02em; }
-  h1 span { color: #8fd6c2; }
-  .ba { display: grid; grid-template-columns: 104px 1fr; gap: 10px 14px; align-items: start; }
-  .chip { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 5px 0; border-radius: 6px; text-align: center; }
-  .c1 { background: rgba(154,208,255,.12); color: #9ad0ff; border: 1px solid rgba(154,208,255,.4); }
-  .c2 { background: rgba(127,216,164,.15); color: #7fd8a4; border: 1px solid rgba(127,216,164,.45); }
-  .c3 { background: rgba(242,210,122,.13); color: #f2d27a; border: 1px solid rgba(242,210,122,.4); }
-  .txt { font-size: 14px; line-height: 1.45; color: #c9dcd7; }
-  .txt b { color: #fff; }
-  .jump { display: flex; align-items: baseline; gap: 14px; margin-top: 22px; padding-top: 18px; border-top: 1px solid #24463e; }
-  .jump .from { font-size: 28px; font-weight: 700; color: #f39a88; text-decoration: line-through; text-decoration-thickness: 2px; }
-  .jump .arr { font-size: 26px; color: #7fa59b; }
-  .jump .to { font-size: 52px; font-weight: 800; color: #fff; line-height: 1; }
-  .jump .lbl { font-size: 13px; color: #a7c4bd; line-height: 1.35; }
-  .note { margin-top: 14px; font-size: 12px; color: #7fa59b; }
+  /* context: two rulers */
+  .ruler { display: grid; grid-template-columns: 92px 1fr 52px; align-items: center; gap: 12px; margin: 7px 0; font-size: 13px; color: var(--muted); }
+  .track { height: 16px; border-radius: 8px; background: #efeae0; position: relative; overflow: hidden; }
+  .fill { position: absolute; inset: 0 auto 0 0; border-radius: 8px; }
+  .ticks { position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(255,255,255,.7) 2px, transparent 2px); background-size: 25% 100%; }
+
+  /* tools: request → call → done */
+  .flow { display: grid; grid-template-columns: 1fr 22px 1.25fr; gap: 10px; align-items: center; }
+  .req { background: #eef1fd; border-radius: 14px 14px 4px 14px; padding: 10px 13px; font-size: 14px; line-height: 1.5; }
+  .arrow { color: var(--sand); font-size: 22px; text-align: center; }
+  .call { background: #16213e; color: #e7ebff; border-radius: 12px; padding: 10px 13px; font-size: 11.5px; line-height: 1.6; }
+  .call .f { color: #ffcf7a; } .call .k { color: #9fb2ff; } .call .s { color: #b9f0cf; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stat .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+  .stat .big small { font-size: 15px; color: var(--muted); font-weight: 600; margin-right: 6px; text-decoration: line-through; }
+  .stat .lbl { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.35; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="phone"><div class="island"></div><div class="screen">
-    <div class="status"><span>9:41</span><span>●●● 5G</span></div>
-    <div class="head"><div class="avatar ar">م</div><div><div class="n ar">مساعدي</div><div class="s">online · allam-plus-7b</div></div></div>
-    <div class="chat">
-      <div class="day">Today</div>
-      <div class="b me ar">ابحث لي عن مركز صيانة تويوتا في الرياض واحجز لي فيه تغيير زيت بكرة الساعة ٤ العصر<span class="t">9:41</span></div>
-      <div class="tool">⚙ find_car_service_centers · book_car_service</div>
-      <div class="b bot ar">تم حجز موعدك في مركز النخبة لصيانة السيارات، رقم الحجز 881011600، يوم 2026-10-16 الساعة 16:00، لتغيير الزيت.<span class="t">9:41</span></div>
-    </div>
-    <div class="bar"><div></div></div>
-  </div></div>
-
-  <div class="panel">
-    <div class="ptop">What your app gets <span>standard OpenAI tool_calls</span></div>
-    <div class="code mono">
-      <div class="who" style="color:#9ad0ff">Step 1 · the model calls a tool</div>
-      <div class="line" style="--c:#9ad0ff">{<span class="k">"name"</span>: <span class="s">"find_car_service_centers"</span>, <span class="k">"arguments"</span>: {<span class="k">"city"</span>: <span class="s">"<span class="ar">الرياض</span>"</span>, <span class="k">"brand"</span>: <span class="s">"<span class="ar">تويوتا</span>"</span>}}</div>
-      <div class="who" style="color:#f2d27a">Your code runs it</div>
-      <div class="line" style="--c:#f2d27a">{<span class="k">"centers"</span>: [{<span class="k">"center_id"</span>: <span class="s">"101"</span>, <span class="dim">…</span>}]}</div>
-      <div class="who" style="color:#9ad0ff">Step 2 · it uses the result</div>
-      <div class="line" style="--c:#9ad0ff">{<span class="k">"name"</span>: <span class="s">"book_car_service"</span>, <span class="k">"arguments"</span>: {<span class="k">"center_id"</span>: <span class="s">"101"</span>, <span class="k">"service"</span>: <span class="s">"<span class="ar">تغيير زيت</span>"</span>, <span class="k">"date"</span>: <span class="s">"2026-10-16"</span>, <span class="k">"time"</span>: <span class="s">"16:00"</span>}}</div>
-      <div class="okk">✓ the centre number comes from step 1<br>✓ «<span class="ar">بكرة الساعة ٤ العصر</span>» became 2026-10-16 16:00</div>
-    </div>
+  <div>
+    <div class="kicker">HUMAIN's ALLaM-7B, upgraded</div>
+    <h1>allam<span>-plus</span></h1>
+    <div class="ar-title ar">علّام، بقدرات أكثر</div>
+    <p class="lead">An open Arabic model that <b>reads 16K tokens</b>, <b>calls tools in Arabic</b> and runs from
+      <b>one file</b> on a gaming GPU.</p>
+    <div class="pills"><span class="pill">GGUF 4-bit · 8-bit</span><span class="pill">llama.cpp</span>
+      <span class="pill">Ollama</span><span class="pill">LangGraph</span><span class="pill">OpenAI API</span></div>
   </div>
 
-  <div>
-    <div class="kicker">allam-plus-7b · HUMAIN's ALLaM, upgraded</div>
-    <h1>Reads 4× more.<br><span>Uses tools in Arabic.</span></h1>
-    <div class="ba">
-      <div class="chip c1">Long text</div>
-      <div class="txt">Finds a fact hidden in <b>16K tokens</b> of Arabic text: <b>0% → 100%</b>.</div>
-      <div class="chip c2">Tools</div>
-      <div class="txt">Picks the right tool for <b>96%</b> of 1,000 Arabic requests (was 66%), Saudi dialect too.</div>
-      <div class="chip c3">Same Arabic</div>
-      <div class="txt">General knowledge unchanged: ArabicMMLU <b>68.6% → 69.2%</b>.</div>
+  <div class="cards">
+    <div class="card">
+      <div class="ctitle"><b>Context</b><span class="num">4× longer</span></div>
+      <div class="ruler"><span>as released</span><div class="track"><div class="fill" style="width:25%;background:#b9b3a6"></div><div class="ticks"></div></div><span>4K</span></div>
+      <div class="ruler"><span>allam-plus</span><div class="track"><div class="fill" style="width:100%;background:var(--indigo)"></div><div class="ticks"></div></div><span><b style="color:var(--ink)">16K</b></span></div>
     </div>
-    <div class="jump"><span class="from">4K</span><span class="arr">→</span><span class="to">16K</span><span class="lbl">tokens of context,<br>trained on one RTX 5080</span></div>
-    <div class="note">Real, unedited run: 4-bit GGUF, llama-server, LangGraph.</div>
+
+    <div class="card">
+      <div class="ctitle"><b>Tools in Arabic</b><span>a real request, unedited</span></div>
+      <div class="flow">
+        <div class="req ar">ابحث لي عن مركز صيانة تويوتا في الرياض واحجز لي فيه تغيير زيت بكرة الساعة ٤ العصر</div>
+        <div class="arrow">→</div>
+        <div class="call mono"><span class="f">find_car_service_centers</span>(<span class="k">city</span>=<span class="s ar">"الرياض"</span>)<br>
+          <span class="f">book_car_service</span>(<span class="k">center_id</span>=<span class="s">"101"</span>,<br>
+          &nbsp;&nbsp;<span class="k">date</span>=<span class="s">"2026-10-16"</span>, <span class="k">time</span>=<span class="s">"16:00"</span>)</div>
+      </div>
+    </div>
+
+    <div class="card stats">
+      <div class="stat"><div class="big"><small>0%</small>100%</div><div class="lbl">finds a fact hidden<br>in 16K tokens</div></div>
+      <div class="stat"><div class="big"><small>66%</small>96%</div><div class="lbl">right tool, 1,000<br>Arabic requests</div></div>
+      <div class="stat"><div class="big" style="color:var(--green)">69.2%</div><div class="lbl">Arabic knowledge,<br>unchanged (was 68.6%)</div></div>
+    </div>
   </div>
 </div>
 </body>

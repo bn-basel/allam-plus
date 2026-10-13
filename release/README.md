@@ -16,7 +16,7 @@ tags:
 - langgraph
 ---
 
-![allam-plus-7b: a real chat where the model finds a car service centre, then books it with the centre number from the first result](assets/banner.png)
+![allam-plus: 4x longer context, a real Arabic request turned into two tool calls, and three headline numbers](assets/banner.png)
 
 # allam-plus-7b
 
