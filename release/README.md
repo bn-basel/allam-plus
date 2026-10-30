@@ -29,7 +29,7 @@ on one gaming GPU (RTX 5080):
   (llama.cpp, Ollama, LangGraph, the OpenAI SDK).
 - **Lost nothing:** general Arabic knowledge and instruction following stay the same.
 
-Built by **Basel**, a CS/AI student at the University of Melbourne and the founder of Mudeef. Code, data recipes and
+Built by **Basel**, a Computing and Software Systems student, specialising in AI, at the University of Melbourne, and the founder of Mudeef. Code, data recipes and
 every result: [GitHub](https://github.com/bn-basel/allam-plus).
 
 ![Before and after: needle 0% to 100%, long books 18.3% to 66.1%, right tool 65.9% to 96.0% (MSA) and 68.8% to 92.7% (dialects), receptionist 36.3% to 85.0%, ArabicMMLU and IFEval unchanged](assets/card_summary.png)
