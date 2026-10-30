@@ -41,5 +41,8 @@ Details: [baselines](docs/BASELINES.md) · [long context](docs/PHASE2.md) · [to
 Decisions and reasons: [docs/DECISIONS.md](docs/DECISIONS.md) · Learning log: [LEARNING.md](LEARNING.md) ·
 Terms: [GLOSSARY.md](GLOSSARY.md)
 
-Builds on [mujawib-receptionist-finetune](https://github.com/bn-basel/mujawib-receptionist-finetune) (ALLaM-7B and
-Gemma-4-12B fine-tuned as Saudi-dialect receptionists with tool calling).
+Builds on two Saudi-dialect receptionist fine-tunes with tool calling on Hugging Face:
+[saudi-receptionist-gemma-4-12b](https://huggingface.co/bnbasel/saudi-receptionist-gemma-4-12b) and
+[allam-7b-saudi-receptionist](https://huggingface.co/bnbasel/allam-7b-saudi-receptionist).
+
+Licence: [Apache-2.0](LICENSE).

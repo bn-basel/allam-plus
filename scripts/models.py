@@ -36,7 +36,7 @@ API_MAX_TOKENS = 2048  # thinking included
 # USD per 1M tokens (input, output) at the most expensive allowed provider, used only as an
 # estimate when OpenRouter does not report the real cost.
 COMPETITORS = {
-    # The model Mujawib runs on in production: the "beat what I have" comparison.
+    # The model Mudeef runs on in production: the "beat what I have" comparison.
     "deepseek-v4.1-flash": {"model": "deepseek/deepseek-v4.1-flash", "providers": ["deepinfra", "fireworks"],
                             "price": (0.45, 1.80)},
     # One established model from each other major vendor, on the cheaper "flex" tier when available.
